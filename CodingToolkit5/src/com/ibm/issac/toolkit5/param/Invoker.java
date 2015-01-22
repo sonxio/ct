@@ -110,7 +110,8 @@ public class Invoker {
 		final Field[] fields = Invoker.getCachedDeclaredFields(obj.getClass());
 		for (Field f : fields) {
 			try {
-				sb.append(f.getName()).append(":\"").append(Invoker.get(obj, f.getName(), f.getType())).append("\", ");
+				Object valObj = Invoker.get(obj, f.getName(), f.getType());
+				sb.append(f.getName()).append(":>").append(valObj==null?"$NULL":valObj).append("<, ");
 			} catch (SecurityException e) {
 				e.printStackTrace();
 			} catch (IllegalArgumentException e) {

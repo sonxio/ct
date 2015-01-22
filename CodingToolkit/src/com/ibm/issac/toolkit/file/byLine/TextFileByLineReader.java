@@ -14,7 +14,7 @@ import java.io.IOException;
  */
 public class TextFileByLineReader {
 	public String process(String fileName, ByLineProcesser p) {
-		File file = new File(fileName);
+		final File file = new File(fileName);
 		StringBuffer contents = new StringBuffer();
 		BufferedReader reader = null;
 		try {
@@ -32,7 +32,7 @@ public class TextFileByLineReader {
 			try {
 				if (reader != null) {
 					reader.close();
-				}
+				}				
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

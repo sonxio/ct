@@ -1,19 +1,19 @@
 package com.ibm.issac.toolkit.file;
 
 import java.io.BufferedInputStream;
-import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.channels.FileChannel;
 import java.util.Date;
 
 import com.ibm.issac.toolkit.Cube;
 import com.ibm.issac.toolkit.DatetimeUtility;
+import com.ibm.issac.toolkit.DevLog;
 import com.ibm.issac.toolkit.logging.ColorLog;
 
 /**
@@ -77,37 +77,76 @@ public final class FileUtility {
 		return file;
 	}
 
+	public static void move(File srcF, File dstF, boolean overwriteWhenExisted) {
+		DevLog.trace("[FILE MOVE] Trying to move file from >" + srcF.getAbsolutePath() + "< to >" + dstF.getAbsolutePath() + "<");
+		if (srcF.getAbsolutePath().equals(dstF.getAbsolutePath())) {
+			DevLog.error("[FILE MOVE] Source file\'s absoluate path is the same as the destination file. Operation aborted.");
+			return;
+		}
+		if (!dstF.isFile()) {
+			DevLog.error("[FILE MOVE] Destination is not a file. Operation aborted.");
+			return;
+		}
+		// ---------------------------------
+		if (dstF.exists()) {// 若在待转移目录下，已经存在目标文件
+			DevLog.warn("[FILE MOVE] Destination file existed. Overwrite? " + overwriteWhenExisted);
+			if (!overwriteWhenExisted) {//不允许覆盖，则放弃操作
+				DevLog.trace("[FILE MOVE] Destination file existed. Operation aborted.");
+				return;
+			}
+			//覆盖现有文件
+			srcF.renameTo(dstF);
+			return;
+		}
+		//不存在目标文件
+		srcF.renameTo(dstF);
+	}
 
 	/**
-	 * 转移文件目录
+	 * 把文件s拷贝为文件t
 	 * 
-	 * @param filename
-	 *            文件名
-	 * @param oldpath
-	 *            旧目录
-	 * @param newpath
-	 *            新目录
-	 * @param cover
-	 *            若新目录下存在和转移文件具有相同文件名的文件时，是否覆盖新目录下文件，cover=true将会覆盖原文件，否则不操作
+	 * @param srcF
+	 * @param dstF
+	 * @param overwriteWhenExisted
+	 *            如果目标文件已经存在，是否覆盖
 	 */
-
-	public static void move(String filename, String oldpath, String newpath, boolean cover) {
-		if (!oldpath.equals(newpath)) {
-			File oldfile = new File(oldpath + "/" + filename);
-			File newfile = new File(newpath + "/" + filename + "." + DatetimeUtility.formatDate("yyyyMMddHHmmss", new Date()));
-			if (newfile.exists()) {// 若在待转移目录下，已经存在待转移文件
-				if (cover)// 覆盖
-					oldfile.renameTo(newfile);
-				else
-					ColorLog.warn("在新目录下已经存在：" + filename);
-			} else {
-				oldfile.renameTo(newfile);
+	public static void copy(File srcF, File dstF, boolean overwriteWhenExisted) {
+		DevLog.trace("[FILE COPY] Trying to copy file from >" + srcF.getAbsolutePath() + "< to >" + dstF.getAbsolutePath() + "<");
+		if (dstF.exists()) {
+			DevLog.warn("[FILE COPY] The destination file existed when trying to perform file copy. Overwrite? " + overwriteWhenExisted);
+			if (!overwriteWhenExisted) {
+				DevLog.warn("[FILE COPY] Destination file existed. Operation aborted.");
+				return;
+			}
+		}
+		// 开始拷贝文件，遇到现有文件则覆盖。
+		FileInputStream fi = null;
+		FileOutputStream fo = null;
+		FileChannel in = null;
+		FileChannel out = null;
+		try {
+			fi = new FileInputStream(srcF);
+			fo = new FileOutputStream(dstF);
+			in = fi.getChannel();// 得到对应的文件通道
+			out = fo.getChannel();// 得到对应的文件通道
+			in.transferTo(0, in.size(), out);// 连接两个通道，并且从in通道读取，然后写入out通道
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				fi.close();
+				in.close();
+				fo.close();
+				out.close();
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
 		}
 	}
 
 	/**
 	 * 查询一个文本文件有多少行
+	 * 
 	 * @param filename
 	 * @return
 	 * @throws IOException
@@ -129,5 +168,4 @@ public final class FileUtility {
 			is.close();
 		}
 	}
-
 }
