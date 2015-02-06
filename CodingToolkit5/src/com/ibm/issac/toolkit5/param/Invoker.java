@@ -86,7 +86,7 @@ public class Invoker {
 					Invoker.set(obj, f.getName(), Cube.produceRandomInteger(0, 100), f.getType());
 					continue;
 				}
-				//DevLog.trace("Field " + f.getName() + " of type " + f.getType().toString() + " is not set.");
+				// DevLog.trace("Field " + f.getName() + " of type " + f.getType().toString() + " is not set.");
 			} catch (SecurityException e) {
 				e.printStackTrace();
 			} catch (IllegalArgumentException e) {
@@ -101,8 +101,17 @@ public class Invoker {
 		}
 	}
 
+	/**
+	 * <h2>注意：在测试中，发现如果在读取DB2 ResultSet当中用reportObj或reportObjSilently等方法<br/>
+	 * 输出日志，会造成DB2 RESULTSET被自动关闭。原理目前不明确。<br/>
+	 * <br/>
+	 * 因此应避免在DB2 RESULTSET读取过程中用INVOKER相关方法输出日志</h2>
+	 * 
+	 * @param obj
+	 * @return
+	 */
 	public static String reportObj(Object obj) {
-		if(!SysProp.b_bool("issac.debugMode.invoker", true)){
+		if (!SysProp.b_bool("issac.debugMode.invoker", true)) {
 			return "";
 		}
 		StringBuffer sb = new StringBuffer(obj.getClass().getSimpleName());
@@ -111,7 +120,7 @@ public class Invoker {
 		for (Field f : fields) {
 			try {
 				Object valObj = Invoker.get(obj, f.getName(), f.getType());
-				sb.append(f.getName()).append(":>").append(valObj==null?"$NULL":valObj).append("<, ");
+				sb.append(f.getName()).append(":>").append(valObj == null ? "$NULL" : valObj).append("<, ");
 			} catch (SecurityException e) {
 				e.printStackTrace();
 			} catch (IllegalArgumentException e) {
@@ -145,8 +154,17 @@ public class Invoker {
 		return fA;
 	}
 
+	/**
+	 * <h2>注意：在测试中，发现如果在读取DB2 ResultSet当中用reportObj或reportObjSilently等方法<br/>
+	 * 输出日志，会造成DB2 RESULTSET被自动关闭。原理目前不明确。<br/>
+	 * <br/>
+	 * 因此应避免在DB2 RESULTSET读取过程中用INVOKER相关方法输出日志</h2>
+	 * 
+	 * @param obj
+	 * @return
+	 */
 	public static String reportObjSilently(Object obj) {
-		if(!SysProp.b_bool("issac.debugMode.invoker", true)){
+		if (!SysProp.b_bool("issac.debugMode.invoker", true)) {
 			return "";
 		}
 		final StringBuffer sb = new StringBuffer(obj.getClass().getSimpleName());
@@ -168,6 +186,7 @@ public class Invoker {
 
 	/**
 	 * 给出带有特定前缀的FIELD名称列表
+	 * 
 	 * @param fieldPrefix
 	 * @param cls
 	 * @return
@@ -175,8 +194,8 @@ public class Invoker {
 	public static List<String> listFieldsWithPrefix(String fieldPrefix, Class<? extends Object> cls) {
 		final Field[] fA = Invoker.getCachedDeclaredFields(cls);
 		final List<String> l = new ArrayList<String>();
-		for(Field f:fA){
-			if(f.getName().startsWith(fieldPrefix)){
+		for (Field f : fA) {
+			if (f.getName().startsWith(fieldPrefix)) {
 				l.add(f.getName());
 			}
 		}
