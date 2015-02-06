@@ -13,7 +13,22 @@ import java.io.IOException;
  * 
  */
 public class TextFileByLineReader {
+	/**
+	 * @deprecated 缺少EXCEPTION处理，在文件找不到等情况是不便处理的
+	 * @param fileName
+	 * @param p
+	 * @return
+	 */
 	public String process(String fileName, ByLineProcesser p) {
+		try {
+			return this.processForException(fileName, p);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public String processForException(String fileName, ByLineProcesser p) throws IOException {
 		final File file = new File(fileName);
 		StringBuffer contents = new StringBuffer();
 		BufferedReader reader = null;
@@ -24,20 +39,11 @@ public class TextFileByLineReader {
 			while ((text = reader.readLine()) != null) {
 				p.process(text);
 			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
 		} finally {
-			try {
-				if (reader != null) {
-					reader.close();
-				}				
-			} catch (IOException e) {
-				e.printStackTrace();
+			if (reader != null) {
+				reader.close();
 			}
 		}
-
 		// show file contents here
 		return contents.toString();
 	}

@@ -24,30 +24,13 @@ import com.ibm.issac.toolkit.DevLog;
 public class XPathApproach extends AbstractApproach {
 	private Document doc;
 
-	public XPathApproach(String filename) {
-		this.loadXML(filename);
-	}
-
-	/**
-	 * Load xml for later usage.
-	 * 
-	 * @param filename
-	 */
-	private void loadXML(String filename) {
-		try {
-			DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
-			builderFactory.setNamespaceAware(true);
-			DevLog.debug("Loading " + filename);
-			DocumentBuilder builder = builderFactory.newDocumentBuilder();
-			this.doc = builder.parse(filename);
-			DevLog.debug("XML Loaded successfully.");
-		} catch (ParserConfigurationException e) {
-			e.printStackTrace();
-		} catch (SAXException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	public XPathApproach(String filename) throws ParserConfigurationException, SAXException, IOException {
+		DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
+		builderFactory.setNamespaceAware(true);
+		DevLog.debug("Loading " + filename);
+		DocumentBuilder builder = builderFactory.newDocumentBuilder();
+		this.doc = builder.parse(filename);
+		DevLog.trace("XML Loaded successfully.");
 	}
 
 	/**

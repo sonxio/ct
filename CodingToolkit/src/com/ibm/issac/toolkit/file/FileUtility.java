@@ -80,16 +80,16 @@ public final class FileUtility {
 	public static void move(File srcF, File dstF, boolean overwriteWhenExisted) {
 		DevLog.trace("[FILE MOVE] Trying to move file from >" + srcF.getAbsolutePath() + "< to >" + dstF.getAbsolutePath() + "<");
 		if (srcF.getAbsolutePath().equals(dstF.getAbsolutePath())) {
-			DevLog.error("[FILE MOVE] Source file\'s absoluate path is the same as the destination file. Operation aborted.");
+			DevLog.debug("[FILE MOVE] Source file\'s absoluate path is the same as the destination file. Operation aborted.");
 			return;
 		}
-		if (!dstF.isFile()) {
-			DevLog.error("[FILE MOVE] Destination is not a file. Operation aborted.");
+		if (!srcF.isFile()) {
+			DevLog.debug("[FILE MOVE] Source is not a file. Operation aborted.");
 			return;
 		}
 		// ---------------------------------
 		if (dstF.exists()) {// 若在待转移目录下，已经存在目标文件
-			DevLog.warn("[FILE MOVE] Destination file existed. Overwrite? " + overwriteWhenExisted);
+			DevLog.debug("[FILE MOVE] Destination file existed. Overwrite? " + overwriteWhenExisted);
 			if (!overwriteWhenExisted) {//不允许覆盖，则放弃操作
 				DevLog.trace("[FILE MOVE] Destination file existed. Operation aborted.");
 				return;
@@ -112,10 +112,14 @@ public final class FileUtility {
 	 */
 	public static void copy(File srcF, File dstF, boolean overwriteWhenExisted) {
 		DevLog.trace("[FILE COPY] Trying to copy file from >" + srcF.getAbsolutePath() + "< to >" + dstF.getAbsolutePath() + "<");
+		if (!srcF.isFile()) {
+			DevLog.debug("[FILE COPY] Source is not a file. Operation aborted.");
+			return;
+		}
 		if (dstF.exists()) {
-			DevLog.warn("[FILE COPY] The destination file existed when trying to perform file copy. Overwrite? " + overwriteWhenExisted);
+			DevLog.debug("[FILE COPY] The destination file existed when trying to perform file copy. Overwrite? " + overwriteWhenExisted);
 			if (!overwriteWhenExisted) {
-				DevLog.warn("[FILE COPY] Destination file existed. Operation aborted.");
+				DevLog.debug("[FILE COPY] Destination file existed. Operation aborted.");
 				return;
 			}
 		}
