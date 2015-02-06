@@ -15,6 +15,13 @@ import com.ibm.issac.toolkit.Cube;
 import com.ibm.issac.toolkit.DatetimeUtility;
 import com.ibm.issac.toolkit.DevLog;
 import com.ibm.issac.toolkit.logging.ColorLog;
+import com.ibm.issac.toolkit.nativeRuntime.ErrorRunningNativeCommandException;
+import com.ibm.issac.toolkit.nativeRuntime.NativeCmdUnit;
+import com.ibm.issac.toolkit.nativeRuntime.RunNativeCmd;
+import com.ibm.issac.toolkit.nativeRuntime.RunUnixNativeCommand;
+import com.ibm.issac.toolkit.nativeRuntime.RunWindowsNativeCommand;
+import com.ibm.issac.toolkit.param.SysProp;
+import com.ibm.issac.toolkit.util.StringUtil;
 
 /**
  * 辅助文件操作
@@ -90,15 +97,15 @@ public final class FileUtility {
 		// ---------------------------------
 		if (dstF.exists()) {// 若在待转移目录下，已经存在目标文件
 			DevLog.debug("[FILE MOVE] Destination file existed. Overwrite? " + overwriteWhenExisted);
-			if (!overwriteWhenExisted) {//不允许覆盖，则放弃操作
+			if (!overwriteWhenExisted) {// 不允许覆盖，则放弃操作
 				DevLog.trace("[FILE MOVE] Destination file existed. Operation aborted.");
 				return;
 			}
-			//覆盖现有文件
+			// 覆盖现有文件
 			srcF.renameTo(dstF);
 			return;
 		}
-		//不存在目标文件
+		// 不存在目标文件
 		srcF.renameTo(dstF);
 	}
 
@@ -145,6 +152,56 @@ public final class FileUtility {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+		}
+	}
+
+	/**
+	 * 使用NATIVE命令拷贝文件。这样的优势是可以规避一部分OWNER, MODE的问题<br/>
+	 * 该方法不支持覆盖，如果目标文件存在，则拒绝操作
+	 * 
+	 * @param srcPath
+	 * @param destPath
+	 * @throws ErrorRunningNativeCommandException
+	 * @throws InterruptedException 
+	 * @throws IOException 
+	 */
+	public static void copyFileNatively(String srcPath, String dstPath) throws ErrorRunningNativeCommandException, IOException, InterruptedException {
+		// 为了避免误操作，确认所要拷贝的对象的确是文件
+		if (!StringUtil.isReadable(srcPath)) {
+			DevLog.debug("[FILE COPY NATIVELY] source path not readable. >" + srcPath + "<. Operation aborted.");
+			return;
+		}
+		if (!StringUtil.isReadable(dstPath)) {
+			DevLog.debug("[FILE COPY NATIVELY] destination path not readable. >" + dstPath + "<. Operation aborted.");
+			return;
+		}
+		final File srcF = new File(srcPath);
+		final File dstF = new File(dstPath);
+		DevLog.trace("[FILE COPY NATIVELY] Trying to copy file from >" + srcF.getAbsolutePath() + "< to >" + dstF.getAbsolutePath() + "<");
+		if (!srcF.isFile()) {
+			DevLog.debug("[FILE COPY NATIVELY] Source is not a file. Operation aborted.");
+			return;
+		}
+		if (dstF.exists()) {
+			DevLog.debug("[FILE COPY NATIVELY] The destination file existed when trying to perform file copy. Operation aborted.");
+			return;
+		}
+		// 调用对应OS命令
+		final NativeCmdUnit ncu = new NativeCmdUnit();
+		if (!SysProp.getOSName().startsWith("Windows")) {
+			final String cmd = "cp -p " + srcPath + " " + dstPath;// -p preserve,保持OWNER,MODE，创建时间
+			ncu.setCmd_ALL(cmd);
+			ncu.setCmd_Windows(null);
+		} else {
+			ncu.setCmd_ALL(null);
+			ncu.setCmd_Windows("copy " + srcPath + " " + dstPath);
+		}
+		final RunNativeCmd r = new RunNativeCmd();
+		int retVal;
+		retVal = r.runNativeCmd(ncu);
+		DevLog.trace("[FILE COPY NATIVELY] REPORT: " + r.getOutputM().get("last report"));
+		if (retVal != 0) {
+			throw new ErrorRunningNativeCommandException("[FILE COPY NATIVELY] error output: " + r.getOutputM().get("error output"));
 		}
 	}
 
