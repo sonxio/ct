@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.ibm.issac.toolkit.DevLog;
+import com.ibm.issac.toolkit.util.StringUtil;
 
 /**
  * ½âÎömqs.ini
@@ -63,7 +64,7 @@ public class INI_BLP implements ByLineProcesser {
 	 * @return
 	 */
 	private boolean isNewSectionBeginning(String trimmedStr) {
-		if (trimmedStr.isEmpty())
+		if (!StringUtil.isReadable(trimmedStr))
 			return false;
 		if (trimmedStr.indexOf('=') >= 0)
 			return false;

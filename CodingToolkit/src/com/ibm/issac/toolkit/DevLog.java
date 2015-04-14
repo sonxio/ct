@@ -41,7 +41,7 @@ public final class DevLog {
 		// 如果没有特别指定LOG FILE的文件位置，则根据环境变量生成日志文件
 		if (!StringUtil.isReadable(DevLog.logFileName)) {
 			final String logPath = SysProp.b_str("issac.logPath", SysProp.b_str("java.io.tmpdir", ""));
-			logFileName = logPath + "devlog_" + appName + "_" + DateUtil.getNow("yyyyMMdd") + ".log";
+			logFileName = logPath+SysProp.getFS() + "devlog_" + appName + "_" + DateUtil.getNow("yyyyMMdd") + ".log";
 		}
 		try {
 			DevLog.debug("log file written to " + logFileName);

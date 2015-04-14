@@ -17,7 +17,9 @@ import com.ibm.issac.toolkit.DevLog;
 public class TextFileWriter {
 	
 	/**
-	 * 写新文件，会覆盖掉原有文件。
+	 * 写新文件，会覆盖掉原有文件。<br/>
+	 * 新建的文件会按照当前UMASK/OWNER决定OWNER/MODE。<br/>
+	 * 如果希望OWNER MODE和某个文件保持一致，则先用这个文件使用NATIVE命令cp -p拷贝一份，然后再用这个方法覆盖，则可以保持源文件的OWNER/MODE
 	 * @param fileName
 	 * @param content
 	 * @throws IOException

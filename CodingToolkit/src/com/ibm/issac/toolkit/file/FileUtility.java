@@ -84,6 +84,12 @@ public final class FileUtility {
 		return file;
 	}
 
+	/**
+	 * MOVE方法在UNIX上不会改变OWNER/MODE
+	 * @param srcF
+	 * @param dstF
+	 * @param overwriteWhenExisted
+	 */
 	public static void move(File srcF, File dstF, boolean overwriteWhenExisted) {
 		DevLog.trace("[FILE MOVE] Trying to move file from >" + srcF.getAbsolutePath() + "< to >" + dstF.getAbsolutePath() + "<");
 		if (srcF.getAbsolutePath().equals(dstF.getAbsolutePath())) {
@@ -111,7 +117,7 @@ public final class FileUtility {
 
 	/**
 	 * 把文件s拷贝为文件t
-	 * 
+	 * 该方法会修改OWNER,MODE
 	 * @param srcF
 	 * @param dstF
 	 * @param overwriteWhenExisted
@@ -156,6 +162,7 @@ public final class FileUtility {
 	}
 
 	/**
+	 * 使用cp -p在UNIX上不会修改OWNER,MODE<br/>
 	 * 使用NATIVE命令拷贝文件。这样的优势是可以规避一部分OWNER, MODE的问题<br/>
 	 * 该方法不支持覆盖，如果目标文件存在，则拒绝操作
 	 * 

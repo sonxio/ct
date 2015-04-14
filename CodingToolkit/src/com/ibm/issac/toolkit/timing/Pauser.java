@@ -14,6 +14,7 @@ import com.ibm.issac.toolkit.logging.ColorLog;
 public class Pauser {
 	public static void pauseThread(long ms) {
 		try {
+			DevLog.trace("Pausing "+ms+"ms...");
 			Thread.sleep(ms);
 		} catch (InterruptedException e) {
 			ColorLog.info("You have interrupted a paused thread.");
@@ -21,6 +22,7 @@ public class Pauser {
 	}
 
 	public static void pauseThreadForException(long ms) throws InterruptedException {
+		DevLog.trace("Pausing "+ms+"ms..."); 
 		Thread.sleep(ms);
 	}
 
