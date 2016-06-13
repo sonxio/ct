@@ -137,4 +137,17 @@ public class StringUtil {
 		String splittedStr[] = str.split(seperator+"");
 		return splittedStr;
 	}
+	
+	/**
+	 * 替换字符串中的回车、制表符等特殊符号。
+	 * @param inStr 需要替换的字符串
+	 * @param replacement 需要替换为该字符，例如设置为空字符串
+	 * @return
+	 */
+	public static String removeControlCharacters(String inStr,String replacement){
+		if(!StringUtil.isReadable(inStr)){
+			return inStr;
+		}
+		return inStr.replaceAll("[\\t\\n\\r]", replacement);
+	}
 }

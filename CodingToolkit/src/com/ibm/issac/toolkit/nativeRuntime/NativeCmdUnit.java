@@ -11,6 +11,7 @@ public class NativeCmdUnit {
 	private String cmd_Linux;
 	private String cmd_AIX;
 	private String cmd_Other;
+	private String cmd_MacOSX;
 
 	/**
 	 * 把所有命令设置为一样的内容
@@ -20,6 +21,7 @@ public class NativeCmdUnit {
 		cmd_Linux = cmd;
 		cmd_AIX = cmd;
 		cmd_Other = cmd;
+		cmd_MacOSX = cmd;
 	}
 	
 	public String getCmd_Windows() {
@@ -53,4 +55,14 @@ public class NativeCmdUnit {
 	public void setCmd_Other(String cmd_Other) {
 		this.cmd_Other = cmd_Other;
 	}
+
+	public String getCmd_MacOSX() {
+		return cmd_MacOSX;
+	}
+
+	public void setCmd_MacOSX(String cmd_MacOSX) {
+		this.cmd_MacOSX = cmd_MacOSX;
+	}
+
+	
 }

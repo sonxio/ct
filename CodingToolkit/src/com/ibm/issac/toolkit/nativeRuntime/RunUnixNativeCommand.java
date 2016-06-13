@@ -19,7 +19,7 @@ public class RunUnixNativeCommand extends AbstractNativeCommandSupport {
 		} else {
 			commandStr = sourceStr;
 		}
-		DevLog.trace("[NATIVE CMD] Command line: >" + commandStr + "<");
+		DevLog.super_trace("[NATIVE CMD] Command line: >" + commandStr + "<");
 		// 执行处理后的脚本
 		String[] commandArray = new String[] { "/bin/sh", "-c", commandStr };
 		// 启动命令
@@ -32,14 +32,14 @@ public class RunUnixNativeCommand extends AbstractNativeCommandSupport {
 		errorGobbler.start();
 		outputGobbler.start();
 		int retVal = proc.waitFor();
-		DevLog.debug("[NATIVE CMD] Process exitValue: " + retVal);
+		DevLog.super_trace("[NATIVE CMD] Process exitValue: " + retVal);
 		outputM.put("last report", this.reportRunningInfo(retVal, outputGobbler, errorGobbler));
 		outputM.put("error output", errorGobbler.getAllOutput().toString());
 		return retVal;
 	}
 
 	private String filterSource(String sourceStr) {
-		DevLog.debug("[NATIVE CMD] Command fitler will be implemented as instructed.");
+		DevLog.super_trace("[NATIVE CMD] Command fitler will be implemented as instructed.");
 		String filteredStr = sourceStr.replaceAll("\\$\\(basename \\$0\\)", "\\$SP_SOURCE_FILE_NAME");
 		return filteredStr;
 	}

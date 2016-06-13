@@ -45,6 +45,11 @@ public class NuF {
 		return df0.format(d);
 	}
 	
+	/**
+	 * 显示百分比
+	 * @param d
+	 * @return
+	 */
 	public static String pe(double d){
 		DecimalFormat df0 = new DecimalFormat("#.##%");
 		return df0.format(d);

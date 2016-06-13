@@ -184,7 +184,7 @@ public final class FileUtility {
 		}
 		final File srcF = new File(srcPath);
 		final File dstF = new File(dstPath);
-		DevLog.trace("[FILE COPY NATIVELY] Trying to copy file from >" + srcF.getAbsolutePath() + "< to >" + dstF.getAbsolutePath() + "<");
+		DevLog.super_trace("[FILE COPY NATIVELY] Trying to copy file from >" + srcF.getAbsolutePath() + "< to >" + dstF.getAbsolutePath() + "<");
 		if (!srcF.isFile()) {
 			DevLog.debug("[FILE COPY NATIVELY] Source is not a file. Operation aborted.");
 			return;
@@ -206,7 +206,7 @@ public final class FileUtility {
 		final RunNativeCmd r = new RunNativeCmd();
 		int retVal;
 		retVal = r.runNativeCmd(ncu);
-		DevLog.trace("[FILE COPY NATIVELY] REPORT: " + r.getOutputM().get("last report"));
+		DevLog.super_trace("[FILE COPY NATIVELY] REPORT: " + r.getOutputM().get("last report"));
 		if (retVal != 0) {
 			throw new ErrorRunningNativeCommandException("[FILE COPY NATIVELY] error output: " + r.getOutputM().get("error output"));
 		}

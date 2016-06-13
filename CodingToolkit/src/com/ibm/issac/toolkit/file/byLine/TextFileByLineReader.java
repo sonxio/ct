@@ -5,6 +5,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URLDecoder;
+
+import com.ibm.issac.toolkit.util.StringUtil;
 
 /**
  * 逐行处理TEXT FILE
@@ -29,6 +32,10 @@ public class TextFileByLineReader {
 	}
 
 	public String processForException(String fileName, ByLineProcesser p) throws IOException {
+		if(!StringUtil.isReadable(fileName)){
+			throw new IOException("File name not readable: >"+fileName+"<");
+		}
+		fileName=URLDecoder.decode(fileName,"utf-8");//防止目录里有空格
 		final File file = new File(fileName);
 		StringBuffer contents = new StringBuffer();
 		BufferedReader reader = null;

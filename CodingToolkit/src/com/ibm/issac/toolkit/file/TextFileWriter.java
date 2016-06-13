@@ -25,7 +25,7 @@ public class TextFileWriter {
 	 * @throws IOException
 	 */
 	public static void writeTextFile(String fileName, String content) throws IOException {
-		DevLog.debug("Writing file: "+fileName);
+		DevLog.debug("[TextFileWriter] Writing file: "+fileName);
 		final PrintWriter pw = new PrintWriter(new OutputStreamWriter(new FileOutputStream(fileName)), true);
 		pw.println(content);
 		pw.close();
@@ -38,7 +38,7 @@ public class TextFileWriter {
 	 * @throws IOException
 	 */
 	public static void appendToFile(String fileName, String content) throws IOException{
-		DevLog.debug("Appending file: "+fileName);
+		DevLog.debug("[TextFileWriter] Appending to file: "+fileName);
 		FileWriter writer = new FileWriter(fileName, true);
 		writer.write(content);
 		writer.close();

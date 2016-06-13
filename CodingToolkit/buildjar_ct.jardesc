@@ -1,5 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?><jardesc>
-    <jar path="C:/Users/issac/Desktop/ct.jar"/>
+<?xml version="1.0" encoding="GBK" standalone="no"?>
+<jardesc>
+    <jar path="/Users/song/Desktop/ct.jar"/>
     <options buildIfNeeded="true" compress="false" descriptionLocation="/CodingToolkit/buildjar_ct.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="false" overwrite="true" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
     <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
     <selectedProjects/>
@@ -10,8 +11,8 @@
         </sealing>
     </manifest>
     <selectedElements exportClassFiles="true" exportJavaFiles="false" exportOutputFolder="false">
-        <file path="/CodingToolkit/.project"/>
         <javaElement handleIdentifier="=CodingToolkit/src"/>
         <file path="/CodingToolkit/.classpath"/>
+        <file path="/CodingToolkit/.project"/>
     </selectedElements>
 </jardesc>

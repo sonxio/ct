@@ -16,6 +16,19 @@ public class RunNativeCmd {
 	private Map outputM;
 
 	/**
+	 * 直接执行字符串形式的命令
+	 * @param cmdStr
+	 * @return
+	 * @throws IOException
+	 * @throws InterruptedException
+	 */
+	public int runNativeCmd(String cmdStr) throws IOException, InterruptedException{
+		final NativeCmdUnit ncu = new NativeCmdUnit();
+		ncu.setCmd_ALL(cmdStr);
+		return this.runNativeCmd(ncu);
+	}
+	
+	/**
 	 * 执行NATIVE命令
 	 * 
 	 * @param ncu
@@ -26,7 +39,7 @@ public class RunNativeCmd {
 	public int runNativeCmd(NativeCmdUnit ncu) throws IOException, InterruptedException {
 		// 根据OS处理命令
 		final String osName = SysProp.getOSName();
-		DevLog.trace("[NATIVE CMD] Running native command for OS: " + osName);
+		DevLog.super_trace("[NATIVE CMD] Running native command for OS: " + osName);
 		AbstractNativeCommandSupport s = null;
 		if (osName.startsWith("Windows")) {
 			s = new RunWindowsNativeCommand();
@@ -43,6 +56,12 @@ public class RunNativeCmd {
 		if (osName.startsWith("AIX")) {
 			s = new RunUnixNativeCommand();
 			int retVal = s.process(ncu.getCmd_AIX(), false);
+			outputM = s.getOutputM();
+			return retVal;
+		}
+		if (osName.startsWith("Mac OS X")) {
+			s = new RunUnixNativeCommand();
+			int retVal = s.process(ncu.getCmd_MacOSX(), false);
 			outputM = s.getOutputM();
 			return retVal;
 		}

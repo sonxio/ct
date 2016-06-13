@@ -16,7 +16,7 @@ import com.ibm.issac.toolkit.param.SysProp;
 public class RunWindowsNativeCommand extends AbstractNativeCommandSupport {
 	public int process(String sourceStr, boolean filterRequired) throws IOException, InterruptedException {
 		String commandLine = sourceStr.replaceAll("/", "\\\\");
-		DevLog.trace("[NATIVE CMD] Command line: >" + commandLine + "<");
+		DevLog.super_trace("[NATIVE CMD] Command line: >" + commandLine + "<");
 		String[] commandArray = new String[] { "cmd.exe", "/C", commandLine };
 		// 启动命令
 		Runtime rt = Runtime.getRuntime();
@@ -28,7 +28,7 @@ public class RunWindowsNativeCommand extends AbstractNativeCommandSupport {
 		errorGobbler.start();
 		outputGobbler.start();
 		int retVal = proc.waitFor();
-		DevLog.debug("[NATIVE CMD] Process exitValue: " + retVal);
+		DevLog.super_trace("[NATIVE CMD] Process exitValue: " + retVal);
 		// 生成执行报告
 		outputM.put("last report", this.reportRunningInfo(retVal, outputGobbler, errorGobbler));
 		outputM.put("error output", errorGobbler.getAllOutput());

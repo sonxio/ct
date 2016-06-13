@@ -40,4 +40,9 @@ public class Plog {
 		DevLog.info("");
 		DevLog.info("...>" + msg);
 	}
+	
+	public static void p4(String msg) {
+		DevLog.info("");
+		DevLog.info(".>" + msg);
+	}
 }

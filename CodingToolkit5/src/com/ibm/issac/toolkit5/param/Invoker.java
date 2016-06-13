@@ -48,7 +48,12 @@ public class Invoker {
 	public static Object get(Object obj, String fieldName, Class<?> fieldType) throws SecurityException, NoSuchMethodException, IllegalArgumentException, IllegalAccessException, InvocationTargetException {
 		Method met;
 		if (fieldType.equals(boolean.class) || fieldType.equals(Boolean.class)) {
+			try{
 			met = obj.getClass().getMethod("is" + initStr(fieldName));
+			}catch(NoSuchMethodException e){
+				//boolean类型也可能使用get开始的，尝试用get
+				met = obj.getClass().getMethod("get" + initStr(fieldName));	
+			}
 		} else {
 			met = obj.getClass().getMethod("get" + initStr(fieldName));
 		}
@@ -103,7 +108,7 @@ public class Invoker {
 
 	/**
 	 * <h2>注意：在测试中，发现如果在读取DB2 ResultSet当中用reportObj或reportObjSilently等方法<br/>
-	 * 输出日志，会造成DB2 RESULTSET被自动关闭。原理目前不明确。<br/>
+	 * 输出日志，会造成DB2 RESULTSET被自动关闭。可能是因为。<br/>
 	 * <br/>
 	 * 因此应避免在DB2 RESULTSET读取过程中用INVOKER相关方法输出日志</h2>
 	 * 

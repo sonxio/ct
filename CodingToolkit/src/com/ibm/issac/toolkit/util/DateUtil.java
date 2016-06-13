@@ -27,7 +27,9 @@ public class DateUtil {
 	}
 
 	public static String formatDateByRoutine(Date date) {
-		return DateUtil.formatDate("yyyy/MM/dd HH:mm:ss", date);
+		if(date==null)
+			return null;
+		return DateUtil.formatDate("yyyy/MM/dd HH:mm:ss.SSS", date);
 	}
 
 	/**

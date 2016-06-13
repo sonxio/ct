@@ -2,6 +2,7 @@ package com.ibm.issac.toolkit;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStream;
 
 import com.ibm.issac.toolkit.param.SysProp;
 import com.ibm.issac.toolkit.util.DateUtil;
@@ -17,6 +18,16 @@ public final class DevLog {
 	private static String appName;
 	private static String logFileName;
 	private static FileWriter logWriter;
+	private static OutputStream os1; // 如果不是NULL，则额外输出到这个OS中，用于在SERVLET中输出数据
+
+	/**
+	 * 选择用TEXT或者HTML输出日志
+	 * 
+	 * @param logModeStr
+	 */
+	public static void setOutputStream1(OutputStream os) {
+		DevLog.os1 = os;
+	}
 
 	public static void setLogFileName(String logFileStr) {
 		DevLog.logFileName = logFileStr;
@@ -27,10 +38,10 @@ public final class DevLog {
 	}
 
 	public static void init(String appName) {
-		//-----------------------------------
-		//确定日志文件生成的位置
-		if(!SysProp.b_bool("issac.DevLog.writeFile", true)){
-			logWriter = null;//不允许写日志文件，从而降低性能消耗，对于J2EE等System.out已经写入的情况，应如此设置
+		// -----------------------------------
+		// 确定日志文件生成的位置
+		if (!SysProp.b_bool("issac.DevLog.writeFile", true)) {
+			logWriter = null;// 不允许写日志文件，从而降低性能消耗，对于J2EE等System.out已经写入的情况，应如此设置
 			DevLog.debug("DevLog will not write to a file.");
 			return;
 		}
@@ -41,7 +52,7 @@ public final class DevLog {
 		// 如果没有特别指定LOG FILE的文件位置，则根据环境变量生成日志文件
 		if (!StringUtil.isReadable(DevLog.logFileName)) {
 			final String logPath = SysProp.b_str("issac.logPath", SysProp.b_str("java.io.tmpdir", ""));
-			logFileName = logPath+SysProp.getFS() + "devlog_" + appName + "_" + DateUtil.getNow("yyyyMMdd") + ".log";
+			logFileName = logPath + SysProp.getFS() + "devlog_" + appName + "_" + DateUtil.getNow("yyyyMMdd") + ".log";
 		}
 		try {
 			DevLog.debug("log file written to " + logFileName);
@@ -81,10 +92,18 @@ public final class DevLog {
 	public static void trace(String logStr) {
 		DevLog.writeLog("T", logStr);
 	}
+	
+	/**
+	 * super trace，用来TRACE日志量非常大的内容
+	 * @param logStr
+	 */
+	public static void super_trace(String logStr) {
+		DevLog.writeLog("S", logStr);
+	}
 
 	private static void writeLog(String type, String logStr) {
-		String prefixedLog = DevLog.buildPrefixedLog(type, logStr);
-		// 在文件中记录日志，无论日志等级类型如何，都会在文件中记录
+		final String prefixedLog = DevLog.buildPrefixedLog(type, logStr);
+		// 在文件中记录日志，无论日志等级类型如何，都会在文件中记录，而且永远用TEXT方式记录
 		if (logWriter != null) {
 			try {
 				logWriter.write(prefixedLog);
@@ -94,14 +113,15 @@ public final class DevLog {
 			}
 		}
 		// 根据日志设置类型决定是否在SYSTEM OUT打印日志内容
-		String logLevel = SysProp.b_str("issac.logLevel", "-T-D-I-W-E-");
+		String logLevel = SysProp.b_str("issac.logLevel", "-S-T-D-I-W-E-");
 		if (logLevel.indexOf(type) < 0) { // 不打印logLevel变量中不包含级别的日志
 			return;
 		}
 		// 在SYSTEM OUT中显示日志，对于界面显示，不增加时间、线程，以免在WAS,TOMCAT等应用中显示时显示出多余的时间。
-		// StringBuffer sb = new StringBuffer(type);
-		// sb.append(' ').append(logStr).append('\n');
-		DevLog.display(prefixedLog);
+		//界面显示不显示PREFIXED LOG，只显示关键内容
+		StringBuffer sb = new StringBuffer();
+		sb.append(logStr).append('\n');
+		DevLog.display(sb.toString());
 	}
 
 	/**
@@ -132,6 +152,19 @@ public final class DevLog {
 	 * @param logStr
 	 */
 	public static void display(String logStr) {
+		// 为HTML格式进行特别处理
+		if (DevLog.os1!=null) {
+			StringBuffer sb = new StringBuffer("");
+			sb.append("<pre>").append(logStr).append("</pre>");
+			try {
+				os1.write(sb.toString().getBytes());
+			} catch (IOException e) {
+				System.out.println("DevLog#Error displaying data. "+logStr);
+				e.printStackTrace();
+			}
+			return;
+		}
+		// 非HTML，则直接打印日志
 		System.out.print(logStr);
 	}
 
