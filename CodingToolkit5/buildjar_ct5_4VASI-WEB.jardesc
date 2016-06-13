@@ -1,6 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?><jardesc>
-    <jar path="C:/Users/issac/Desktop/ct5.jar"/>
-    <options buildIfNeeded="true" compress="false" descriptionLocation="/CodingToolkit/buildjar_ct5.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="false" overwrite="true" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
+<?xml version="1.0" encoding="GBK" standalone="no"?>
+<jardesc>
+    <jar path="C:/Users/issac/BACKUP/COMMON-FREQUENT/WORK/WORKSPACE/RAD_V9.1/VASI-WEB/WebContent/WEB-INF/lib/ct5.jar"/>
+    <options buildIfNeeded="true" compress="false" descriptionLocation="/CodingToolkit/buildjar_ct5_4VASI-WEB.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="false" overwrite="true" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
     <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
     <selectedProjects/>
     <manifest generateManifest="true" manifestLocation="" manifestVersion="1.0" reuseManifest="false" saveManifest="false" usesManifest="true">
@@ -11,7 +12,7 @@
     </manifest>
     <selectedElements exportClassFiles="true" exportJavaFiles="false" exportOutputFolder="false">
         <file path="/CodingToolkit5/.project"/>
-        <javaElement handleIdentifier="=CodingToolkit5/src"/>
         <file path="/CodingToolkit5/.classpath"/>
+        <javaElement handleIdentifier="=CodingToolkit5/src"/>
     </selectedElements>
 </jardesc>

@@ -112,7 +112,6 @@ public class SysProp {
 		// 保存访问记录，并生成访问日志
 		SysProp.printDebugMsg(pName, resultDesc, setValStr);
 		return parsedVal == null ? defaultVal : parsedVal.intValue();
-
 	}
 
 	private static void printDebugMsg(String pName, String resultDesc, String setValStr) {
@@ -140,7 +139,6 @@ public class SysProp {
 
 	public static String pstr(String pName) {
 		String s = System.getProperty(pName);
-
 		if (!historyM.containsKey(pName)) {
 			historyM.put(pName, new Integer(0));
 			StringBuffer sb = new StringBuffer("[SysProp] ");
@@ -168,5 +166,31 @@ public class SysProp {
 
 	public static String getLS() {
 		return SysProp.pstr("line.separator");
+	}
+
+	public static String getFS() {
+		return SysProp.pstr("file.separator");
+	}
+
+	public static String getOSName() {
+		return SysProp.pstr("os.name");
+	}
+
+	/**
+	 * @return 当前OS脚本的附文件名，包含点
+	 */
+	public static String getShellSurfix() {
+		final String osName = SysProp.getOSName();
+		if (osName.startsWith("Windows")) {
+			return ".bat";
+		}
+		if (osName.startsWith("AIX")) {
+			return ".sh";
+		}
+		if (osName.startsWith("Linux")) {
+			return ".sh";
+		}
+		DevLog.trace("Uncategoried OS: " + osName + ". Shell surfix will default to .sh.");
+		return ".sh";
 	}
 }

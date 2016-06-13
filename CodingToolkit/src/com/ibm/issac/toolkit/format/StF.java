@@ -37,4 +37,15 @@ public class StF {
 		}
 		return sb1;		
 	}
+	
+	/**
+	 * 为STRING加上左右括号，用于日志输出避免不能识别左右的空格
+	 * @param str
+	 * @return
+	 */
+	public static String quoted(String str){
+		StringBuffer sb = new StringBuffer(">");
+		sb.append(str).append("<");
+		return sb.toString();
+	}
 }

@@ -5,6 +5,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URLDecoder;
+
+import com.ibm.issac.toolkit.util.StringUtil;
 
 /**
  * 逐行处理TEXT FILE
@@ -13,8 +16,27 @@ import java.io.IOException;
  * 
  */
 public class TextFileByLineReader {
+	/**
+	 * @deprecated 缺少EXCEPTION处理，在文件找不到等情况是不便处理的
+	 * @param fileName
+	 * @param p
+	 * @return
+	 */
 	public String process(String fileName, ByLineProcesser p) {
-		File file = new File(fileName);
+		try {
+			return this.processForException(fileName, p);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public String processForException(String fileName, ByLineProcesser p) throws IOException {
+		if(!StringUtil.isReadable(fileName)){
+			throw new IOException("File name not readable: >"+fileName+"<");
+		}
+		fileName=URLDecoder.decode(fileName,"utf-8");//防止目录里有空格
+		final File file = new File(fileName);
 		StringBuffer contents = new StringBuffer();
 		BufferedReader reader = null;
 		try {
@@ -24,20 +46,11 @@ public class TextFileByLineReader {
 			while ((text = reader.readLine()) != null) {
 				p.process(text);
 			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
 		} finally {
-			try {
-				if (reader != null) {
-					reader.close();
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
+			if (reader != null) {
+				reader.close();
 			}
 		}
-
 		// show file contents here
 		return contents.toString();
 	}

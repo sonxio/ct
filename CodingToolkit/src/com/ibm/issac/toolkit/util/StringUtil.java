@@ -6,7 +6,6 @@ import com.ibm.issac.toolkit.logging.ColorLog;
 import com.ibm.issac.toolkit.validation.StringValidation;
 
 public class StringUtil {
-	
 	/**
 	 * 如果STRING中包含可读内容，返回真；否则为假。
 	 * 
@@ -18,13 +17,17 @@ public class StringUtil {
 			return false;
 		if ("".equals(string.trim()))
 			return false;
-		if ("null".equals(string.trim().toLowerCase())){
+		/*
+		if ("null".equals(string.trim().toLowerCase())) {
 			ColorLog.warn("You have provided a string consisted of 4 characters: N-U-L-L. It's been treated as not-readable.");
 			return false;
-		}
+		}*/
 		return true;
 	}
-	
+
+	public static boolean isEmpty(String str){
+		return !StringUtil.isReadable(str);
+	}
 	
 	/**
 	 * 用String形式显示一个String数组
@@ -95,7 +98,6 @@ public class StringUtil {
 	public static String getSubStringInbetween(String partStr, String delimiterA, String delimiterB) {
 		partStr = StringUtil.getSubStringBeginningFromTheFirstDelimeter(partStr, delimiterA);
 		return StringUtil.getSubStringEndingAtTheFirstDelimeter(partStr, delimiterB);
-
 	}
 
 	/**
@@ -121,8 +123,31 @@ public class StringUtil {
 
 	public static String generateRamdomString(String prefix) {
 		long uniqueNumber = System.currentTimeMillis() % 1000;
-		if(!StringValidation.isStringReadable(prefix))
+		if (!StringValidation.isStringReadable(prefix))
 			prefix = "RAMDOM_STRING_";
 		return prefix + uniqueNumber;
+	}
+
+	/**
+	 * 把字符串用空格切断为
+	 * 
+	 * @return
+	 */
+	public static String[] splitIntoList(String str, String seperator) {
+		String splittedStr[] = str.split(seperator+"");
+		return splittedStr;
+	}
+	
+	/**
+	 * 替换字符串中的回车、制表符等特殊符号。
+	 * @param inStr 需要替换的字符串
+	 * @param replacement 需要替换为该字符，例如设置为空字符串
+	 * @return
+	 */
+	public static String removeControlCharacters(String inStr,String replacement){
+		if(!StringUtil.isReadable(inStr)){
+			return inStr;
+		}
+		return inStr.replaceAll("[\\t\\n\\r]", replacement);
 	}
 }

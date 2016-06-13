@@ -1,4 +1,4 @@
-package com.ibm.issac.toolkit.xml.xpath;
+package com.ibm.issac.toolkit5.xml.xpath;
 
 /**
  * Abstract approach to access XML files with differed methodologies.
