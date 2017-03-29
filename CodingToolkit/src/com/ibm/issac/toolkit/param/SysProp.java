@@ -190,6 +190,9 @@ public class SysProp {
 		if (osName.startsWith("Linux")) {
 			return ".sh";
 		}
+		if (osName.startsWith("Mac OS X")) {
+			return ".sh";
+		}
 		DevLog.trace("Uncategoried OS: " + osName + ". Shell surfix will default to .sh.");
 		return ".sh";
 	}

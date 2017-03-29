@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="GBK" standalone="no"?>
 <jardesc>
-    <jar path="/Users/song/Desktop/ct.jar"/>
+    <jar path="C:/Users/song/Desktop/ct.jar"/>
     <options buildIfNeeded="true" compress="false" descriptionLocation="/CodingToolkit/buildjar_ct.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="false" overwrite="true" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
     <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
     <selectedProjects/>

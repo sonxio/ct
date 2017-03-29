@@ -35,59 +35,13 @@ public abstract class AbstractNativeCommandSupport {
 		}
 	}
 
-	protected String reportRunningInfo(int retVal, StreamGobbler out, StreamGobbler err) {
+	protected String reportRunningInfo(int retVal, NativeOutputFormatter out, NativeOutputFormatter err) {
 		StringBuffer sb = new StringBuffer();
 		sb.append("return code: ").append(retVal).append(SysProp.getLS());
-		sb.append(out.reportInfo());
+		sb.append(out.getReportOutput());
 		sb.append(SysProp.getLS());
-		sb.append(err.reportInfo());
+		sb.append(err.getReportOutput());
 		sb.append(SysProp.getLS());
 		return sb.toString();
-	}
-
-	/**
-	 * 检查OS命令的OUTPUT STREAM, ERROR STREAM的CLASS.
-	 * 
-	 * @author issac
-	 * 
-	 */
-	final class StreamGobbler extends Thread {
-		private InputStream is;
-		private String type;
-		private StringBuffer infoSb;
-		private StringBuffer allOutputSb;
-
-		StreamGobbler(InputStream is, String type) {
-			this.is = is;
-			this.type = type;
-			infoSb = new StringBuffer();
-			allOutputSb = new StringBuffer();
-		}
-
-		public void run() {
-			try {
-				InputStreamReader isr = new InputStreamReader(is);
-				BufferedReader br = new BufferedReader(isr);
-				String line = null;
-				while ((line = br.readLine()) != null) {
-					DevLog.info("[NATIVE CMD] " + type + "> " + line);
-					// 判断是否需要记录该输出
-					allOutputSb.append(line).append(SysProp.getLS());
-					if (line.startsWith(SysProp.b_str("issac.native.reportKeyword", "REPORT:"))) {
-						infoSb.append(line).append(SysProp.getLS());
-					}
-				}
-			} catch (IOException ioe) {
-				ioe.printStackTrace();
-			}
-		}
-
-		public StringBuffer reportInfo() {
-			return infoSb;
-		}
-
-		public StringBuffer getAllOutput() {
-			return this.allOutputSb;
-		}
 	}
 }

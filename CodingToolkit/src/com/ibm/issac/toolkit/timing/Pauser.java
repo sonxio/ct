@@ -22,7 +22,7 @@ public class Pauser {
 	}
 
 	public static void pauseThreadForException(long ms) throws InterruptedException {
-		DevLog.trace("Pausing "+ms+"ms..."); 
+		DevLog.super_trace("Pausing "+ms+"ms..."); 
 		Thread.sleep(ms);
 	}
 

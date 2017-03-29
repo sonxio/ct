@@ -4,6 +4,7 @@ import com.ibm.issac.toolkit.DevLog;
 
 /**
  * 用trace级别显示进度日志
+ * @deprecated 一律改用PLOG
  * @author issac
  * 
  */

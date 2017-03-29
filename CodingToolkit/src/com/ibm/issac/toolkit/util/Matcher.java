@@ -1,7 +1,5 @@
 package com.ibm.issac.toolkit.util;
 
-import java.io.IOException;
-
 import com.ibm.issac.toolkit.DevLog;
 
 /**
@@ -45,6 +43,6 @@ public class Matcher {
 	}
 
 	public String reportNotMatched() {
-		return "[Matcher-" + title + "] No match found for " + title + ", standard: " + standardObj;
+		return "[Matcher-" + title + "] No match found, standard: " + standardObj;
 	}
 }

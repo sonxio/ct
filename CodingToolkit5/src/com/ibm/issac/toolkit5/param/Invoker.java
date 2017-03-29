@@ -48,11 +48,11 @@ public class Invoker {
 	public static Object get(Object obj, String fieldName, Class<?> fieldType) throws SecurityException, NoSuchMethodException, IllegalArgumentException, IllegalAccessException, InvocationTargetException {
 		Method met;
 		if (fieldType.equals(boolean.class) || fieldType.equals(Boolean.class)) {
-			try{
-			met = obj.getClass().getMethod("is" + initStr(fieldName));
-			}catch(NoSuchMethodException e){
-				//boolean类型也可能使用get开始的，尝试用get
-				met = obj.getClass().getMethod("get" + initStr(fieldName));	
+			try {
+				met = obj.getClass().getMethod("is" + initStr(fieldName));
+			} catch (NoSuchMethodException e) {
+				// boolean类型也可能使用get开始的，尝试用get
+				met = obj.getClass().getMethod("get" + initStr(fieldName));
 			}
 		} else {
 			met = obj.getClass().getMethod("get" + initStr(fieldName));
@@ -95,9 +95,11 @@ public class Invoker {
 			} catch (SecurityException e) {
 				e.printStackTrace();
 			} catch (IllegalArgumentException e) {
-				e.printStackTrace();
+				// 因为自动生成的方法时不时都有参数类型错误的，因此不再打印stacktrace
+				DevLog.error("[Invoker] "+e.getMessage());
 			} catch (NoSuchMethodException e) {
-				e.printStackTrace();
+				// 因为自动生成的方法时不时都有不存在的，因此不再打印stacktrace
+				DevLog.error("[Invoker] "+e.getMessage());
 			} catch (IllegalAccessException e) {
 				e.printStackTrace();
 			} catch (InvocationTargetException e) {
