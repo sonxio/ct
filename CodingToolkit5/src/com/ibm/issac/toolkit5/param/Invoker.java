@@ -62,6 +62,9 @@ public class Invoker {
 
 	public static String initStr(String old) { // 将单词的首字母大写
 		String str = old.substring(0, 1).toUpperCase() + old.substring(1);
+		//特例处理
+		if("mDefectID".equals(old))
+			return "mDefectID";
 		return str;
 	}
 
