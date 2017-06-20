@@ -164,10 +164,18 @@ public class SysProp {
 		return parsedVal;
 	}
 
+	/**
+	 * 获得行分隔符
+	 * @return
+	 */
 	public static String getLS() {
 		return SysProp.pstr("line.separator");
 	}
 
+	/**
+	 * 获得文件分隔符，即目录分隔符
+	 * @return
+	 */
 	public static String getFS() {
 		return SysProp.pstr("file.separator");
 	}
