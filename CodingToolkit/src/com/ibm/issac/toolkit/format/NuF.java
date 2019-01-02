@@ -3,7 +3,7 @@ package com.ibm.issac.toolkit.format;
 import java.text.DecimalFormat;
 
 /**
- * ¸ñÊ½»¯Êı¾İÀàĞÍ£¬ÀıÈç¸ñÊ½»¯Ğ¡ÊıµãµÈ¡£
+ * æ ¼å¼åŒ–æ•°æ®ç±»å‹ï¼Œä¾‹å¦‚æ ¼å¼åŒ–å°æ•°ç‚¹ç­‰ã€‚
  * VasF = Vas Format
  * @author issac
  * 
@@ -11,7 +11,7 @@ import java.text.DecimalFormat;
 public class NuF {
 
 	/**
-	 * ÏÔÊ¾ÎªÏÖ½ğ¸ñÊ½
+	 * æ˜¾ç¤ºä¸ºç°é‡‘æ ¼å¼
 	 *  cu =currency
 	 * @param d
 	 * @return
@@ -22,7 +22,7 @@ public class NuF {
 	}
 	
 	/**
-	 * Ö»±£ÁôÒ»Î»Ğ¡ÊıµãµÄÊı×Ö dot 1
+	 * åªä¿ç•™ä¸€ä½å°æ•°ç‚¹çš„æ•°å­— dot 1
 	 * @param d
 	 * @return
 	 */
@@ -32,7 +32,7 @@ public class NuF {
 	}
 	
 	/**
-	 * Ö»±£ÁôÒ»Î»Ğ¡ÊıµãµÄÊı×Ö dot 4
+	 * åªä¿ç•™ä¸€ä½å°æ•°ç‚¹çš„æ•°å­— dot 4
 	 * @param d
 	 * @return
 	 */
@@ -46,7 +46,7 @@ public class NuF {
 	}
 	
 	/**
-	 * ÏÔÊ¾°Ù·Ö±È
+	 * æ˜¾ç¤ºç™¾åˆ†æ¯”
 	 * @param d
 	 * @return
 	 */

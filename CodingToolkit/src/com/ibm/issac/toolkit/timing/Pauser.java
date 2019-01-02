@@ -6,7 +6,7 @@ import com.ibm.issac.toolkit.DevLog;
 import com.ibm.issac.toolkit.logging.ColorLog;
 
 /**
- * 暂停指定时间长度
+ * 鏆傚仠鎸囧畾鏃堕棿闀垮害
  * 
  * @author issac
  * 

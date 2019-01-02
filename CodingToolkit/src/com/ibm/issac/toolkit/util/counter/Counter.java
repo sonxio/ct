@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 实现统计，必须实例化，以便同时存在多个COUNTER
+ * 瀹炵幇缁熻锛屽繀椤诲疄渚嬪寲锛屼互渚垮悓鏃跺瓨鍦ㄥ涓狢OUNTER
  * @author issac
  *
  */

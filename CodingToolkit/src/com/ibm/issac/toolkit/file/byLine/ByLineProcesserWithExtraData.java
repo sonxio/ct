@@ -1,14 +1,14 @@
 package com.ibm.issac.toolkit.file.byLine;
 
 /**
- * ÅäºÏline by line reader£¬ÖğĞĞ´¦ÀíTEXT FILE
+ * é…åˆline by line readerï¼Œé€è¡Œå¤„ç†TEXT FILE
  * @author issac
  *
  */
 public interface ByLineProcesserWithExtraData extends ByLineProcesser {
 
 	/**
-	 * ÓÃÓÚ´¦ÀíµÄ¸½¼ÓÊôĞÔ
+	 * ç”¨äºå¤„ç†çš„é™„åŠ å±æ€§
 	 * @param obj
 	 */
 	public void setExtraData(Object obj);

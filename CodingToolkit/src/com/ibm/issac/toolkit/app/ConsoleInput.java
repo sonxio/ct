@@ -11,10 +11,10 @@ import com.ibm.issac.toolkit.validation.StringValidation;
 public class ConsoleInput {
 
 	/**
-	 * ÊÕ¼¯ÓÃ»§ÊäÈëµÄ×Ö·û´®
+	 * æ”¶é›†ç”¨æˆ·è¾“å…¥çš„å­—ç¬¦ä¸²
 	 * 
 	 * @param question
-	 * @param ÓÃ»§Ö±½Ó°´»Ø³µµÄÇé¿öÏÂ¸ø³öÄ¬ÈÏÖµ
+	 * @param ç”¨æˆ·ç›´æ¥æŒ‰å›è½¦çš„æƒ…å†µä¸‹ç»™å‡ºé»˜è®¤å€¼
 	 * @return
 	 * @throws IOException
 	 */
@@ -29,7 +29,7 @@ public class ConsoleInput {
 	}
 
 	/**
-	 * ÊÕ¼¯ÓÃ»§ÊäÈëµÄÕûÊı
+	 * æ”¶é›†ç”¨æˆ·è¾“å…¥çš„æ•´æ•°
 	 * 
 	 * @param question
 	 * @return
@@ -41,7 +41,7 @@ public class ConsoleInput {
 			int i = Integer.valueOf(ansStr).intValue();
 			return i;
 		} catch (Exception e) {
-			DevLog.warn("¶ÔÓÚ¸ÃÎÊÌâµÄ»Ø´ğ²»ÄÜ½âÎöÎªint£¬½«Ê¹ÓÃÄ¬ÈÏÖµ" + defaultVal + "£¬ÎÊÌâÊÇ£º" + question);
+			DevLog.warn("å¯¹äºè¯¥é—®é¢˜çš„å›ç­”ä¸èƒ½è§£æä¸ºintï¼Œå°†ä½¿ç”¨é»˜è®¤å€¼" + defaultVal + "ï¼Œé—®é¢˜æ˜¯ï¼š" + question);
 			e.printStackTrace();
 			return defaultVal;
 		}
@@ -53,7 +53,7 @@ public class ConsoleInput {
 			double dbl = Double.valueOf(ansStr).doubleValue();
 			return dbl;
 		} catch (Exception e) {
-			DevLog.warn("¶ÔÓÚ¸ÃÎÊÌâµÄ»Ø´ğ²»ÄÜ½âÎöÎªdouble£¬½«Ê¹ÓÃÄ¬ÈÏÖµ" + dv + "£¬ÎÊÌâÊÇ£º" + question);
+			DevLog.warn("å¯¹äºè¯¥é—®é¢˜çš„å›ç­”ä¸èƒ½è§£æä¸ºdoubleï¼Œå°†ä½¿ç”¨é»˜è®¤å€¼" + dv + "ï¼Œé—®é¢˜æ˜¯ï¼š" + question);
 			e.printStackTrace();
 			return dv;
 		}
@@ -64,7 +64,7 @@ public class ConsoleInput {
 			String ansStr = ConsoleInput.answerString(question, null);
 			return Float.valueOf(ansStr).floatValue();
 		} catch (Exception e) {
-			DevLog.warn("¶ÔÓÚ¸ÃÎÊÌâµÄ»Ø´ğ²»ÄÜ½âÎöÎªfloat£¬½«Ê¹ÓÃÄ¬ÈÏÖµ" + dv + "£¬ÎÊÌâÊÇ£º" + question);
+			DevLog.warn("å¯¹äºè¯¥é—®é¢˜çš„å›ç­”ä¸èƒ½è§£æä¸ºfloatï¼Œå°†ä½¿ç”¨é»˜è®¤å€¼" + dv + "ï¼Œé—®é¢˜æ˜¯ï¼š" + question);
 			e.printStackTrace();
 			return dv;
 		}

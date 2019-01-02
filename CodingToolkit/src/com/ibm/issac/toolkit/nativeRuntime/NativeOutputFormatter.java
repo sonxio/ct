@@ -9,7 +9,7 @@ import com.ibm.issac.toolkit.DevLog;
 import com.ibm.issac.toolkit.param.SysProp;
 
 /**
- * ´¦ÀíOSÃüÁîµÄOUTPUT STREAM, ERROR STREAMµÄCLASS.ÕûÀí³ÉÀíÏëµÄ¸ñÊ½£¬·ÖÀà¡£
+ * å¤„ç†OSå‘½ä»¤çš„OUTPUT STREAM, ERROR STREAMçš„CLASS.æ•´ç†æˆç†æƒ³çš„æ ¼å¼ï¼Œåˆ†ç±»ã€‚
  * 
  * @author issac
  * 
@@ -17,9 +17,9 @@ import com.ibm.issac.toolkit.param.SysProp;
 final class NativeOutputFormatter extends Thread {
 	private InputStream is;
 	private String type;
-	private StringBuffer reportSb;// °üº¬´øÓĞREPORT¹Ø¼ü´ÊµÄÊä³öĞÅÏ¢¼¯ºÏ£¬¼´Ö»¼ÇÂ¼´øÓĞREPORT¹Ø¼ü´ÊµÄÊä³öĞÅÏ¢
-	private StringBuffer completeSb;// °üº¬ÁËÈ«²¿Êä³öĞÅÏ¢¼¯ºÏ
-	private boolean processingFinished = false; // ÊÇ·ñÒÑ¾­´¦ÀíÍê¡£ÓÃÀ´È·±£Òì²½Ïß³Ì´¦Àí½áÊø
+	private StringBuffer reportSb;// åŒ…å«å¸¦æœ‰REPORTå…³é”®è¯çš„è¾“å‡ºä¿¡æ¯é›†åˆï¼Œå³åªè®°å½•å¸¦æœ‰REPORTå…³é”®è¯çš„è¾“å‡ºä¿¡æ¯
+	private StringBuffer completeSb;// åŒ…å«äº†å…¨éƒ¨è¾“å‡ºä¿¡æ¯é›†åˆ
+	private boolean processingFinished = false; // æ˜¯å¦å·²ç»å¤„ç†å®Œã€‚ç”¨æ¥ç¡®ä¿å¼‚æ­¥çº¿ç¨‹å¤„ç†ç»“æŸ
 
 	public NativeOutputFormatter(InputStream is, String type) {
 		this.is = is;
@@ -34,11 +34,11 @@ final class NativeOutputFormatter extends Thread {
 			BufferedReader br = new BufferedReader(isr);
 			String line = null;
 			while ((line = br.readLine()) != null) {
-				// ´òÓ¡ËùÓĞÊä³ö½á¹û
+				// æ‰“å°æ‰€æœ‰è¾“å‡ºç»“æœ
 				DevLog.info("[NATIVE CMD] " + type + "> " + line);
-				// Êä³öĞÅÏ¢Ò»ÂÉ·ÅÈëCOMPLETE SB¡£
+				// è¾“å‡ºä¿¡æ¯ä¸€å¾‹æ”¾å…¥COMPLETE SBã€‚
 				completeSb.append(line).append(SysProp.getLS());
-				// Èç¹û´øÓĞREPORT¹Ø¼ü´Ê£¬Ôò·ÅÈëREPORT SB
+				// å¦‚æœå¸¦æœ‰REPORTå…³é”®è¯ï¼Œåˆ™æ”¾å…¥REPORT SB
 				if (line.startsWith(SysProp.b_str("issac.native.reportKeyword", "REPORT:"))) {
 					reportSb.append(line).append(SysProp.getLS());
 				}
@@ -51,7 +51,7 @@ final class NativeOutputFormatter extends Thread {
 	}
 
 	/**
-	 * °üº¬´øÓĞREPORT¹Ø¼ü´ÊµÄÊä³öĞÅÏ¢¼¯ºÏ£¬¼´Ö»¼ÇÂ¼´øÓĞREPORT¹Ø¼ü´ÊµÄÊä³öĞÅÏ¢
+	 * åŒ…å«å¸¦æœ‰REPORTå…³é”®è¯çš„è¾“å‡ºä¿¡æ¯é›†åˆï¼Œå³åªè®°å½•å¸¦æœ‰REPORTå…³é”®è¯çš„è¾“å‡ºä¿¡æ¯
 	 * 
 	 * @return
 	 */
@@ -63,7 +63,7 @@ final class NativeOutputFormatter extends Thread {
 	}
 
 	/**
-	 * »ñÈ¡°üº¬È«²¿Êä³öĞÅÏ¢µÄ¼¯ºÏ¡£
+	 * è·å–åŒ…å«å…¨éƒ¨è¾“å‡ºä¿¡æ¯çš„é›†åˆã€‚
 	 * 
 	 * @return
 	 */
@@ -76,7 +76,7 @@ final class NativeOutputFormatter extends Thread {
 	}
 
 	/**
-	 * ÊÇ·ñÒÑ¾­´¦ÀíÍê¡£ÓÃÀ´È·±£Òì²½Ïß³Ì´¦Àí½áÊø
+	 * æ˜¯å¦å·²ç»å¤„ç†å®Œã€‚ç”¨æ¥ç¡®ä¿å¼‚æ­¥çº¿ç¨‹å¤„ç†ç»“æŸ
 	 * 
 	 * @return
 	 */

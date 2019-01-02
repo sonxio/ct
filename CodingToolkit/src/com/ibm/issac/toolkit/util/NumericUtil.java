@@ -5,7 +5,7 @@ public class NumericUtil {
 	private final static char[] HEX = "0123456789abcdef".toCharArray();
 
 	/**
-	 * ½« int ÀàĞÍÊı¾İ×ª³É¶ş½øÖÆµÄ×Ö·û´®£¬²»×ã int ÀàĞÍÎ»ÊıÊ±ÔÚÇ°ÃæÌí¡°0¡±ÒÔ´Õ×ãÎ»Êı
+	 * å°† int ç±»å‹æ•°æ®è½¬æˆäºŒè¿›åˆ¶çš„å­—ç¬¦ä¸²ï¼Œä¸è¶³ int ç±»å‹ä½æ•°æ—¶åœ¨å‰é¢æ·»â€œ0â€ä»¥å‡‘è¶³ä½æ•°
 	 * 
 	 * @param num
 	 * @return
@@ -19,13 +19,13 @@ public class NumericUtil {
 	}
 
 	/**
-	 * ½« int ÀàĞÍÊı¾İ×ª³ÉÊ®Áù½øÖÆµÄ×Ö·û´®£¬²»×ã int ÀàĞÍÎ»ÊıÊ±ÔÚÇ°ÃæÌí¡°0¡±ÒÔ´Õ×ãÎ»Êı
+	 * å°† int ç±»å‹æ•°æ®è½¬æˆåå…­è¿›åˆ¶çš„å­—ç¬¦ä¸²ï¼Œä¸è¶³ int ç±»å‹ä½æ•°æ—¶åœ¨å‰é¢æ·»â€œ0â€ä»¥å‡‘è¶³ä½æ•°
 	 * 
 	 * @param num
 	 * @return
 	 */
 	public static String toFullHexString(int num) {
-		char[] chs = new char[Integer.SIZE / 4]; // integerµÄSIZEÊÇ32
+		char[] chs = new char[Integer.SIZE / 4]; // integerçš„SIZEæ˜¯32
 		for (int i = 0; i < chs.length; i++) {
 			chs[chs.length - 1 - i] = HEX[(num >> (i * 4)) & 0xf];
 		}
@@ -33,14 +33,14 @@ public class NumericUtil {
 	}
 
 	/**
-	 * MQ HEXÃ¿¸öÊı×ÖÖ»ÓĞ2Î»
+	 * MQ HEXæ¯ä¸ªæ•°å­—åªæœ‰2ä½
 	 * 
 	 * @param num
-	 *            ×¢Òâ£º±ØĞëÊÇ0-255±íÊ¾µÄBYTE£¬JAVAÄ¬ÈÏBYTE·¶Î§Îª-127~128
+	 *            æ³¨æ„ï¼šå¿…é¡»æ˜¯0-255è¡¨ç¤ºçš„BYTEï¼ŒJAVAé»˜è®¤BYTEèŒƒå›´ä¸º-127~128
 	 * @return
 	 */
 	public static String toMQHexString(int num) {
-		char[] chs = new char[Integer.SIZE / 16]; // integerµÄSIZEÊÇ32
+		char[] chs = new char[Integer.SIZE / 16]; // integerçš„SIZEæ˜¯32
 		for (int i = 0; i < chs.length; i++) {
 			chs[chs.length - 1 - i] = HEX[(num >> (i * 4)) & 0xf];
 		}
@@ -48,17 +48,17 @@ public class NumericUtil {
 	}
 
 	/**
-	 * °Ñ-127-128µÄBYTEÀàĞÍ×ª»»Îª0-255±íÊ¾µÄÕûÊıÀàĞÍ
+	 * æŠŠ-127-128çš„BYTEç±»å‹è½¬æ¢ä¸º0-255è¡¨ç¤ºçš„æ•´æ•°ç±»å‹
 	 * 
 	 * @param b
 	 * @return
 	 */
 	public static int toIntByte(byte b) {
-		return -1; //ÏÖÔÚÃ»ÕÒµ½¼òµ¥·½·¨£¬ÔÚEncodingUtilÀïÓÃByteArrayInputStream½â¾öÁËÎÊÌâ¡£
+		return -1; //ç°åœ¨æ²¡æ‰¾åˆ°ç®€å•æ–¹æ³•ï¼Œåœ¨EncodingUtilé‡Œç”¨ByteArrayInputStreamè§£å†³äº†é—®é¢˜ã€‚
 	}
 
 	/**
-	 * ½« long ÀàĞÍÊı¾İ×ª³É¶ş½øÖÆµÄ×Ö·û´®£¬²»×ã long ÀàĞÍÎ»ÊıÊ±ÔÚÇ°ÃæÌí¡°0¡±ÒÔ´Õ×ãÎ»Êı
+	 * å°† long ç±»å‹æ•°æ®è½¬æˆäºŒè¿›åˆ¶çš„å­—ç¬¦ä¸²ï¼Œä¸è¶³ long ç±»å‹ä½æ•°æ—¶åœ¨å‰é¢æ·»â€œ0â€ä»¥å‡‘è¶³ä½æ•°
 	 * 
 	 * @param num
 	 * @return
@@ -72,7 +72,7 @@ public class NumericUtil {
 	}
 
 	/**
-	 * ½« long ÀàĞÍÊı¾İ×ª³ÉÊ®Áù½øÖÆµÄ×Ö·û´®£¬²»×ã long ÀàĞÍÎ»ÊıÊ±ÔÚÇ°ÃæÌí¡°0¡±ÒÔ´Õ×ãÎ»Êı
+	 * å°† long ç±»å‹æ•°æ®è½¬æˆåå…­è¿›åˆ¶çš„å­—ç¬¦ä¸²ï¼Œä¸è¶³ long ç±»å‹ä½æ•°æ—¶åœ¨å‰é¢æ·»â€œ0â€ä»¥å‡‘è¶³ä½æ•°
 	 * 
 	 * @param num
 	 * @return

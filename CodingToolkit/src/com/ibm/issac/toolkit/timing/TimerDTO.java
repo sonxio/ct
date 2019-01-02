@@ -5,7 +5,7 @@ import java.util.Date;
 import com.ibm.issac.toolkit.util.DateUtil;
 
 /**
- * ¼ÆËãÆğÊ¼Ê±¼ä
+ * è®¡ç®—èµ·å§‹æ—¶é—´
  * 
  * @author issac
  * 
@@ -32,7 +32,7 @@ public class TimerDTO {
 	}
 
 	/**
-	 * ÔÚstopTimerºóµÃµ½ºÁÃëÎªµ¥Î»µÄÊ±¼ä²î
+	 * åœ¨stopTimeråå¾—åˆ°æ¯«ç§’ä¸ºå•ä½çš„æ—¶é—´å·®
 	 * 
 	 * @return
 	 */
@@ -41,7 +41,7 @@ public class TimerDTO {
 	}
 
 	/**
-	 * ²»Í£Ö¹¼ÆÊ±£¬±¨¸æµ±Ç°ÒÑ¾­¾­¹ıµÄÊ±¼ä
+	 * ä¸åœæ­¢è®¡æ—¶ï¼ŒæŠ¥å‘Šå½“å‰å·²ç»ç»è¿‡çš„æ—¶é—´
 	 * 
 	 * @return
 	 */
@@ -55,7 +55,7 @@ public class TimerDTO {
 	}
 	
 	/**
-	 * ±¨¸æµ±Ç°ÒÑ¾­¾­¹ıµÄÊ±¼ä£¬È»ºóÖØĞÂ¿ªÊ¼¼ÆÊ±
+	 * æŠ¥å‘Šå½“å‰å·²ç»ç»è¿‡çš„æ—¶é—´ï¼Œç„¶åé‡æ–°å¼€å§‹è®¡æ—¶
 	 * @return
 	 */
 	public String reportAndReset(String title){
@@ -70,7 +70,7 @@ public class TimerDTO {
 	}
 
 	/**
-	 * ²»Í£Ö¹¼ÆÊ±£¬¸ø³öÆô¶¯ÖÁ½ñµÄÊ±²î
+	 * ä¸åœæ­¢è®¡æ—¶ï¼Œç»™å‡ºå¯åŠ¨è‡³ä»Šçš„æ—¶å·®
 	 * @return
 	 */
 	public long getCurrentInterval() {

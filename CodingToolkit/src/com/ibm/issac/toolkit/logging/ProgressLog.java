@@ -1,7 +1,7 @@
 package com.ibm.issac.toolkit.logging;
 
 /**
- * 以后改用Plog，为了和之前的代码兼容，保留该类
+ * 浠ュ悗鏀圭敤Plog锛屼负浜嗗拰涔嬪墠鐨勪唬鐮佸吋瀹癸紝淇濈暀璇ョ被
  * @deprecated
  * @author issac
  *

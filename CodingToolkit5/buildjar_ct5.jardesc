@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="GBK" standalone="no"?>
+<jardesc>
+    <jar path="/Users/song/Desktop/ct5.jar"/>
+    <options buildIfNeeded="true" compress="false" descriptionLocation="/CodingToolkit5/buildjar_ct5.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="false" overwrite="true" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
+    <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
+    <selectedProjects/>
+    <manifest generateManifest="true" manifestLocation="" manifestVersion="1.0" reuseManifest="false" saveManifest="false" usesManifest="true">
+        <sealing sealJar="false">
+            <packagesToSeal/>
+            <packagesToUnSeal/>
+        </sealing>
+    </manifest>
+    <selectedElements exportClassFiles="true" exportJavaFiles="false" exportOutputFolder="false">
+        <javaElement handleIdentifier="=CodingToolkit5/src&lt;com.ibm.issac.toolkit5.param"/>
+        <file path="/CodingToolkit5/.factorypath"/>
+        <javaElement handleIdentifier="=CodingToolkit5/src&lt;com.ibm.issac.toolkit5.xml.xpath"/>
+        <file path="/CodingToolkit5/.project"/>
+        <file path="/CodingToolkit5/.classpath"/>
+    </selectedElements>
+</jardesc>

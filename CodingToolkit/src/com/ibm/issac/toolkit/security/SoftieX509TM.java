@@ -6,7 +6,7 @@ import java.security.cert.X509Certificate;
 import javax.net.ssl.X509TrustManager;
 
 /**
- * 一个会信任任何证书的X509TrustManager
+ * 涓�涓細淇′换浠讳綍璇佷功鐨刋509TrustManager
  * @author issac
  *
  */

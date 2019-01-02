@@ -9,7 +9,7 @@ import com.ibm.issac.toolkit.DevLog;
 import com.ibm.issac.toolkit.param.SysProp;
 
 /**
- * ÏÔÊ¾×Ö·û±àÂë
+ * æ˜¾ç¤ºå­—ç¬¦ç¼–ç 
  * 
  * @author issac
  * 
@@ -21,10 +21,10 @@ public class EncodingUtil {
 	}
 	
 	/**
-	 * ¼òÒªÃèÊöSTRINGµÄ¸÷¸ö×Ö·û±àÂë
+	 * ç®€è¦æè¿°STRINGçš„å„ä¸ªå­—ç¬¦ç¼–ç 
 	 * 
 	 * @param obj
-	 *            ÎªÁË±ãÓÚ²ÎÊı´«Èë£¬ÕâÀï²»ÊÇSTRINGÔòÖ±½Ó·ÅÆú¡£
+	 *            ä¸ºäº†ä¾¿äºå‚æ•°ä¼ å…¥ï¼Œè¿™é‡Œä¸æ˜¯STRINGåˆ™ç›´æ¥æ”¾å¼ƒã€‚
 	 * @param strEncoding
 	 * @return
 	 */
@@ -41,9 +41,9 @@ public class EncodingUtil {
 		}
 		str = (String) obj;
 		try {
-			// Éú³É×Ö½ÚÁ÷
+			// ç”Ÿæˆå­—èŠ‚æµ
 			final ByteArrayInputStream bais = new ByteArrayInputStream(str.getBytes(strEncoding));
-			// ÃèÊö¸Ã×Ö½ÚÁ÷
+			// æè¿°è¯¥å­—èŠ‚æµ
 			final StringBuffer sb = new StringBuffer("EC{");
 			sb.append(strEncoding);
 			sb.append(":\"");
@@ -82,14 +82,14 @@ public class EncodingUtil {
 		final String parsedStr = EncodingUtil.parseWithEncoding(baos, printEncoding);
 		DevLog.display("\n### THE COMPLETE STRING\n");
 		DevLog.display(parsedStr + "\n");
-		// ÏÔÊ¾¸ÃENCODING¶ÔÓ¦µÄ×Ö·û£¬Èç¹ûÓĞÖĞÎÄ£¬Ã¿¸öºº×Ö¶ÔÓ¦Ò»¸öCHAR
+		// æ˜¾ç¤ºè¯¥ENCODINGå¯¹åº”çš„å­—ç¬¦ï¼Œå¦‚æœæœ‰ä¸­æ–‡ï¼Œæ¯ä¸ªæ±‰å­—å¯¹åº”ä¸€ä¸ªCHAR
 		DevLog.display("\n### PARSED CHAR ARRAY\n");
 		final char[] charArray = parsedStr.toCharArray();
 		for (int i = 0; i < charArray.length; i++) {
 			DevLog.display("[" + charArray[i] + "]\t");
 		}
 		EncodingUtil.printRuler(charArray.length);
-		// ÏÔÊ¾¸ÃENCODING¶ÔÓ¦µÄBYTE ARRAY£»Èç¹ûÓĞÖĞÎÄ£¬Ã¿¸öºº×Ö¶ÔÓ¦¶à¸öBYTE
+		// æ˜¾ç¤ºè¯¥ENCODINGå¯¹åº”çš„BYTE ARRAYï¼›å¦‚æœæœ‰ä¸­æ–‡ï¼Œæ¯ä¸ªæ±‰å­—å¯¹åº”å¤šä¸ªBYTE
 		DevLog.display("\n### PARSED BYTE ARRAY (-127~128)\n");
 		// final byte[] byteArray = parsedStr.getBytes();
 		final byte[] byteArray = baos.toByteArray();
@@ -97,7 +97,7 @@ public class EncodingUtil {
 			DevLog.display("[" + byteArray[i] + "]\t");
 		}
 		EncodingUtil.printRuler(byteArray.length);
-		// ÏÔÊ¾0-255±àÂëµÄBYTE£¬ÒÔ¼°¶ÔÓ¦µÄHEX
+		// æ˜¾ç¤º0-255ç¼–ç çš„BYTEï¼Œä»¥åŠå¯¹åº”çš„HEX
 		DevLog.display("\n### PARSED INTEGER ARRAY (0~255), AND HEX\n");
 		ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
 		int k = -1;
@@ -120,7 +120,7 @@ public class EncodingUtil {
 	}
 
 	/**
-	 * ÏÔÊ¾×óÓÒĞòºÅ£¬ÓÃ×÷±ê³ß£¬·½±ã²éÕÒ×Ö·û
+	 * æ˜¾ç¤ºå·¦å³åºå·ï¼Œç”¨ä½œæ ‡å°ºï¼Œæ–¹ä¾¿æŸ¥æ‰¾å­—ç¬¦
 	 */
 	private static void printRuler(int length) {
 		DevLog.display("\n");
@@ -140,14 +140,14 @@ public class EncodingUtil {
 	}
 
 	/**
-	 * ×ª»»BYTEÊı×é±àÂë
+	 * è½¬æ¢BYTEæ•°ç»„ç¼–ç 
 	 * 
 	 * @param byteArrayEncoding
-	 *            ²ÎÊıËù¸øµÄBYTEÊı×éµÄÊµ¼Ê±àÂë
+	 *            å‚æ•°æ‰€ç»™çš„BYTEæ•°ç»„çš„å®é™…ç¼–ç 
 	 * @param convertedEncoding
-	 *            Ï£Íû×ª»»³ÉµÄÄ¿±ê±àÂë
+	 *            å¸Œæœ›è½¬æ¢æˆçš„ç›®æ ‡ç¼–ç 
 	 * @param bArray
-	 *            BYTEÊı×é£¬ÓÃ-127~128±íÊ¾£¬Èç¹ûÊÇ0-255µÄ£¬ÓÃ(byte)238ÕâÑù¼´¿É×ª»»
+	 *            BYTEæ•°ç»„ï¼Œç”¨-127~128è¡¨ç¤ºï¼Œå¦‚æœæ˜¯0-255çš„ï¼Œç”¨(byte)238è¿™æ ·å³å¯è½¬æ¢
 	 * @return
 	 * @throws IOException
 	 */

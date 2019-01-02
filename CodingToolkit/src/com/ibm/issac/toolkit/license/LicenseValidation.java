@@ -4,17 +4,17 @@ import com.ibm.issac.toolkit.license.pattern.BasicDateValidationPattern;
 import com.ibm.issac.toolkit.license.pattern.FlooredSqrtPattern;
 
 /**
- * IREÏµÁĞµÄ¹¤¾ß²»ÔÊĞíÈÎºÎÓÃ»§Ê¹ÓÃ¡£Òò´ËÌá¹©ÁËÒ»Ğ©ÊÚÈ¨·½°¸¡£
+ * IREç³»åˆ—çš„å·¥å…·ä¸å…è®¸ä»»ä½•ç”¨æˆ·ä½¿ç”¨ã€‚å› æ­¤æä¾›äº†ä¸€äº›æˆæƒæ–¹æ¡ˆã€‚
  * @author issac
  *
  */
 public final class LicenseValidation {
 
 	/**
-	 * ÑéÖ¤µ±Ç°ÓÃ»§ÊÇ·ñÓµÓĞLICENSE¡£
-	 * @param licensePattern ²»Í¬µÄLICENSEÑéÖ¤ÀàĞÍ
-	 * @param requestCode ÇëÇóÂë£¬¸ù¾İLICENSEÑéÖ¤ÀàĞÍµÄ²»Í¬£¬ÇëÇóÂëÄÚÈİÒ²»áÓĞÇø±ğ
-	 * @return ÓÃ»§ÊÇ·ñ³ÖÓĞLICENSE
+	 * éªŒè¯å½“å‰ç”¨æˆ·æ˜¯å¦æ‹¥æœ‰LICENSEã€‚
+	 * @param licensePattern ä¸åŒçš„LICENSEéªŒè¯ç±»å‹
+	 * @param requestCode è¯·æ±‚ç ï¼Œæ ¹æ®LICENSEéªŒè¯ç±»å‹çš„ä¸åŒï¼Œè¯·æ±‚ç å†…å®¹ä¹Ÿä¼šæœ‰åŒºåˆ«
+	 * @return ç”¨æˆ·æ˜¯å¦æŒæœ‰LICENSE
 	 */
 	public boolean isLicenseGranted(String licensePattern, String requestCode){
 		if("BasicDateValidation_LicenseSurfix".equals(licensePattern))

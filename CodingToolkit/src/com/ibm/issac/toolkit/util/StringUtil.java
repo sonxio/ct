@@ -1,13 +1,43 @@
 package com.ibm.issac.toolkit.util;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Random;
 
 import com.ibm.issac.toolkit.logging.ColorLog;
 import com.ibm.issac.toolkit.validation.StringValidation;
 
 public class StringUtil {
+
 	/**
-	 * Èç¹ûSTRINGÖĞ°üº¬¿É¶ÁÄÚÈİ£¬·µ»ØÕæ£»·ñÔòÎª¼Ù¡£
+	 * ç”Ÿæˆä¸€ä¸ªéšæœºå­—ç¬¦ä¸²
+	 * 
+	 * @param numberOfWords
+	 * @return
+	 */
+	public static String generateRandomString() {
+		Random random = new Random();
+		char[] word = new char[random.nextInt(8) + 3]; // words of length 3 through 10. (1 and 2 letter words are boring.)
+		for (int j = 0; j < word.length; j++) {
+			word[j] = (char) ('a' + random.nextInt(26));
+		}
+		return new String(word);
+	}
+
+	/**
+	 * ç”Ÿæˆä¸€ä¸ªå«æœ‰æ•°å­—çš„éšæœºå­—ç¬¦ä¸²
+	 * @deprecated æ–¹æ³•åç§°æ‹¼å†™é”™äº†ï¼Œè€Œä¸”å¸¦æœ‰æ•°å­—ä¸ç¾è§‚ï¼Œæ”¹ç”¨çº¯å­—æ¯çš„ç‰ˆæœ¬
+	 * @param prefix
+	 * @return
+	 */
+	public static String generateRamdomString(String prefix) {
+		long uniqueNumber = System.currentTimeMillis() % 1000;
+		if (!StringValidation.isStringReadable(prefix))
+			prefix = "RAMDOM_STRING_";
+		return prefix + uniqueNumber;
+	}
+
+	/**
+	 * å¦‚æœSTRINGä¸­åŒ…å«å¯è¯»å†…å®¹ï¼Œè¿”å›çœŸï¼›å¦åˆ™ä¸ºå‡ã€‚
 	 * 
 	 * @param string
 	 * @return
@@ -18,29 +48,61 @@ public class StringUtil {
 		if ("".equals(string.trim()))
 			return false;
 		/*
-		if ("null".equals(string.trim().toLowerCase())) {
-			ColorLog.warn("You have provided a string consisted of 4 characters: N-U-L-L. It's been treated as not-readable.");
-			return false;
-		}*/
+		 * if ("null".equals(string.trim().toLowerCase())) { ColorLog.warn("You have provided a string consisted of 4 characters: N-U-L-L. It's been treated as not-readable."); return false; }
+		 */
 		return true;
 	}
 
-	public static boolean isEmpty(String str){
+	public static boolean isEmpty(String str) {
 		return !StringUtil.isReadable(str);
 	}
-	
+
 	/**
-	 * ÓÃStringĞÎÊ½ÏÔÊ¾Ò»¸öStringÊı×é
+	 * é»˜è®¤javaç”¨ç§‘å­¦è®¡æ•°æ³•æ‰“å°å°æ•°ï¼Œé€ æˆå¾ˆéš¾è¯†åˆ«ã€‚
 	 * 
+	 * @param d
+	 * @return
+	 */
+	public static String printNumber(double d) {
+		java.text.DecimalFormat df = new java.text.DecimalFormat("#,##0.00");
+		return df.format(d);
+	}
+
+	/**
+	 * ç”¨Stringå½¢å¼æ˜¾ç¤ºä¸€ä¸ªStringæ•°ç»„
+	 * 
+	 * @deprecated æ”¹ç”¨flattenArray
 	 * @param stringArray
 	 * @return
 	 */
 	public static String flattenStringArray(String[] stringArray) {
 		final StringBuffer sb = new StringBuffer("[");
-		for (int i = 0; i < stringArray.length; i++) {
+		for (int i = 0; stringArray != null && i < stringArray.length; i++) {
 			if (i != 0)
 				sb.append(',');
 			sb.append(stringArray[i]);
+		}
+		sb.append(']');
+		return sb.toString();
+	}
+
+	public static String flattenArray(Object[] objA) {
+		final StringBuffer sb = new StringBuffer("[");
+		for (int i = 0; objA != null && i < objA.length; i++) {
+			if (i != 0)
+				sb.append(',');
+			sb.append(objA[i]);
+		}
+		sb.append(']');
+		return sb.toString();
+	}
+
+	public static String flattenArray(int[] intA) {
+		final StringBuffer sb = new StringBuffer("[");
+		for (int i = 0; intA != null && i < intA.length; i++) {
+			if (i != 0)
+				sb.append(',');
+			sb.append(intA[i]);
 		}
 		sb.append(']');
 		return sb.toString();
@@ -67,7 +129,7 @@ public class StringUtil {
 	}
 
 	/**
-	 * ·µ»Ø´Ó¿ªÍ·µ½µÚÒ»¸ö¿Õ¸ñµÄ×Ö·û´®
+	 * è¿”å›ä»å¼€å¤´åˆ°ç¬¬ä¸€ä¸ªç©ºæ ¼çš„å­—ç¬¦ä¸²
 	 * 
 	 * @param partStr
 	 * @param delimeterStr
@@ -78,7 +140,7 @@ public class StringUtil {
 	}
 
 	/**
-	 * ·µ»Ø´ÓµÚÒ»¸ö¿Õ¸ñ¿ªÊ¼µ½½áÎ²µÄ²¿·Ö×Ö·û´®
+	 * è¿”å›ä»ç¬¬ä¸€ä¸ªç©ºæ ¼å¼€å§‹åˆ°ç»“å°¾çš„éƒ¨åˆ†å­—ç¬¦ä¸²
 	 * 
 	 * @param partStr
 	 * @param delimeterStr
@@ -89,7 +151,7 @@ public class StringUtil {
 	}
 
 	/**
-	 * »ñµÃÁ½¸ö·Ö¸ô·ûÖ®¼äµÄ×Ö·û´®
+	 * è·å¾—ä¸¤ä¸ªåˆ†éš”ç¬¦ä¹‹é—´çš„å­—ç¬¦ä¸²
 	 * 
 	 * @param delimiterA
 	 * @param delimiterB
@@ -101,11 +163,11 @@ public class StringUtil {
 	}
 
 	/**
-	 * ÊôĞÔÅäÖÃÖĞ¿ÉÄÜ°üº¬ÖĞÎÄÊ±Ê¹ÓÃ¸ÃÑ¡Ïî¡£
+	 * å±æ€§é…ç½®ä¸­å¯èƒ½åŒ…å«ä¸­æ–‡æ—¶ä½¿ç”¨è¯¥é€‰é¡¹ã€‚
 	 * 
 	 * @param propertyName
 	 * @param defaultValue
-	 *            Èç¹ûÖĞÎÄ½âÎöÊ§°Ü£¬¾ÍÊÇÓÃÄ¬ÈÏÖµ
+	 *            å¦‚æœä¸­æ–‡è§£æå¤±è´¥ï¼Œå°±æ˜¯ç”¨é»˜è®¤å€¼
 	 * @return
 	 */
 	public static String readChinese(String str, String defaultValue) {
@@ -121,31 +183,27 @@ public class StringUtil {
 		}
 	}
 
-	public static String generateRamdomString(String prefix) {
-		long uniqueNumber = System.currentTimeMillis() % 1000;
-		if (!StringValidation.isStringReadable(prefix))
-			prefix = "RAMDOM_STRING_";
-		return prefix + uniqueNumber;
-	}
-
 	/**
-	 * °Ñ×Ö·û´®ÓÃ¿Õ¸ñÇĞ¶ÏÎª
+	 * æŠŠå­—ç¬¦ä¸²ç”¨ç©ºæ ¼åˆ‡æ–­ä¸º
 	 * 
 	 * @return
 	 */
 	public static String[] splitIntoList(String str, String seperator) {
-		String splittedStr[] = str.split(seperator+"");
+		String splittedStr[] = str.split(seperator + "");
 		return splittedStr;
 	}
-	
+
 	/**
-	 * Ìæ»»×Ö·û´®ÖĞµÄ»Ø³µ¡¢ÖÆ±í·ûµÈÌØÊâ·ûºÅ¡£
-	 * @param inStr ĞèÒªÌæ»»µÄ×Ö·û´®
-	 * @param replacement ĞèÒªÌæ»»Îª¸Ã×Ö·û£¬ÀıÈçÉèÖÃÎª¿Õ×Ö·û´®
+	 * æ›¿æ¢å­—ç¬¦ä¸²ä¸­çš„å›è½¦ã€åˆ¶è¡¨ç¬¦ç­‰ç‰¹æ®Šç¬¦å·ã€‚
+	 * 
+	 * @param inStr
+	 *            éœ€è¦æ›¿æ¢çš„å­—ç¬¦ä¸²
+	 * @param replacement
+	 *            éœ€è¦æ›¿æ¢ä¸ºè¯¥å­—ç¬¦ï¼Œä¾‹å¦‚è®¾ç½®ä¸ºç©ºå­—ç¬¦ä¸²
 	 * @return
 	 */
-	public static String removeControlCharacters(String inStr,String replacement){
-		if(!StringUtil.isReadable(inStr)){
+	public static String removeControlCharacters(String inStr, String replacement) {
+		if (!StringUtil.isReadable(inStr)) {
 			return inStr;
 		}
 		return inStr.replaceAll("[\\t\\n\\r]", replacement);

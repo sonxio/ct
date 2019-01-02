@@ -15,7 +15,7 @@ import com.ibm.issac.toolkit.DevLog;
 import com.ibm.issac.toolkit.logging.ColorLog;
 
 /**
- * 解析TEXT格式的PROPERTIES配置
+ * 瑙ｆ瀽TEXT鏍煎紡鐨凱ROPERTIES閰嶇疆
  * 
  * @author issac
  * 

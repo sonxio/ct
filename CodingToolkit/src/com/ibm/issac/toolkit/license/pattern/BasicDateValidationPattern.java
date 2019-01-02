@@ -6,7 +6,7 @@ import com.ibm.issac.toolkit.DatetimeUtility;
 import com.ibm.issac.toolkit.logging.ColorLog;
 
 /**
- * Í¨¹ı¶ÔÈÕÆÚ½øĞĞ»ù±¾×ª»»£¬È·ÈÏÇëÇóÂëÊÇ·ñÓĞĞ§
+ * é€šè¿‡å¯¹æ—¥æœŸè¿›è¡ŒåŸºæœ¬è½¬æ¢ï¼Œç¡®è®¤è¯·æ±‚ç æ˜¯å¦æœ‰æ•ˆ
  * 
  * @author issac
  * 

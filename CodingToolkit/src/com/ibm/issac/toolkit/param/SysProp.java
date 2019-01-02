@@ -6,21 +6,22 @@ import java.util.Map;
 import com.ibm.issac.toolkit.DevLog;
 
 /**
- * Ê¹ÓÃ-D²ÎÊı·µ»ØÖµ£» ÒòÎªÕâÖÖ²ÎÊıÌá¹©·½Ê½ºÜÈİÒ×ÒÅÍü£¬ËùÒÔËùÓĞµ÷ÓÃµ½Ê±£¬¶¼ÒªÇó´òÓ¡µ÷ÓÃÈÕÖ¾¡£
- * 
+ * ä½¿ç”¨-Då‚æ•°è¿”å›å€¼ï¼› å› ä¸ºè¿™ç§å‚æ•°æä¾›æ–¹å¼å¾ˆå®¹æ˜“é—å¿˜ï¼Œæ‰€ä»¥æ‰€æœ‰è°ƒç”¨åˆ°æ—¶ï¼Œéƒ½è¦æ±‚æ‰“å°è°ƒç”¨æ—¥å¿—ã€‚
+ * <br/>
+ * åœ¨ä»£ç ä¸­åŠ¨æ€è®¾å®šå±æ€§ï¼šSystem.setProperty("song.devlog.printDateTimeInSystemOut", "false");
  * @author issac
  * 
  */
 public class SysProp {
-	private static Map helpM = new HashMap(); // »º´æ¶Ô²ÎÊıµÄ½âÊÍ
-	private static Map historyM = new HashMap(); // ±£´æ·ÃÎÊ¹ıµÄKEY£¬±ÜÃâÖØ¸´´òÓ¡¶ÔÍ¬Ò»¸öKEYµÄ·ÃÎÊÈÕÖ¾
+	private static Map helpM = new HashMap(); // ç¼“å­˜å¯¹å‚æ•°çš„è§£é‡Š
+	private static Map historyM = new HashMap(); // ä¿å­˜è®¿é—®è¿‡çš„KEYï¼Œé¿å…é‡å¤æ‰“å°å¯¹åŒä¸€ä¸ªKEYçš„è®¿é—®æ—¥å¿—
 
 	public static void cacheHelp(String pName, String helpStr) {
 		SysProp.helpM.put(pName, helpStr);
 	}
 
 	/**
-	 * @deprecated Èç¹ûĞèÒªÏÔÊ¾°ïÖú£¬½¨Òéµ¥¶Àµ÷ÓÃcacheHelp£¬ÒÔÃâÔÚÕâ¸öÀàÀïÃæ·½·¨²ÎÊı¹ı¶È¸´ÔÓ
+	 * @deprecated å¦‚æœéœ€è¦æ˜¾ç¤ºå¸®åŠ©ï¼Œå»ºè®®å•ç‹¬è°ƒç”¨cacheHelpï¼Œä»¥å…åœ¨è¿™ä¸ªç±»é‡Œé¢æ–¹æ³•å‚æ•°è¿‡åº¦å¤æ‚
 	 * @param pName
 	 * @param help
 	 * @return
@@ -31,7 +32,7 @@ public class SysProp {
 	}
 
 	/**
-	 * @deprecated »»ÓÃb_bool
+	 * @deprecated æ¢ç”¨b_bool
 	 * @param pName
 	 * @return
 	 */
@@ -42,7 +43,7 @@ public class SysProp {
 			result = false;
 		}
 		result = Boolean.valueOf(s).booleanValue();
-		// ±£´æ·ÃÎÊ¼ÇÂ¼£¬²¢Éú³É·ÃÎÊÈÕÖ¾
+		// ä¿å­˜è®¿é—®è®°å½•ï¼Œå¹¶ç”Ÿæˆè®¿é—®æ—¥å¿—
 		if (!historyM.containsKey(pName)) {
 			historyM.put(pName, s);
 			StringBuffer sb = new StringBuffer("[SysProp] ");
@@ -69,7 +70,7 @@ public class SysProp {
 	}
 
 	/**
-	 * @deprecated ½¨Òé²»×öPUBLICµ÷ÓÃ£¬ÒÔºó°ÑintÃû³ÆÓÃÀ´±íÊ¾intÀàĞÍ£¬IntÓÃÀ´±íÊ¾IntegerÀàĞÍ
+	 * @deprecated å»ºè®®ä¸åšPUBLICè°ƒç”¨ï¼Œä»¥åæŠŠintåç§°ç”¨æ¥è¡¨ç¤ºintç±»å‹ï¼ŒIntç”¨æ¥è¡¨ç¤ºIntegerç±»å‹
 	 * @param pName
 	 * @return
 	 */
@@ -81,7 +82,7 @@ public class SysProp {
 		} else {
 			result = Integer.valueOf(s);
 		}
-		// ±£´æ·ÃÎÊ¼ÇÂ¼£¬²¢Éú³É·ÃÎÊÈÕÖ¾
+		// ä¿å­˜è®¿é—®è®°å½•ï¼Œå¹¶ç”Ÿæˆè®¿é—®æ—¥å¿—
 		if (!historyM.containsKey(pName)) {
 			historyM.put(pName, new Integer(0));
 			StringBuffer sb = new StringBuffer("[SysProp] ");
@@ -107,9 +108,9 @@ public class SysProp {
 		} else {
 			parsedVal = Integer.valueOf(setValStr);
 		}
-		// Éú³É´¦Àí½á¹ûÃèÊö
+		// ç”Ÿæˆå¤„ç†ç»“æœæè¿°
 		String resultDesc = parsedVal == null ? "DefaultVal: " + defaultVal : "ParsedVal: " + parsedVal.intValue();
-		// ±£´æ·ÃÎÊ¼ÇÂ¼£¬²¢Éú³É·ÃÎÊÈÕÖ¾
+		// ä¿å­˜è®¿é—®è®°å½•ï¼Œå¹¶ç”Ÿæˆè®¿é—®æ—¥å¿—
 		SysProp.printDebugMsg(pName, resultDesc, setValStr);
 		return parsedVal == null ? defaultVal : parsedVal.intValue();
 	}
@@ -117,7 +118,7 @@ public class SysProp {
 	private static void printDebugMsg(String pName, String resultDesc, String setValStr) {
 		if (!historyM.containsKey(pName)) {
 			historyM.put(pName, new Integer(0));
-			// Éú³ÉDEBUGĞÅÏ¢
+			// ç”ŸæˆDEBUGä¿¡æ¯
 			StringBuffer sb = new StringBuffer("[SysProp] ");
 			sb.append(pName).append("=").append(resultDesc).append(", SetVal : ").append(setValStr);
 			appendHelp(pName, sb);
@@ -126,7 +127,7 @@ public class SysProp {
 	}
 
 	private static void appendHelp(String pName, StringBuffer sb) {
-		// Èç¹ûÓĞ°ïÖúÄÚÈİ£¬ÔòÏÔÊ¾³öÀ´£º
+		// å¦‚æœæœ‰å¸®åŠ©å†…å®¹ï¼Œåˆ™æ˜¾ç¤ºå‡ºæ¥ï¼š
 		String helpStr = (String) helpM.get(pName);
 		if (helpStr != null)
 			sb.append(", Help: ").append(helpStr);
@@ -165,7 +166,7 @@ public class SysProp {
 	}
 
 	/**
-	 * »ñµÃĞĞ·Ö¸ô·û
+	 * è·å¾—è¡Œåˆ†éš”ç¬¦
 	 * @return
 	 */
 	public static String getLS() {
@@ -173,7 +174,7 @@ public class SysProp {
 	}
 
 	/**
-	 * »ñµÃÎÄ¼ş·Ö¸ô·û£¬¼´Ä¿Â¼·Ö¸ô·û
+	 * è·å¾—æ–‡ä»¶åˆ†éš”ç¬¦ï¼Œå³ç›®å½•åˆ†éš”ç¬¦
 	 * @return
 	 */
 	public static String getFS() {
@@ -185,7 +186,7 @@ public class SysProp {
 	}
 
 	/**
-	 * @return µ±Ç°OS½Å±¾µÄ¸½ÎÄ¼şÃû£¬°üº¬µã
+	 * @return å½“å‰OSè„šæœ¬çš„é™„æ–‡ä»¶åï¼ŒåŒ…å«ç‚¹
 	 */
 	public static String getShellSurfix() {
 		final String osName = SysProp.getOSName();

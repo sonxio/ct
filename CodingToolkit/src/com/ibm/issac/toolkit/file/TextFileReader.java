@@ -15,12 +15,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import com.ibm.issac.toolkit.DevLog;
 import com.ibm.issac.toolkit.util.StringUtil;
 
 public class TextFileReader {
 
 	/**
-	 * °ÑÎÄ±¾ÎÄ¼şÖĞËùÓĞÄÚÈİ¶ÁÈëÒ»¸ö×Ö·û´®
+	 * æŠŠæ–‡æœ¬æ–‡ä»¶ä¸­æ‰€æœ‰å†…å®¹è¯»å…¥ä¸€ä¸ªå­—ç¬¦ä¸²
 	 * 
 	 * @param fileName
 	 * @return
@@ -71,6 +72,60 @@ public class TextFileReader {
 		return contents.toString();
 	}
 
+	public static List<String> readTextFileIntoStringList(String fileName) throws IOException {
+		DevLog.super_trace("[TextFileReader] loading string array from text file: " + fileName);
+		File file = new File(fileName);
+		BufferedReader reader = new BufferedReader(new FileReader(file));
+		String text = null;
+		List<String> sL = new ArrayList<String>();
+		int lineNo = 0;
+		// repeat until all lines is read
+		while ((text = reader.readLine()) != null) {
+			lineNo++;
+			if (StringUtil.isReadable(text))
+				sL.add(text);
+			else {
+				DevLog.super_trace("[TextFileReader] omitting invalid text file data: " + text + " at line " + lineNo);
+			}
+		}
+		if (reader != null) {
+			reader.close();
+		}
+		DevLog.super_trace("[TextFileReader] finished loading string array from text file: " + fileName);
+		// show file contents here
+		return sL;
+	}
+
+	public static List<Integer> readTextFileIntoIntegerList(String fileName) throws IOException {
+		DevLog.super_trace("[TextFileReader] loading integer array from text file: " + fileName);
+		File file = new File(fileName);
+		BufferedReader reader = new BufferedReader(new FileReader(file));
+		String text = null;
+		List<Integer> iL = new ArrayList<Integer>();
+		int lineNo = 0;
+		// repeat until all lines is read
+		while ((text = reader.readLine()) != null) {
+			lineNo++;
+			if (StringUtil.isReadable(text)) {
+				try {
+					Integer i = Integer.valueOf(text);
+					iL.add(i);
+				} catch (NumberFormatException e) {
+					DevLog.super_trace("[TextFileReader] omitting invalid text file data: " + text + " at line " + lineNo + ". It can't be correctly formatted as integer. " + e.getMessage());
+					e.printStackTrace();
+				}
+			} else {
+				DevLog.super_trace("[TextFileReader] omitting invalid text file data: " + text + " at line " + lineNo);
+			}
+		}
+		if (reader != null) {
+			reader.close();
+		}
+		DevLog.super_trace("[TextFileReader] finished loading string array from text file: " + fileName);
+		// show file contents here
+		return iL;
+	}
+
 	public static Map readProperties(String filePath) {
 		Map m = new HashMap();
 		Properties props = new Properties();
@@ -91,8 +146,9 @@ public class TextFileReader {
 	}
 
 	/**
-	 * °ÑÎÄ±¾ÎÄ¼şÖĞËùÓĞÄÚÈİ¶ÁÈëÒ»¸ö×Ö·û´® Ã¿Ò»ĞĞ¶ÁÈëµ½ListµÄÒ»ĞĞÖĞ¡£
+	 * æŠŠæ–‡æœ¬æ–‡ä»¶ä¸­æ‰€æœ‰å†…å®¹è¯»å…¥ä¸€ä¸ªå­—ç¬¦ä¸² æ¯ä¸€è¡Œè¯»å…¥åˆ°Listçš„ä¸€è¡Œä¸­ã€‚
 	 * 
+	 * @deprecated æ”¹ç”¨IntoStringList
 	 * @param fileName
 	 * @return
 	 */
@@ -127,7 +183,7 @@ public class TextFileReader {
 	}
 
 	public static String readFileByByte(String fileName, String encodingStr) throws IOException {
-		if(!StringUtil.isReadable(encodingStr)){
+		if (!StringUtil.isReadable(encodingStr)) {
 			encodingStr = "UTF-8";
 		}
 		File file = new File(fileName);

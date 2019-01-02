@@ -12,20 +12,20 @@ import com.ibm.issac.toolkit.app.MapCache;
 import com.ibm.issac.toolkit.param.SysProp;
 
 /**
- * ÓÃ·´Éä»úÖÆµ÷ÓÃGETTER SETTER
+ * ç”¨åå°„æœºåˆ¶è°ƒç”¨GETTER SETTER
  * 
  * @author issac
  * 
  */
 public class Invoker {
 	/*
-	 * @param obj ²Ù×÷µÄ¶ÔÏó
+	 * @param obj æ“ä½œçš„å¯¹è±¡
 	 * 
-	 * @param att ²Ù×÷µÄÊôĞÔ
+	 * @param att æ“ä½œçš„å±æ€§
 	 * 
-	 * @param value ÉèÖÃµÄÖµ
+	 * @param value è®¾ç½®çš„å€¼
 	 * 
-	 * @param type ²ÎÊıµÄÀàĞÍ
+	 * @param type å‚æ•°çš„ç±»å‹
 	 */
 	public static void set(Object obj, String att, Object value, Class<?> type) throws IllegalArgumentException, IllegalAccessException, InvocationTargetException, SecurityException, NoSuchMethodException {
 		Method met = obj.getClass().getMethod("set" + initStr(att), type);
@@ -33,7 +33,7 @@ public class Invoker {
 	}
 
 	/**
-	 * ·µ»Øget¿ªÍ·µÄgetter
+	 * è¿”å›getå¼€å¤´çš„getter
 	 * 
 	 * @param obj
 	 * @param fieldName
@@ -51,7 +51,7 @@ public class Invoker {
 			try {
 				met = obj.getClass().getMethod("is" + initStr(fieldName));
 			} catch (NoSuchMethodException e) {
-				// booleanÀàĞÍÒ²¿ÉÄÜÊ¹ÓÃget¿ªÊ¼µÄ£¬³¢ÊÔÓÃget
+				// booleanç±»å‹ä¹Ÿå¯èƒ½ä½¿ç”¨getå¼€å§‹çš„ï¼Œå°è¯•ç”¨get
 				met = obj.getClass().getMethod("get" + initStr(fieldName));
 			}
 		} else {
@@ -60,16 +60,16 @@ public class Invoker {
 		return met.invoke(obj);
 	}
 
-	public static String initStr(String old) { // ½«µ¥´ÊµÄÊ××ÖÄ¸´óĞ´
+	public static String initStr(String old) { // å°†å•è¯çš„é¦–å­—æ¯å¤§å†™
 		String str = old.substring(0, 1).toUpperCase() + old.substring(1);
-		//ÌØÀı´¦Àí
+		//ç‰¹ä¾‹å¤„ç†
 		if("mDefectID".equals(old))
 			return "mDefectID";
 		return str;
 	}
 
 	/**
-	 * Îª´øÓĞSETTER GETTERµÄOBJ¸÷¸öÊôĞÔÌîĞ´Ò»Ğ©²âÊÔÓÃµÄËæ»úÖµ
+	 * ä¸ºå¸¦æœ‰SETTER GETTERçš„OBJå„ä¸ªå±æ€§å¡«å†™ä¸€äº›æµ‹è¯•ç”¨çš„éšæœºå€¼
 	 * 
 	 * @param obj
 	 */
@@ -82,12 +82,12 @@ public class Invoker {
 					continue;
 				}
 				if (f.getType().equals(String.class)) {
-					// ¸ù¾İÃû³ÆÍÆ¶Ï¸³Öµ
-					if (f.getName().endsWith("imestamp") || f.getName().endsWith("Time")) {// °´ÕÕTimestamp¸³Öµ
+					// æ ¹æ®åç§°æ¨æ–­èµ‹å€¼
+					if (f.getName().endsWith("imestamp") || f.getName().endsWith("Time")) {// æŒ‰ç…§Timestampèµ‹å€¼
 						Invoker.set(obj, f.getName(), "1977-02-02 09:12:14.111111111", f.getType());
 						continue;
 					}
-					Invoker.set(obj, f.getName(), prefix + "\t" + f.getName() + " test<>.,?/~`!#$%^&*() a@a.com http://testurl.com {}[]msg ÖĞÎÄ²âÊÔ", f.getType());
+					Invoker.set(obj, f.getName(), prefix + "\t" + f.getName() + " test<>.,?/~`!#$%^&*() a@a.com http://testurl.com {}[]msg ä¸­æ–‡æµ‹è¯•", f.getType());
 					continue;
 				}
 				if (f.getType().equals(Integer.class) || f.getType().equals(Long.class) || f.getType().equals(long.class) || f.getType().equals(int.class)) {
@@ -98,10 +98,10 @@ public class Invoker {
 			} catch (SecurityException e) {
 				e.printStackTrace();
 			} catch (IllegalArgumentException e) {
-				// ÒòÎª×Ô¶¯Éú³ÉµÄ·½·¨Ê±²»Ê±¶¼ÓĞ²ÎÊıÀàĞÍ´íÎóµÄ£¬Òò´Ë²»ÔÙ´òÓ¡stacktrace
+				// å› ä¸ºè‡ªåŠ¨ç”Ÿæˆçš„æ–¹æ³•æ—¶ä¸æ—¶éƒ½æœ‰å‚æ•°ç±»å‹é”™è¯¯çš„ï¼Œå› æ­¤ä¸å†æ‰“å°stacktrace
 				DevLog.error("[Invoker] "+e.getMessage());
 			} catch (NoSuchMethodException e) {
-				// ÒòÎª×Ô¶¯Éú³ÉµÄ·½·¨Ê±²»Ê±¶¼ÓĞ²»´æÔÚµÄ£¬Òò´Ë²»ÔÙ´òÓ¡stacktrace
+				// å› ä¸ºè‡ªåŠ¨ç”Ÿæˆçš„æ–¹æ³•æ—¶ä¸æ—¶éƒ½æœ‰ä¸å­˜åœ¨çš„ï¼Œå› æ­¤ä¸å†æ‰“å°stacktrace
 				DevLog.error("[Invoker] "+e.getMessage());
 			} catch (IllegalAccessException e) {
 				e.printStackTrace();
@@ -112,10 +112,10 @@ public class Invoker {
 	}
 
 	/**
-	 * <h2>×¢Òâ£ºÔÚ²âÊÔÖĞ£¬·¢ÏÖÈç¹ûÔÚ¶ÁÈ¡DB2 ResultSetµ±ÖĞÓÃreportObj»òreportObjSilentlyµÈ·½·¨<br/>
-	 * Êä³öÈÕÖ¾£¬»áÔì³ÉDB2 RESULTSET±»×Ô¶¯¹Ø±Õ¡£¿ÉÄÜÊÇÒòÎª¡£<br/>
+	 * <h2>æ³¨æ„ï¼šåœ¨æµ‹è¯•ä¸­ï¼Œå‘ç°å¦‚æœåœ¨è¯»å–DB2 ResultSetå½“ä¸­ç”¨reportObjæˆ–reportObjSilentlyç­‰æ–¹æ³•<br/>
+	 * è¾“å‡ºæ—¥å¿—ï¼Œä¼šé€ æˆDB2 RESULTSETè¢«è‡ªåŠ¨å…³é—­ã€‚å¯èƒ½æ˜¯å› ä¸ºã€‚<br/>
 	 * <br/>
-	 * Òò´ËÓ¦±ÜÃâÔÚDB2 RESULTSET¶ÁÈ¡¹ı³ÌÖĞÓÃINVOKERÏà¹Ø·½·¨Êä³öÈÕÖ¾</h2>
+	 * å› æ­¤åº”é¿å…åœ¨DB2 RESULTSETè¯»å–è¿‡ç¨‹ä¸­ç”¨INVOKERç›¸å…³æ–¹æ³•è¾“å‡ºæ—¥å¿—</h2>
 	 * 
 	 * @param obj
 	 * @return
@@ -148,7 +148,7 @@ public class Invoker {
 	}
 
 	/**
-	 * °ÑCLASS FIELD»º´æÆğÀ´£¬±ÜÃâ·´ÉäÓ°ÏìËÙ¶È¡£
+	 * æŠŠCLASS FIELDç¼“å­˜èµ·æ¥ï¼Œé¿å…åå°„å½±å“é€Ÿåº¦ã€‚
 	 * 
 	 * @param cls
 	 * @return
@@ -165,10 +165,10 @@ public class Invoker {
 	}
 
 	/**
-	 * <h2>×¢Òâ£ºÔÚ²âÊÔÖĞ£¬·¢ÏÖÈç¹ûÔÚ¶ÁÈ¡DB2 ResultSetµ±ÖĞÓÃreportObj»òreportObjSilentlyµÈ·½·¨<br/>
-	 * Êä³öÈÕÖ¾£¬»áÔì³ÉDB2 RESULTSET±»×Ô¶¯¹Ø±Õ¡£Ô­ÀíÄ¿Ç°²»Ã÷È·¡£<br/>
+	 * <h2>æ³¨æ„ï¼šåœ¨æµ‹è¯•ä¸­ï¼Œå‘ç°å¦‚æœåœ¨è¯»å–DB2 ResultSetå½“ä¸­ç”¨reportObjæˆ–reportObjSilentlyç­‰æ–¹æ³•<br/>
+	 * è¾“å‡ºæ—¥å¿—ï¼Œä¼šé€ æˆDB2 RESULTSETè¢«è‡ªåŠ¨å…³é—­ã€‚åŸç†ç›®å‰ä¸æ˜ç¡®ã€‚<br/>
 	 * <br/>
-	 * Òò´ËÓ¦±ÜÃâÔÚDB2 RESULTSET¶ÁÈ¡¹ı³ÌÖĞÓÃINVOKERÏà¹Ø·½·¨Êä³öÈÕÖ¾</h2>
+	 * å› æ­¤åº”é¿å…åœ¨DB2 RESULTSETè¯»å–è¿‡ç¨‹ä¸­ç”¨INVOKERç›¸å…³æ–¹æ³•è¾“å‡ºæ—¥å¿—</h2>
 	 * 
 	 * @param obj
 	 * @return
@@ -195,7 +195,7 @@ public class Invoker {
 	}
 
 	/**
-	 * ¸ø³ö´øÓĞÌØ¶¨Ç°×ºµÄFIELDÃû³ÆÁĞ±í
+	 * ç»™å‡ºå¸¦æœ‰ç‰¹å®šå‰ç¼€çš„FIELDåç§°åˆ—è¡¨
 	 * 
 	 * @param fieldPrefix
 	 * @param cls

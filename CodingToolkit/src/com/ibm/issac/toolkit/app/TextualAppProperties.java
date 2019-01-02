@@ -59,11 +59,11 @@ public class TextualAppProperties {
 	}
 
 	/**
-	 * ÊôĞÔÅäÖÃÖĞ¿ÉÄÜ°üº¬ÖĞÎÄÊ±Ê¹ÓÃ¸ÃÑ¡Ïî¡£
+	 * å±æ€§é…ç½®ä¸­å¯èƒ½åŒ…å«ä¸­æ–‡æ—¶ä½¿ç”¨è¯¥é€‰é¡¹ã€‚
 	 * 
 	 * @param propertyName
 	 * @param defaultValue
-	 *            Èç¹ûÖĞÎÄ½âÎöÊ§°Ü£¬¾ÍÊÇÓÃÄ¬ÈÏÖµ
+	 *            å¦‚æœä¸­æ–‡è§£æå¤±è´¥ï¼Œå°±æ˜¯ç”¨é»˜è®¤å€¼
 	 * @return
 	 */
 	public String getProperty_ChineseString(String propertyName, String defaultValue) {

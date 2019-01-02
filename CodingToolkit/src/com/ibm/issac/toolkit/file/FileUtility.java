@@ -24,7 +24,7 @@ import com.ibm.issac.toolkit.param.SysProp;
 import com.ibm.issac.toolkit.util.StringUtil;
 
 /**
- * �����ļ�����
+ * 辅助文件操作
  * 
  * @author issac
  * 
@@ -73,19 +73,19 @@ public final class FileUtility {
 	}
 
 	/**
-	 * ��ָ��Ŀ¼����һ����ʱ�ļ�����Ҫ�ṩ�����ļ������ڵ���������·����
+	 * 在指定目录创建一个临时文件，需要提供包括文件名在内的完整绝对路径名
 	 * 
 	 * @param absolutePath
 	 * @return
 	 */
 	public static File createTempFile(String absolutePath) {
 		final File file = new File(absolutePath);
-		file.deleteOnExit();// ��ΪSTREAMû�йرյ�ԭ�򣬸÷����п�����Ч
+		file.deleteOnExit();// 因为STREAM没有关闭等原因，该方法有可能无效
 		return file;
 	}
 
 	/**
-	 * MOVE������UNIX�ϲ���ı�OWNER/MODE
+	 * MOVE方法在UNIX上不会改变OWNER/MODE
 	 * @param srcF
 	 * @param dstF
 	 * @param overwriteWhenExisted
@@ -101,27 +101,27 @@ public final class FileUtility {
 			return;
 		}
 		// ---------------------------------
-		if (dstF.exists()) {// ���ڴ�ת��Ŀ¼�£��Ѿ�����Ŀ���ļ�
+		if (dstF.exists()) {// 若在待转移目录下，已经存在目标文件
 			DevLog.debug("[FILE MOVE] Destination file existed. Overwrite? " + overwriteWhenExisted);
-			if (!overwriteWhenExisted) {// ���������ǣ����������
+			if (!overwriteWhenExisted) {// 不允许覆盖，则放弃操作
 				DevLog.trace("[FILE MOVE] Destination file existed. Operation aborted.");
 				return;
 			}
-			// ���������ļ�
+			// 覆盖现有文件
 			srcF.renameTo(dstF);
 			return;
 		}
-		// ������Ŀ���ļ�
+		// 不存在目标文件
 		srcF.renameTo(dstF);
 	}
 
 	/**
-	 * ���ļ�s����Ϊ�ļ�t
-	 * �÷������޸�OWNER,MODE
+	 * 把文件s拷贝为文件t
+	 * 该方法会修改OWNER,MODE
 	 * @param srcF
 	 * @param dstF
 	 * @param overwriteWhenExisted
-	 *            ���Ŀ���ļ��Ѿ����ڣ��Ƿ񸲸�
+	 *            如果目标文件已经存在，是否覆盖
 	 */
 	public static void copy(File srcF, File dstF, boolean overwriteWhenExisted) {
 		DevLog.trace("[FILE COPY] Trying to copy file from >" + srcF.getAbsolutePath() + "< to >" + dstF.getAbsolutePath() + "<");
@@ -136,7 +136,7 @@ public final class FileUtility {
 				return;
 			}
 		}
-		// ��ʼ�����ļ������������ļ��򸲸ǡ�
+		// 开始拷贝文件，遇到现有文件则覆盖。
 		FileInputStream fi = null;
 		FileOutputStream fo = null;
 		FileChannel in = null;
@@ -144,9 +144,9 @@ public final class FileUtility {
 		try {
 			fi = new FileInputStream(srcF);
 			fo = new FileOutputStream(dstF);
-			in = fi.getChannel();// �õ���Ӧ���ļ�ͨ��
-			out = fo.getChannel();// �õ���Ӧ���ļ�ͨ��
-			in.transferTo(0, in.size(), out);// ��������ͨ�������Ҵ�inͨ����ȡ��Ȼ��д��outͨ��
+			in = fi.getChannel();// 得到对应的文件通道
+			out = fo.getChannel();// 得到对应的文件通道
+			in.transferTo(0, in.size(), out);// 连接两个通道，并且从in通道读取，然后写入out通道
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
@@ -162,9 +162,9 @@ public final class FileUtility {
 	}
 
 	/**
-	 * ʹ��cp -p��UNIX�ϲ����޸�OWNER,MODE<br/>
-	 * ʹ��NATIVE������ļ��������������ǿ��Թ��һ����OWNER, MODE������<br/>
-	 * �÷�����֧�ָ��ǣ����Ŀ���ļ����ڣ���ܾ�����
+	 * 使用cp -p在UNIX上不会修改OWNER,MODE<br/>
+	 * 使用NATIVE命令拷贝文件。这样的优势是可以规避一部分OWNER, MODE的问题<br/>
+	 * 该方法不支持覆盖，如果目标文件存在，则拒绝操作
 	 * 
 	 * @param srcPath
 	 * @param destPath
@@ -173,7 +173,7 @@ public final class FileUtility {
 	 * @throws IOException 
 	 */
 	public static void copyFileNatively(String srcPath, String dstPath) throws ErrorRunningNativeCommandException, IOException, InterruptedException {
-		// Ϊ�˱����������ȷ����Ҫ�����Ķ����ȷ���ļ�
+		// 为了避免误操作，确认所要拷贝的对象的确是文件
 		if (!StringUtil.isReadable(srcPath)) {
 			DevLog.debug("[FILE COPY NATIVELY] source path not readable. >" + srcPath + "<. Operation aborted.");
 			return;
@@ -193,10 +193,10 @@ public final class FileUtility {
 			DevLog.debug("[FILE COPY NATIVELY] The destination file existed when trying to perform file copy. Operation aborted.");
 			return;
 		}
-		// ���ö�ӦOS����
+		// 调用对应OS命令
 		final NativeCmdUnit ncu = new NativeCmdUnit();
 		if (!SysProp.getOSName().startsWith("Windows")) {
-			final String cmd = "cp -p " + srcPath + " " + dstPath;// -p preserve,����OWNER,MODE������ʱ��
+			final String cmd = "cp -p " + srcPath + " " + dstPath;// -p preserve,保持OWNER,MODE，创建时间
 			ncu.setCmd_ALL(cmd);
 			ncu.setCmd_Windows(null);
 		} else {
@@ -213,7 +213,7 @@ public final class FileUtility {
 	}
 
 	/**
-	 * ��ѯһ���ı��ļ��ж�����
+	 * 查询一个文本文件有多少行
 	 * 
 	 * @param filename
 	 * @return

@@ -14,7 +14,6 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import com.ibm.issac.toolkit.DevLog;
-import com.ibm.issac.toolkit5.xml.xpath.AbstractApproach;
 
 /**
  * Approach to XML files with XPath.

@@ -1,21 +1,21 @@
 package com.ibm.issac.toolkit.file.byLine;
 
 /**
- * ÅäºÏline by line reader£¬ÖğĞĞ´¦ÀíTEXT FILE
+ * é…åˆline by line readerï¼Œé€è¡Œå¤„ç†TEXT FILE
  * @author issac
  *
  */
 public interface ByLineProcesser {
 
 	/**
-	 * ´¦Àí¸ÃĞĞÎÄ±¾£¬Ã¿´ÎÖ»Òª½ÓÊÕÒ»¸ö´¦Àíµ¥Î»µÄÎÄ±¾¼´¿É¡£
+	 * å¤„ç†è¯¥è¡Œæ–‡æœ¬ï¼Œæ¯æ¬¡åªè¦æ¥æ”¶ä¸€ä¸ªå¤„ç†å•ä½çš„æ–‡æœ¬å³å¯ã€‚
 	 * @param text
 	 */
 	public void process(String text);
 	
 	
 	/**
-	 * Ö´ĞĞÒ»Ğ©ÎÄ±¾ÒÑ¾­È«²¿´¦ÀíºóÒª½øĞĞµÄ²Ù×÷
+	 * æ‰§è¡Œä¸€äº›æ–‡æœ¬å·²ç»å…¨éƒ¨å¤„ç†åè¦è¿›è¡Œçš„æ“ä½œ
 	 * @param msg
 	 */
 	public Object afterProcessing(Object msg);

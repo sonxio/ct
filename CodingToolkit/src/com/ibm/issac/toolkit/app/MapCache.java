@@ -11,16 +11,16 @@ public class MapCache {
 
 	private MapCache() {
 		m = new HashMap();
-		DevLog.debug("[MapCache] MapCache initiated.");
+		DevLog.super_trace("[MapCache] MapCache initiated.");
 	}
 
 	public void put(String key, Object val) {
 		m.put(key, val);
-		DevLog.trace("[MapCache] cached >" + key + "<");
+		DevLog.super_trace("[MapCache] cached >" + key + "<");
 	}
 
 	public Object get(String key) {
-		DevLog.trace("[MapCache] getting >" + key + "<");
+		DevLog.super_trace("[MapCache] getting >" + key + "<");
 		return m.get(key);
 	}
 }

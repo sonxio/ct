@@ -7,7 +7,7 @@ import com.ibm.issac.toolkit.DevLog;
 import com.ibm.issac.toolkit.logging.ColorLog;
 
 /**
- * ÑéÖ¤Âë²»»áËæ×Å±äÁ¿ÏßĞÔÔö³¤£¬´Ó¶øÔö¼ÓÁËÆÆÒëµÄÄÑ¶È
+ * éªŒè¯ç ä¸ä¼šéšç€å˜é‡çº¿æ€§å¢é•¿ï¼Œä»è€Œå¢åŠ äº†ç ´è¯‘çš„éš¾åº¦
  * 
  * @author issac
  * 
@@ -30,7 +30,7 @@ public class FlooredSqrtPattern extends LicensePattern {
 	}
 
 	/**
-	 * ¼ì²âÇëÇóÂëÊÇ·ñÓĞĞ§
+	 * æ£€æµ‹è¯·æ±‚ç æ˜¯å¦æœ‰æ•ˆ
 	 * 
 	 * @param dateInt
 	 * @param requestInt

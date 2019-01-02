@@ -8,9 +8,9 @@ import com.ibm.issac.toolkit.DevLog;
 import com.ibm.issac.toolkit.param.SysProp;
 
 /**
- * Á¬Ğø¼ÇÂ¼¶à¸öÊ±¼äµã£¬×îºó¿ÉÒÔÒ»ÆğÉú³É±¨¸æµÄ¼ÆÊ±Æ÷<br/>
- * ¸ÃtimerÃ¿´Î¼ÇÂ¼Ê±³¤ºó×Ô¶¯ÖØĞÂ¿ªÊ¼¼ÆÊ±<br/>
- * ²âÊÔÖĞÈ·ÈÏÕâ¸öÀàµ¼ÖÂCPUÕ¼ÓÃ¹ı¸ß£¬Òò´ËÔö¼ÓÁË¿ØÖÆÊÇ·ñÆôÓÃµÄ¿ª¹Ø£¬ÔÚÑ¹Á¦²âÊÔµ±ÖĞ£¬»òÊµ¼ÊÔËĞĞCPU×ÊÔ´²»×ãÊ±£¬Ó¦¹Ø±ÕÊ¹ÓÃÕâ¸öÀà¡£
+ * è¿ç»­è®°å½•å¤šä¸ªæ—¶é—´ç‚¹ï¼Œæœ€åå¯ä»¥ä¸€èµ·ç”ŸæˆæŠ¥å‘Šçš„è®¡æ—¶å™¨<br/>
+ * è¯¥timeræ¯æ¬¡è®°å½•æ—¶é•¿åè‡ªåŠ¨é‡æ–°å¼€å§‹è®¡æ—¶<br/>
+ * æµ‹è¯•ä¸­ç¡®è®¤è¿™ä¸ªç±»å¯¼è‡´CPUå ç”¨è¿‡é«˜ï¼Œå› æ­¤å¢åŠ äº†æ§åˆ¶æ˜¯å¦å¯ç”¨çš„å¼€å…³ï¼Œåœ¨å‹åŠ›æµ‹è¯•å½“ä¸­ï¼Œæˆ–å®é™…è¿è¡ŒCPUèµ„æºä¸è¶³æ—¶ï¼Œåº”å…³é—­ä½¿ç”¨è¿™ä¸ªç±»ã€‚
  * 
  * @author issac
  * 
@@ -21,7 +21,7 @@ public class ResettingTimer extends TimerDTO {
 
 	public ResettingTimer(Object obj, boolean autoStart) {
 		super(autoStart);
-		//±ÜÃâ·´Éä»úÖÆÔì³ÉCPUÏûºÄ¹ı´ó
+		//é¿å…åå°„æœºåˆ¶é€ æˆCPUæ¶ˆè€—è¿‡å¤§
 		if (!SysProp.b_bool("issac.debugMode.timer", true)) {
 			return;
 		}
@@ -30,7 +30,7 @@ public class ResettingTimer extends TimerDTO {
 	}
 
 	/**
-	 * ÀàËÆ³¤ÅÜÅÜÁËÒ»È¦£¬¼ÇÂ¼Ò»¸öÊ±³¤
+	 * ç±»ä¼¼é•¿è·‘è·‘äº†ä¸€åœˆï¼Œè®°å½•ä¸€ä¸ªæ—¶é•¿
 	 */
 	public void lapAndReset() {
 		if (!SysProp.b_bool("issac.debugMode.timer", true)) {
@@ -50,7 +50,7 @@ public class ResettingTimer extends TimerDTO {
 	}
 
 	/**
-	 * Éú³ÉÒ»¸öÄ¿Ç°ÎªÖ¹ËùÓĞÊ±³¤¼ÇÂ¼
+	 * ç”Ÿæˆä¸€ä¸ªç›®å‰ä¸ºæ­¢æ‰€æœ‰æ—¶é•¿è®°å½•
 	 * 
 	 * @return
 	 */
@@ -58,19 +58,19 @@ public class ResettingTimer extends TimerDTO {
 		if (!SysProp.b_bool("issac.debugMode.timer", true)) {
 			return "";
 		}
-		// »ñÈ¡¾¯¸æ·§Öµ
+		// è·å–è­¦å‘Šé˜€å€¼
 		final int threshold = SysProp.d_int("issac.timerThreshold", 1);
-		// Éú³É×Ö·û´®
+		// ç”Ÿæˆå­—ç¬¦ä¸²
 		final StringBuffer sb = new StringBuffer(), sb1 = new StringBuffer(" = ");
 		sb.append("[TIMER-").append(title).append("]");
 		sb.append(title).append(':');
-		// ¼ÆËã×ÜÊ±³¤
+		// è®¡ç®—æ€»æ—¶é•¿
 		long total = 0;
 		final Iterator it = tL.iterator();
 		while (it.hasNext()) {
 			Long t = (Long) it.next();
 			total += t.longValue();
-			// Èç¹û³¬¹ı·§Öµ£¬ÔòÍ³¼ÆÏêÏ¸Ê±¼ä×é³ÉÇé¿ö
+			// å¦‚æœè¶…è¿‡é˜€å€¼ï¼Œåˆ™ç»Ÿè®¡è¯¦ç»†æ—¶é—´ç»„æˆæƒ…å†µ
 			sb1.append(t.longValue() / 1000.0);
 			if (it.hasNext()) {
 				sb1.append(" + ");

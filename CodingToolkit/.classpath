@@ -5,23 +5,14 @@
 	<classpathentry kind="lib" path="lib/log4j-1.2.16.jar"/>
 	<classpathentry kind="lib" path="lib/jcurses/jcurses.jar"/>
 	<classpathentry kind="lib" path="lib/jansi-1.4.jar"/>
-	<classpathentry kind="lib" path="lib/http/httpclient-4.3.2.jar"/>
-	<classpathentry kind="lib" path="lib/http/httpcore-4.3.1.jar"/>
-	<classpathentry kind="lib" path="lib/poi/commons-codec-1.5.jar"/>
-	<classpathentry kind="lib" path="lib/poi/poi-3.10-FINAL-20140208.jar"/>
-	<classpathentry kind="lib" path="lib/poi/poi-excelant-3.10-FINAL-20140208.jar"/>
-	<classpathentry kind="lib" path="lib/poi/poi-ooxml-3.10-FINAL-20140208.jar"/>
-	<classpathentry kind="lib" path="lib/poi/poi-ooxml-schemas-3.10-FINAL-20140208.jar"/>
-	<classpathentry kind="lib" path="lib/poi/poi-scratchpad-3.10-FINAL-20140208.jar"/>
-	<classpathentry kind="lib" path="lib/poi/xmlbeans-2.3.0.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
-		<attributes>
-			<attribute name="owner.project.facets" value="java"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="src" path=".apt_generated">
 		<attributes>
 			<attribute name="optional" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5">
+		<attributes>
+			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="output" path="bin"/>

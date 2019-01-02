@@ -1,7 +1,7 @@
 package com.ibm.issac.toolkit.security.dto;
 
 /**
- * ±íÊ¾°ÑÒ»¸öKEYµ¼ÈëKEY STOREËùĞèµÄ¸÷Ïî²ÎÊı
+ * è¡¨ç¤ºæŠŠä¸€ä¸ªKEYå¯¼å…¥KEY STOREæ‰€éœ€çš„å„é¡¹å‚æ•°
  * 
  * @author issac
  * 

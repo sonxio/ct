@@ -6,16 +6,16 @@ import com.ibm.issac.toolkit.param.SysProp;
 
 public class VerifyJavaVersion {
 	/**
-	 * µ±°æ±¾´íÎóÊ±£¬·¢ÉúRUNTIMEÒì³£²¢ÍË³ö¡£<br/>
-	 * ²»Ö§³ÖµÚ¶şÎ»°æ±¾£¬Ö»ÄÜ±È½Ï 1.6>1.5£¬ÏÂÒ»¼¶Ğ¡°æ±¾²»ÄÜ±È½Ï¡£<br/>
-	 * ×¢Òâ£ºÕâ¸ö·½·¨Ö»ÓĞÔÚËùÓÃJDK°æ±¾ºÍ±àÒëJDK°æ±¾¼æÈİÊ±£¬ÒªÌØ±ğÖ¸¶¨µÄ°æ±¾£¬²Å»áÓĞÒâÒå¡£¾Ù¸ö·´Àı£º¶ÔÓÚJAVA 1.5±àÒëµÄÀà£¬Èç¹ûÊ¹ÓÃJDK 1.4ÔËĞĞ£¬Ö±½ÓJDK¾Í»á±¨´íIncompatibleJavaVersionError£¨Ãû³Æ¿ÉÄÜÓĞÎó£©£¬²»ÄÜÔËĞĞÕâ¸ö·½·¨µÄÄÚÈİ¡£
+	 * å½“ç‰ˆæœ¬é”™è¯¯æ—¶ï¼Œå‘ç”ŸRUNTIMEå¼‚å¸¸å¹¶é€€å‡ºã€‚<br/>
+	 * ä¸æ”¯æŒç¬¬äºŒä½ç‰ˆæœ¬ï¼Œåªèƒ½æ¯”è¾ƒ 1.6>1.5ï¼Œä¸‹ä¸€çº§å°ç‰ˆæœ¬ä¸èƒ½æ¯”è¾ƒã€‚<br/>
+	 * æ³¨æ„ï¼šè¿™ä¸ªæ–¹æ³•åªæœ‰åœ¨æ‰€ç”¨JDKç‰ˆæœ¬å’Œç¼–è¯‘JDKç‰ˆæœ¬å…¼å®¹æ—¶ï¼Œè¦ç‰¹åˆ«æŒ‡å®šçš„ç‰ˆæœ¬ï¼Œæ‰ä¼šæœ‰æ„ä¹‰ã€‚ä¸¾ä¸ªåä¾‹ï¼šå¯¹äºJAVA 1.5ç¼–è¯‘çš„ç±»ï¼Œå¦‚æœä½¿ç”¨JDK 1.4è¿è¡Œï¼Œç›´æ¥JDKå°±ä¼šæŠ¥é”™IncompatibleJavaVersionErrorï¼ˆåç§°å¯èƒ½æœ‰è¯¯ï¼‰ï¼Œä¸èƒ½è¿è¡Œè¿™ä¸ªæ–¹æ³•çš„å†…å®¹ã€‚
 	 * @param versionStr
 	 * @param comment
 	 */
 	public static boolean isMinimalJavaVersionSatisfied(float minVer, String comment){
 		final String currentVer = SysProp.pstr("java.version");
 		DevLog.trace("VerifyJavaVersion#Java version at "+StF.quoted(currentVer));
-		//»ñÈ¡Ç°ÈıÎ»½âÎöÎªÊı×Ö£¬ÓÃÓÚ±È½Ï´óĞ¡
+		//è·å–å‰ä¸‰ä½è§£æä¸ºæ•°å­—ï¼Œç”¨äºæ¯”è¾ƒå¤§å°
 		final String subVer = currentVer.substring(0, 3);
 		final float verF = Float.valueOf(subVer).floatValue();
 		DevLog.trace("VerifyJavaVersion#converted float: "+verF);

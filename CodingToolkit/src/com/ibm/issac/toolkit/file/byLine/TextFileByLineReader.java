@@ -10,14 +10,14 @@ import java.net.URLDecoder;
 import com.ibm.issac.toolkit.util.StringUtil;
 
 /**
- * 逐行处理TEXT FILE
+ * 閫愯澶勭悊TEXT FILE
  * 
  * @author issac
  * 
  */
 public class TextFileByLineReader {
 	/**
-	 * @deprecated 缺少EXCEPTION处理，在文件找不到等情况是不便处理的
+	 * @deprecated 缂哄皯EXCEPTION澶勭悊锛屽湪鏂囦欢鎵句笉鍒扮瓑鎯呭喌鏄笉渚垮鐞嗙殑
 	 * @param fileName
 	 * @param p
 	 * @return
@@ -35,7 +35,7 @@ public class TextFileByLineReader {
 		if(!StringUtil.isReadable(fileName)){
 			throw new IOException("File name not readable: >"+fileName+"<");
 		}
-		fileName=URLDecoder.decode(fileName,"utf-8");//防止目录里有空格
+		fileName=URLDecoder.decode(fileName,"utf-8");//闃叉鐩綍閲屾湁绌烘牸
 		final File file = new File(fileName);
 		StringBuffer contents = new StringBuffer();
 		BufferedReader reader = null;

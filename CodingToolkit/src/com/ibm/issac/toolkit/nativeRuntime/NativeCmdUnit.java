@@ -1,7 +1,7 @@
 package com.ibm.issac.toolkit.nativeRuntime;
 
 /**
- * °üº¬ÁËÊÊºÏ¸÷¸öÆ½Ì¨µÄÃüÁî
+ * åŒ…å«äº†é€‚åˆå„ä¸ªå¹³å°çš„å‘½ä»¤
  * 
  * @author issac
  *
@@ -14,7 +14,7 @@ public class NativeCmdUnit {
 	private String cmd_MacOSX;
 
 	/**
-	 * °ÑËùÓĞÃüÁîÉèÖÃÎªÒ»ÑùµÄÄÚÈİ
+	 * æŠŠæ‰€æœ‰å‘½ä»¤è®¾ç½®ä¸ºä¸€æ ·çš„å†…å®¹
 	 */
 	public void setCmd_ALL(String cmd){
 		cmd_Windows = cmd;

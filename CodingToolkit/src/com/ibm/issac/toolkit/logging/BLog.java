@@ -7,9 +7,9 @@ import com.ibm.issac.toolkit.file.TextFileWriter;
 import com.ibm.issac.toolkit.util.StringUtil;
 
 /**
- * 收集多个STRING，在需要时输出完整的STRING
+ * 鏀堕泦澶氫釜STRING锛屽湪闇�瑕佹椂杈撳嚭瀹屾暣鐨凷TRING
  * BLog = buffer log
- * 这种日志不会随时打印出所有日志，只有调用了FLUSH后才能确认当前日志已经被打印完整
+ * 杩欑鏃ュ織涓嶄細闅忔椂鎵撳嵃鍑烘墍鏈夋棩蹇楋紝鍙湁璋冪敤浜咶LUSH鍚庢墠鑳界‘璁ゅ綋鍓嶆棩蹇楀凡缁忚鎵撳嵃瀹屾暣
  * @author issac
  * 
  */
@@ -25,7 +25,7 @@ public class BLog {
 
 	public static void log(String str) {
 		sb.append(str);
-		// 判断是否需要FLUSH
+		// 鍒ゆ柇鏄惁闇�瑕丗LUSH
 		logCount++;
 		if (logCount >= BLog.AUTO_FLUSH_THRESHOLD) {
 			BLog.flush();
@@ -46,7 +46,7 @@ public class BLog {
 	}
 
 	/**
-	 * 把缓存的数据写入磁盘，并清理缓存
+	 * 鎶婄紦瀛樼殑鏁版嵁鍐欏叆纾佺洏锛屽苟娓呯悊缂撳瓨
 	 * 
 	 * @throws IOException
 	 */

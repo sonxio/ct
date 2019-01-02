@@ -12,7 +12,7 @@ import com.ibm.issac.toolkit.param.SysProp;
 
 public abstract class AbstractNativeCommandSupport {
 	protected static final int BUFFER = 2048;
-	protected Map outputM = new HashMap(); // ×îºóÒ»´ÎÔËĞĞµÄÔËĞĞÊ±Êı¾İ
+	protected Map outputM = new HashMap(); // æœ€åä¸€æ¬¡è¿è¡Œçš„è¿è¡Œæ—¶æ•°æ®
 
 	public abstract int process(String sourceStr, boolean filterRequired) throws IOException,InterruptedException;
 
@@ -21,7 +21,7 @@ public abstract class AbstractNativeCommandSupport {
 	}
 
 	/**
-	 * ´òÓ¡½ø³ÌÖ´ĞĞÖĞµÄÊä³ö
+	 * æ‰“å°è¿›ç¨‹æ‰§è¡Œä¸­çš„è¾“å‡º
 	 * 
 	 * @param proc
 	 * @throws IOException

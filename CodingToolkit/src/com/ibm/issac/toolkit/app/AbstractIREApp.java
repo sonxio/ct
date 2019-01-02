@@ -13,7 +13,7 @@ public abstract class AbstractIREApp {
 	public AbstractIREApp() {
 		String appName = this.buildAppName();
 		DevLog.init(appName);
-		// ´òÓ¡Æô¶¯ĞÅÏ¢
+		// æ‰“å°å¯åŠ¨ä¿¡æ¯
 		Plog.p0("App started for class " + this.getClass().getName() + " at " + DateUtil.getDatetimeNow());
 
 	}
@@ -34,7 +34,7 @@ public abstract class AbstractIREApp {
 	}
 
 	/**
-	 * ´Ó²ÎÊıÖĞ»ñµÃSTRING
+	 * ä»å‚æ•°ä¸­è·å¾—STRING
 	 * 
 	 * @param keyName
 	 * @return
@@ -44,9 +44,9 @@ public abstract class AbstractIREApp {
 	}
 
 	/**
-	 * Ö÷¶¯ĞŞ¸ÄÓÃ»§²ÎÊı
+	 * ä¸»åŠ¨ä¿®æ”¹ç”¨æˆ·å‚æ•°
 	 * 
-	 * @deprecated Ãû³ÆÒ×»ìÏı£¬¸ÄÓÃsetParamData
+	 * @deprecated åç§°æ˜“æ··æ·†ï¼Œæ”¹ç”¨setParamData
 	 * @param keyName
 	 * @param keyValue
 	 * @return
@@ -56,7 +56,7 @@ public abstract class AbstractIREApp {
 	}
 
 	/**
-	 * Ö÷¶¯ĞŞ¸ÄÓÃ»§²ÎÊı
+	 * ä¸»åŠ¨ä¿®æ”¹ç”¨æˆ·å‚æ•°
 	 * 
 	 * @param keyName
 	 * @param keyValue
@@ -67,8 +67,8 @@ public abstract class AbstractIREApp {
 	}
 
 	/**
-	 * ÔÚ²ÎÊıÖĞÌá¹©Ò»¸öÃûÎªmodeµÄ£¬ÄÚÈİÎª×Ö·û´®¡£<br/>
-	 * Èç¹ûmodeµÄ×Ö·û´®ÖµÀï°üÀ¨ÁË¸ø³öµÄÖµ£¬·µ»Øtrue£¬·ñÔòÎªfalse
+	 * åœ¨å‚æ•°ä¸­æä¾›ä¸€ä¸ªåä¸ºmodeçš„ï¼Œå†…å®¹ä¸ºå­—ç¬¦ä¸²ã€‚<br/>
+	 * å¦‚æœmodeçš„å­—ç¬¦ä¸²å€¼é‡ŒåŒ…æ‹¬äº†ç»™å‡ºçš„å€¼ï¼Œè¿”å›trueï¼Œå¦åˆ™ä¸ºfalse
 	 * 
 	 * @param modeName
 	 * @return
@@ -84,7 +84,7 @@ public abstract class AbstractIREApp {
 			Integer intVal = (Integer) this.paramMap.get(keyName);
 			return intVal.intValue();
 		} catch (ClassCastException e) {
-			// Èç¹ûÌá¹©ÁËStringÀàĞÍ£¬Ôò³¢ÊÔ×ª»»Îªint
+			// å¦‚æœæä¾›äº†Stringç±»å‹ï¼Œåˆ™å°è¯•è½¬æ¢ä¸ºint
 			return (Integer.valueOf((String) this.paramMap.get(keyName))).intValue();
 		} catch (NullPointerException e) {
 			throw new RuntimeException("Failed locating integer key " + keyName);

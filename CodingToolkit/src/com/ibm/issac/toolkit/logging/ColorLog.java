@@ -3,7 +3,7 @@ package com.ibm.issac.toolkit.logging;
 import com.ibm.issac.toolkit.DatetimeUtility;
 
 /**
- * Ğ´ÈÕÖ¾£¬ÉèÖÃÎªFINAL±ÜÃâ±»¶ñÒâ´Û¸Ä²¿·Ö·½·¨
+ * å†™æ—¥å¿—ï¼Œè®¾ç½®ä¸ºFINALé¿å…è¢«æ¶æ„ç¯¡æ”¹éƒ¨åˆ†æ–¹æ³•
  * 
  * @author issac
  * 

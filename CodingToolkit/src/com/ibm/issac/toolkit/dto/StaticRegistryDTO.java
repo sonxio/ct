@@ -1,7 +1,7 @@
 package com.ibm.issac.toolkit.dto;
 
 /**
- * ±£´æÈí¼şÔËĞĞÆÚ¼äµÄ¾²Ì¬ĞÅÏ¢
+ * ä¿å­˜è½¯ä»¶è¿è¡ŒæœŸé—´çš„é™æ€ä¿¡æ¯
  * @author issac
  *
  */

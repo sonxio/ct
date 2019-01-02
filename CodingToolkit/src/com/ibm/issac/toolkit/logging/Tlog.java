@@ -3,8 +3,8 @@ package com.ibm.issac.toolkit.logging;
 import com.ibm.issac.toolkit.DevLog;
 
 /**
- * 用trace级别显示进度日志
- * @deprecated 一律改用PLOG
+ * 鐢╰race绾у埆鏄剧ず杩涘害鏃ュ織
+ * @deprecated 涓�寰嬫敼鐢≒LOG
  * @author issac
  * 
  */

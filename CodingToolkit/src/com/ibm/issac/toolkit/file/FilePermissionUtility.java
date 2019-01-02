@@ -11,17 +11,17 @@ import java.nio.channels.OverlappingFileLockException;
 import com.ibm.issac.toolkit.logging.ColorLog;
 
 /**
- * ÎÄ¼şÈ¨ÏŞ¿ØÖÆ²Ù×÷¹¤¾ßÀà
+ * æ–‡ä»¶æƒé™æ§åˆ¶æ“ä½œå·¥å…·ç±»
  * 
  * @author issac
  * 
  */
 public final class FilePermissionUtility {
 	/**
-	 * ÎªÎÄ¼ş¼ÓSHAREDËø£¬±ÜÃâÆäËû½ø³Ì¶ÁÈ¡¡¢²Ù×÷¡£¸Ã·½·¨ºÍOSÓĞ¹Ø£¬ÔÚÓĞĞ©OSÉÏÎŞĞ§¡£
+	 * ä¸ºæ–‡ä»¶åŠ SHAREDé”ï¼Œé¿å…å…¶ä»–è¿›ç¨‹è¯»å–ã€æ“ä½œã€‚è¯¥æ–¹æ³•å’ŒOSæœ‰å…³ï¼Œåœ¨æœ‰äº›OSä¸Šæ— æ•ˆã€‚
 	 * 
 	 * @param file
-	 *            ÎÄ¼şÃû£¬±¾·½·¨¶ÔÄ¿Â¼ÎŞĞ§
+	 *            æ–‡ä»¶åï¼Œæœ¬æ–¹æ³•å¯¹ç›®å½•æ— æ•ˆ
 	 * @return
 	 * @throws IOException
 	 */
@@ -35,7 +35,7 @@ public final class FilePermissionUtility {
 	}
 
 	/**
-	 * ÏÔÊ¾ÎÄ¼şµ±Ç°È¨ÏŞ
+	 * æ˜¾ç¤ºæ–‡ä»¶å½“å‰æƒé™
 	 * 
 	 * @param file
 	 */
@@ -45,7 +45,7 @@ public final class FilePermissionUtility {
 	}
 
 	/**
-	 * ½öÓÃÓÚ²âÊÔµÄ·½·¨£¬²âÊÔ¸øÒ»¸öÎÄ¼şÖĞĞ´ÈëÒ»Ğ©Êı¾İ¡£
+	 * ä»…ç”¨äºæµ‹è¯•çš„æ–¹æ³•ï¼Œæµ‹è¯•ç»™ä¸€ä¸ªæ–‡ä»¶ä¸­å†™å…¥ä¸€äº›æ•°æ®ã€‚
 	 * 
 	 * @param fc
 	 */

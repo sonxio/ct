@@ -1,7 +1,7 @@
 package com.ibm.issac.toolkit.logging;
 
 /**
- * ´òÓ¡Ò»Ğ©²»±ã´òÓ¡µÄÀàĞÍÈÕÖ¾¡£
+ * æ‰“å°ä¸€äº›ä¸ä¾¿æ‰“å°çš„ç±»å‹æ—¥å¿—ã€‚
  * @author song
  *
  */

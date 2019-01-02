@@ -7,7 +7,7 @@ import com.ibm.issac.toolkit.DevLog;
 import com.ibm.issac.toolkit.timing.Pauser;
 
 /**
- * ÔÚAIXÏÂÔËÐÐOSÃüÁî ×¢Òâ£º±¾ÀàÐÍ°Ñ½Å±¾µÄÃüÁîÖ±½Ó½»¸øOS
+ * åœ¨AIXä¸‹è¿è¡ŒOSå‘½ä»¤ æ³¨æ„ï¼šæœ¬ç±»åž‹æŠŠè„šæœ¬çš„å‘½ä»¤ç›´æŽ¥äº¤ç»™OS
  * 
  * @author issac
  * 
@@ -15,27 +15,27 @@ import com.ibm.issac.toolkit.timing.Pauser;
 public class RunUnixNativeCommand extends AbstractNativeCommandSupport {
 	public int process(String sourceStr, boolean filterRequired) throws IOException, InterruptedException {
 		String commandStr = "";
-		// Èç¹û½Å±¾ÒªÇóÌæ»»ÌØ¶¨ÄÚÈÝ£¬Ôò½øÐÐÔ¤¶¨µÄº¯ÊýÌæ»»
+		// å¦‚æžœè„šæœ¬è¦æ±‚æ›¿æ¢ç‰¹å®šå†…å®¹ï¼Œåˆ™è¿›è¡Œé¢„å®šçš„å‡½æ•°æ›¿æ¢
 		if (filterRequired) {
 			commandStr = this.filterSource(sourceStr);
 		} else {
 			commandStr = sourceStr;
 		}
 		DevLog.super_trace("[NATIVE CMD] Command line: >" + commandStr + "<");
-		// Ö´ÐÐ´¦ÀíºóµÄ½Å±¾
+		// æ‰§è¡Œå¤„ç†åŽçš„è„šæœ¬
 		String[] commandArray = new String[] { "/bin/sh", "-c", commandStr };
-		// Æô¶¯ÃüÁî
+		// å¯åŠ¨å‘½ä»¤
 		Runtime rt = Runtime.getRuntime();
 		Process proc;
 		proc = rt.exec(commandArray);
-		// ´òÓ¡´íÎóÊä³ö¡¢Õý³£Êä³ö
+		// æ‰“å°é”™è¯¯è¾“å‡ºã€æ­£å¸¸è¾“å‡º
 		NativeOutputFormatter errF = new NativeOutputFormatter(proc.getErrorStream(), "E");
 		NativeOutputFormatter outF = new NativeOutputFormatter(proc.getInputStream(), "O");
 		errF.start();
 		outF.start();
 		int retVal = proc.waitFor();
 		// ---------------
-		//µÈ´ýÊÕ¼¯Êý¾ÝµÄÏß³Ì´¦ÀíÍê¡£Èç¹û²»¼Ó´¦Àí£¬ÕâÐ©Ïß³Ì»¹Ã»´¦ÀíÍê¾Í»áÔì³ÉÊÕ¼¯µ½µÄREPORTÎª¿Õ
+		//ç­‰å¾…æ”¶é›†æ•°æ®çš„çº¿ç¨‹å¤„ç†å®Œã€‚å¦‚æžœä¸åŠ å¤„ç†ï¼Œè¿™äº›çº¿ç¨‹è¿˜æ²¡å¤„ç†å®Œå°±ä¼šé€ æˆæ”¶é›†åˆ°çš„REPORTä¸ºç©º
 		DevLog.super_trace("processing command output...");
 		while(!(errF.isProcessingFinished()&&outF.isProcessingFinished())){
 			Pauser.pauseThreadForException(200);

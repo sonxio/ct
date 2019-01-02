@@ -3,8 +3,8 @@ package com.ibm.issac.toolkit.nativeRuntime;
 import com.ibm.issac.toolkit.DevLog;
 
 /**
- * ִ��NATIVE����ʱ�����˴��󷵻ء�
- * ����NATIVE�����ʹ��ȷִ���ˣ�ִ�н������Ҳ�Ǳ�ʾ����Ľ����ͨ����0��ʾ��ȷ������Ϊ����
+ * 执行NATIVE命令时出现了错误返回。
+ * 对于NATIVE命令，即使正确执行了，执行结果可能也是表示错误的结果，通常用0表示正确，其他为错误。
  * @author issac
  *
  */

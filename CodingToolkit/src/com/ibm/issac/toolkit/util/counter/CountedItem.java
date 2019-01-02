@@ -1,7 +1,7 @@
 package com.ibm.issac.toolkit.util.counter;
 
 /**
- * ÓÃÀ´Í³¼ÆµÄÒ»ÏîÊı¾İ
+ * ç”¨æ¥ç»Ÿè®¡çš„ä¸€é¡¹æ•°æ®
  * 
  * @author issac
  * 

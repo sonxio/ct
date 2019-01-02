@@ -1,21 +1,16 @@
 package com.ibm.issac.toolkit.dto;
 
-import org.apache.log4j.PropertyConfigurator;
-
-import com.ibm.issac.toolkit.logging.ColorLog;
-import com.ibm.issac.toolkit.validation.StringValidation;
-
 /**
- * ¼ÓÔØÅäÖÃÎÄ¼ş£¬±£´æ¸÷ÖÖÔËĞĞÊ±Êı¾İ
+ * åŠ è½½é…ç½®æ–‡ä»¶ï¼Œä¿å­˜å„ç§è¿è¡Œæ—¶æ•°æ®
  * 
- * ½¨ÒéËùÓĞÔËĞĞÊ±Êı¾İÊ¹ÓÃpublic±äÁ¿±£´æÔÚ±¾DTOÖĞ¡£
+ * å»ºè®®æ‰€æœ‰è¿è¡Œæ—¶æ•°æ®ä½¿ç”¨publicå˜é‡ä¿å­˜åœ¨æœ¬DTOä¸­ã€‚
  * 
  * @author issac
  * 
  */
 public abstract class AbstractRuntimeRegistryDTO {
 	/**
-	 * ¼ÓÔØÅäÖÃÎÄ¼ş£¬°ÑÅäÖÃĞÅÏ¢¶ÁÈ¡½øÀ´
+	 * åŠ è½½é…ç½®æ–‡ä»¶ï¼ŒæŠŠé…ç½®ä¿¡æ¯è¯»å–è¿›æ¥
 	 * 
 	 * @param fileName
 	 */

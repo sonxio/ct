@@ -19,7 +19,7 @@ public class Cube {
 	}
 
 	/**
-	 * 产生一个随机的正数<br/>
+	 * 浜х敓涓�涓殢鏈虹殑姝ｆ暟<br/>
 	 * 
 	 * @param minValue
 	 * @param maxValue
@@ -36,7 +36,7 @@ public class Cube {
 	}
 
 	/**
-	 * 生成用于ID的随机文本，提供前缀
+	 * 鐢熸垚鐢ㄤ簬ID鐨勯殢鏈烘枃鏈紝鎻愪緵鍓嶇紑
 	 * 
 	 * @param prefix
 	 * @return

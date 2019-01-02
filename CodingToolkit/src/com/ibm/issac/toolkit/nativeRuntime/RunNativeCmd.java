@@ -7,7 +7,7 @@ import com.ibm.issac.toolkit.DevLog;
 import com.ibm.issac.toolkit.param.SysProp;
 
 /**
- * Ö´ĞĞÒ»ÏîNATIVEÃüÁî¡£Ö´ĞĞÊ±Èç¹ûÌá¹©µÄÊı¾İÓĞ¶àĞĞ£¬ÔòÖğĞĞÌá½»¸øOSÖ´ĞĞ¡£
+ * æ‰§è¡Œä¸€é¡¹NATIVEå‘½ä»¤ã€‚æ‰§è¡Œæ—¶å¦‚æœæä¾›çš„æ•°æ®æœ‰å¤šè¡Œï¼Œåˆ™é€è¡Œæäº¤ç»™OSæ‰§è¡Œã€‚
  * 
  * @author issac
  * 
@@ -16,7 +16,7 @@ public class RunNativeCmd {
 	private Map outputM;
 
 	/**
-	 * Ö±½ÓÖ´ĞĞ×Ö·û´®ĞÎÊ½µÄÃüÁî
+	 * ç›´æ¥æ‰§è¡Œå­—ç¬¦ä¸²å½¢å¼çš„å‘½ä»¤
 	 * @param cmdStr
 	 * @return
 	 * @throws IOException
@@ -29,7 +29,7 @@ public class RunNativeCmd {
 	}
 	
 	/**
-	 * Ö´ĞĞNATIVEÃüÁî
+	 * æ‰§è¡ŒNATIVEå‘½ä»¤
 	 * 
 	 * @param ncu
 	 * @return
@@ -37,7 +37,7 @@ public class RunNativeCmd {
 	 * @throws IOException 
 	 */
 	public int runNativeCmd(NativeCmdUnit ncu) throws IOException, InterruptedException {
-		// ¸ù¾İOS´¦ÀíÃüÁî
+		// æ ¹æ®OSå¤„ç†å‘½ä»¤
 		final String osName = SysProp.getOSName();
 		DevLog.super_trace("[NATIVE CMD] Running native command for OS: " + osName);
 		AbstractNativeCommandSupport s = null;

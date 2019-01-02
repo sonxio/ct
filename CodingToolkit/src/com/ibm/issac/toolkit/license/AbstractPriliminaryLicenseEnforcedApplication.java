@@ -6,7 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 /**
- * Ê¹ÓÃ¼òµ¥µÄ·½·¨À´¼ÓÇ¿Ó¦ÓÃ°²È«ĞÔµÄÓ¦ÓÃ¡£
+ * ä½¿ç”¨ç®€å•çš„æ–¹æ³•æ¥åŠ å¼ºåº”ç”¨å®‰å…¨æ€§çš„åº”ç”¨ã€‚
  * 
  * @author issac
  * 
@@ -18,14 +18,14 @@ public abstract class AbstractPriliminaryLicenseEnforcedApplication {
 	}
 
 	/**
-	 * ¸ù¾İÃüÁî²ÎÊı¿ªÊ¼´¦ÀíÒµÎñÂß¼­
+	 * æ ¹æ®å‘½ä»¤å‚æ•°å¼€å§‹å¤„ç†ä¸šåŠ¡é€»è¾‘
 	 * 
 	 * @param args
 	 */
 	public abstract void proceed(String[] args);
 
 	/**
-	 * ËùÓĞIRE ACCESSERÏµÁĞµÄÓ¦ÓÃ¶¼Ö»ĞèÒªÒ»¸ö²ÎÊı£¬¾ÍÊÇÅäÖÃÎÄ¼şµÄÃû³Æ
+	 * æ‰€æœ‰IRE ACCESSERç³»åˆ—çš„åº”ç”¨éƒ½åªéœ€è¦ä¸€ä¸ªå‚æ•°ï¼Œå°±æ˜¯é…ç½®æ–‡ä»¶çš„åç§°
 	 * 
 	 * @param args
 	 * @return
@@ -40,7 +40,7 @@ public abstract class AbstractPriliminaryLicenseEnforcedApplication {
 	}
 
 	protected final void checkLicense() {
-		// ¼ÓÔØºÍÑéÖ¤LICENSEÎÄ¼ş
+		// åŠ è½½å’ŒéªŒè¯LICENSEæ–‡ä»¶
 		final String requestCode = loadRequestCodeFromLicenseFile();
 		boolean licenseValid = new LicenseValidation().isLicenseGranted("FlooredSqrtPattern", requestCode);
 		if (!licenseValid) {
@@ -53,7 +53,7 @@ public abstract class AbstractPriliminaryLicenseEnforcedApplication {
 		try {
 			final FileReader reader = new FileReader(licenseFileName);
 			final BufferedReader br = new BufferedReader(reader);
-			String requestCode = br.readLine(); // Ö»¶ÁÈ¡µÚÒ»ĞĞ
+			String requestCode = br.readLine(); // åªè¯»å–ç¬¬ä¸€è¡Œ
 			br.close();
 			reader.close();
 			return requestCode;

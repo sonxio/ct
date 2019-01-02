@@ -3,7 +3,7 @@ package com.ibm.issac.toolkit.license.pattern;
 public abstract class LicensePattern {
 	
 	/**
-	 * 验证请求码是否拥有LICENSE
+	 * 楠岃瘉璇锋眰鐮佹槸鍚︽嫢鏈塋ICENSE
 	 * @param requestCode
 	 * @return
 	 */

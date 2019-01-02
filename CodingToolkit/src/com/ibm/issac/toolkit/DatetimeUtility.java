@@ -7,14 +7,14 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 /**
- * Éú³É¸ñÊ½Ç¡µ±µÄÈÕÆÚ
+ * ç”Ÿæˆæ ¼å¼æ°å½“çš„æ—¥æœŸ
  * 
  * @author issac
  * 
  */
 public class DatetimeUtility {
 	/**
-	 * µÃµ½yyyy/MM/dd HH:mm¸ñÊ½µÄµ±Ç°Ê±¼ä
+	 * å¾—åˆ°yyyy/MM/dd HH:mmæ ¼å¼çš„å½“å‰æ—¶é—´
 	 * 
 	 * @return
 	 */
@@ -31,7 +31,7 @@ public class DatetimeUtility {
 	}
 
 	/**
-	 * ¸ñÊ½»¯Ê±¼ä
+	 * æ ¼å¼åŒ–æ—¶é—´
 	 * 
 	 * @param format
 	 * @param date
@@ -48,7 +48,7 @@ public class DatetimeUtility {
 	}
 
 	/**
-	 * ¼ÆËãÁ½¸öDATEÀàĞÍµÄÊ±¼ä²î(dt1-dt2)£¬ÓÃHOUR±íÊ¾
+	 * è®¡ç®—ä¸¤ä¸ªDATEç±»å‹çš„æ—¶é—´å·®(dt1-dt2)ï¼Œç”¨HOURè¡¨ç¤º
 	 * 
 	 * @param dt1
 	 * @param dt2
@@ -60,9 +60,9 @@ public class DatetimeUtility {
 	}
 
 	/**
-	 * ¼ÆËãÁ½¸öDATEÀàĞÍµÄÊ±¼ä²î(dt1-dt2)£¬ÓÃDAY±íÊ¾
-	 * ×¢ÒâÕâÊÇ×¼È·µÄÊ±¼ä²î£¬ÀıÈçµÚÒ»ÌìÏÂÎç5µãµ½µÚ¶şÌìÏÂÎç5µãÇ°¶¼ÊÇ¼ÆËãÎª1ÌìÄÚ¡£
-	 * Èç¹ûÏ£Íû¸ôÌì¾Í±íÊ¾Ò»Ìì£¬Ê¹ÓÃÏà²î12Ğ¡Ê±»á¸ü½Ó½ü¡£
+	 * è®¡ç®—ä¸¤ä¸ªDATEç±»å‹çš„æ—¶é—´å·®(dt1-dt2)ï¼Œç”¨DAYè¡¨ç¤º
+	 * æ³¨æ„è¿™æ˜¯å‡†ç¡®çš„æ—¶é—´å·®ï¼Œä¾‹å¦‚ç¬¬ä¸€å¤©ä¸‹åˆ5ç‚¹åˆ°ç¬¬äºŒå¤©ä¸‹åˆ5ç‚¹å‰éƒ½æ˜¯è®¡ç®—ä¸º1å¤©å†…ã€‚
+	 * å¦‚æœå¸Œæœ›éš”å¤©å°±è¡¨ç¤ºä¸€å¤©ï¼Œä½¿ç”¨ç›¸å·®12å°æ—¶ä¼šæ›´æ¥è¿‘ã€‚
 	 * @param dt1
 	 * @param dt2
 	 * @return
@@ -73,7 +73,7 @@ public class DatetimeUtility {
 	}
 
 	/**
-	 * ×Ö·û´®×ª»»ÎªÈÕÆÚ
+	 * å­—ç¬¦ä¸²è½¬æ¢ä¸ºæ—¥æœŸ
 	 * 
 	 * @param dateStr
 	 * @param formatStr

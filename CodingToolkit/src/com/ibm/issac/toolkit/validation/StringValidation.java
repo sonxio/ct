@@ -3,7 +3,7 @@ package com.ibm.issac.toolkit.validation;
 import com.ibm.issac.toolkit.logging.ColorLog;
 public class StringValidation {
 	/**
-	 * Èç¹ûSTRINGÖĞ°üº¬¿É¶ÁÄÚÈİ£¬·µ»ØÕæ£»·ñÔòÎª¼Ù¡£
+	 * å¦‚æœSTRINGä¸­åŒ…å«å¯è¯»å†…å®¹ï¼Œè¿”å›çœŸï¼›å¦åˆ™ä¸ºå‡ã€‚
 	 * 
 	 * @param string
 	 * @return

@@ -3,14 +3,14 @@ package com.ibm.issac.toolkit.util;
 import com.ibm.issac.toolkit.DevLog;
 
 /**
- * ±È½ÏLISTÖĞÊÇ·ñÓĞMATCHÖ¸¶¨¶ÔÏóµÄ¶ÔÏó¡£
+ * æ¯”è¾ƒLISTä¸­æ˜¯å¦æœ‰MATCHæŒ‡å®šå¯¹è±¡çš„å¯¹è±¡ã€‚
  * 
  * @author issac
  * 
  */
 public class Matcher {
 	private String title = "";
-	private Object standardObj; // ÓÃ×÷±ê×¼µÄOBJ
+	private Object standardObj; // ç”¨ä½œæ ‡å‡†çš„OBJ
 
 	public Matcher(String title, Object standardObj) {
 		this.title = title;
@@ -19,10 +19,10 @@ public class Matcher {
 	}
 
 	/**
-	 * ÅĞ¶ÏÁ½¸ö¶ÔÏóÊÇ·ñMATCH
+	 * åˆ¤æ–­ä¸¤ä¸ªå¯¹è±¡æ˜¯å¦MATCH
 	 * 
 	 * @param obj1
-	 *            µ±Ç°Òª¶Ô±ÈµÄOBJ£¨Ã¿´Î¶¼Òª±ä»¯£©
+	 *            å½“å‰è¦å¯¹æ¯”çš„OBJï¼ˆæ¯æ¬¡éƒ½è¦å˜åŒ–ï¼‰
 	 * @return
 	 */
 	public boolean match(Object obj1) {

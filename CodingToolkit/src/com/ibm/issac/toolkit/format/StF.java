@@ -8,14 +8,14 @@ package com.ibm.issac.toolkit.format;
 public class StF {
 
 	/**
-	 * Í³Ò»×Ö·û´®³¤¶È£¬°Ñ×Ö·û¼ÓÔÚ×îºó²¹×ã
-	 * @see ¹¦ÄÜ»¹ÓĞÎÊÌâ
+	 * ç»Ÿä¸€å­—ç¬¦ä¸²é•¿åº¦ï¼ŒæŠŠå­—ç¬¦åŠ åœ¨æœ€åè¡¥è¶³
+	 * @see åŠŸèƒ½è¿˜æœ‰é—®é¢˜
 	 * @param sb
-	 * @param c ³¤¶È²»×ãÊ±£¬ÓÃÓÚ²¹×ãµÄ×Ö·û
+	 * @param c é•¿åº¦ä¸è¶³æ—¶ï¼Œç”¨äºè¡¥è¶³çš„å­—ç¬¦
 	 * @param len
 	 */
 	public static StringBuffer unifyLengthBackward(StringBuffer sb, char c, int len1) {
-		//¼ì²é³¤¶È£¬Ìí¼Ó¿Õ¸ñ
+		//æ£€æŸ¥é•¿åº¦ï¼Œæ·»åŠ ç©ºæ ¼
 		int len = sb.length();
 		for(int i=len; i<=len1; i++){
 			sb.append(c);
@@ -24,12 +24,12 @@ public class StF {
 	}
 	
 	/**
-	 * Í³Ò»×Ö·û´®³¤¶È£¬°Ñ×Ö·û¼ÓÔÚ×îÇ°²¹×ã
+	 * ç»Ÿä¸€å­—ç¬¦ä¸²é•¿åº¦ï¼ŒæŠŠå­—ç¬¦åŠ åœ¨æœ€å‰è¡¥è¶³
 	 * @param sb
-	 * @param c ³¤¶È²»×ãÊ±£¬ÓÃÓÚ²¹×ãµÄ×Ö·û
+	 * @param c é•¿åº¦ä¸è¶³æ—¶ï¼Œç”¨äºè¡¥è¶³çš„å­—ç¬¦
 	 */
 	public static StringBuffer unifyLengthForward(StringBuffer sb, char c, int len1) {
-		//¼ì²é³¤¶È£¬Ìí¼Ó¿Õ¸ñ		
+		//æ£€æŸ¥é•¿åº¦ï¼Œæ·»åŠ ç©ºæ ¼		
 		int len = sb.length();
 		StringBuffer sb1 = new StringBuffer(c);
 		for(int i=len; i<=len1; i++){
@@ -39,7 +39,7 @@ public class StF {
 	}
 	
 	/**
-	 * ÎªSTRING¼ÓÉÏ×óÓÒÀ¨ºÅ£¬ÓÃÓÚÈÕÖ¾Êä³ö±ÜÃâ²»ÄÜÊ¶±ğ×óÓÒµÄ¿Õ¸ñ
+	 * ä¸ºSTRINGåŠ ä¸Šå·¦å³æ‹¬å·ï¼Œç”¨äºæ—¥å¿—è¾“å‡ºé¿å…ä¸èƒ½è¯†åˆ«å·¦å³çš„ç©ºæ ¼
 	 * @param str
 	 * @return
 	 */

@@ -1,25 +1,30 @@
 package com.ibm.issac.toolkit;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.Calendar;
+import java.util.Date;
 
 import com.ibm.issac.toolkit.param.SysProp;
 import com.ibm.issac.toolkit.util.DateUtil;
 import com.ibm.issac.toolkit.util.StringUtil;
 
 /**
- * Logger·ÖÎªCONSOLE´òÓ¡ºÍFILE´òÓ¡£¬×ÜÌåÉÏCONSOLEÖ»ÓÃÓÚÏÔÊ¾ËùĞèĞÅÏ¢£¬¶øFILEÔòÏÔÊ¾ËùÓĞĞÅÏ¢
+ * Loggeråˆ†ä¸ºCONSOLEæ‰“å°å’ŒFILEæ‰“å°ï¼Œæ€»ä½“ä¸ŠCONSOLEåªç”¨äºæ˜¾ç¤ºæ‰€éœ€ä¿¡æ¯ï¼Œè€ŒFILEåˆ™æ˜¾ç¤ºæ‰€æœ‰ä¿¡æ¯
  * 
  * @author issac
  * 
  */
 public final class DevLog {
 	private static FileWriter logWriter;
-	private static OutputStream os1; // Èç¹û²»ÊÇNULL£¬Ôò¶îÍâÊä³öµ½Õâ¸öOSÖĞ£¬ÓÃÓÚÔÚSERVLETÖĞÊä³öÊı¾İ
+	private static String logFileName; // æ—¥å¿—æ–‡ä»¶åçš„åŸºç¡€éƒ¨åˆ†ï¼Œåé¢ä¼šå¢åŠ æ—¥æœŸï¼Œä¸è¦åŒ…å«åç¼€
+	private static Integer dayOfMonth = -1;// ç”¨äºæ—¥å¿—éš”æ—¥ç¿»æ–°
+	private static OutputStream os1; // å¦‚æœä¸æ˜¯NULLï¼Œåˆ™é¢å¤–è¾“å‡ºåˆ°è¿™ä¸ªOSä¸­ï¼Œç”¨äºåœ¨SERVLETä¸­è¾“å‡ºæ•°æ®
 
 	/**
-	 * Ñ¡ÔñÓÃTEXT»òÕßHTMLÊä³öÈÕÖ¾
+	 * é€‰æ‹©ç”¨TEXTæˆ–è€…HTMLè¾“å‡ºæ—¥å¿—
 	 * 
 	 * @param logModeStr
 	 */
@@ -28,37 +33,45 @@ public final class DevLog {
 	}
 
 	/**
-	 * Èç¹ûµ÷ÓÃ¸Ã·½·¨£¬ÔòÉú³ÉÎÄ¼şÈÕÖ¾£¬·ñÔò²»´òÓ¡ÎÄ¼şÈÕÖ¾¡£
+	 * å¦‚æœè°ƒç”¨è¯¥æ–¹æ³•ï¼Œåˆ™ç”Ÿæˆæ–‡ä»¶æ—¥å¿—ï¼Œå¦åˆ™ä¸æ‰“å°æ–‡ä»¶æ—¥å¿—ã€‚
+	 * 
 	 * @param appName
 	 */
-	public static void writeFileLog(String appName){
-		DevLog.init(appName);
+	public static void writeFileLog(String appName) {
+		DevLog.refreshFileLogWriter();
 	}
-	
+
 	/**
-	 * Èç¹ûµ÷ÓÃ¸Ã·½·¨£¬ÔòÉú³ÉÎÄ¼şÈÕÖ¾£¬·ñÔò²»´òÓ¡ÎÄ¼şÈÕÖ¾¡£
-	 * @deprecated Ãû³ÆÃ»ÓĞÕæÕıÌåÏÖ³öº¬Òå£¬DevLog²»ĞèÒª³õÊ¼»¯£¬Õâ¸öÃüÁîÖ»ÊÇÓÃÀ´Éú³ÉÎÄ¼şÈÕÖ¾µÄ¡£
+	 * å¦‚æœè°ƒç”¨è¯¥æ–¹æ³•ï¼Œåˆ™ç”Ÿæˆæ–‡ä»¶æ—¥å¿—ï¼Œå¦åˆ™ä¸æ‰“å°æ–‡ä»¶æ—¥å¿—ã€‚
+	 * 
+	 * @deprecated åç§°æ²¡æœ‰çœŸæ­£ä½“ç°å‡ºå«ä¹‰ï¼ŒDevLogä¸éœ€è¦åˆå§‹åŒ–ï¼Œè¿™ä¸ªå‘½ä»¤åªæ˜¯ç”¨æ¥ç”Ÿæˆæ–‡ä»¶æ—¥å¿—çš„ã€‚
 	 * @param appName
 	 */
 	public static void init(String appName) {
-		// -----------------------------------
-		// È·¶¨ÈÕÖ¾ÎÄ¼şÉú³ÉµÄÎ»ÖÃ
-		if (!SysProp.b_bool("issac.DevLog.writeFile", true)) {
-			logWriter = null;// ²»ÔÊĞíĞ´ÈÕÖ¾ÎÄ¼ş£¬´Ó¶ø½µµÍĞÔÄÜÏûºÄ£¬¶ÔÓÚJ2EEµÈSystem.outÒÑ¾­Ğ´ÈëµÄÇé¿ö£¬Ó¦Èç´ËÉèÖÃ
-			DevLog.trace("[DevLog] DevLog will not write to a file.");
-			return;
-		}
-		// Èç¹ûÃ»ÓĞÌØ±ğÖ¸¶¨LOG FILEµÄÎÄ¼şÎ»ÖÃ£¬Ôò¸ù¾İ»·¾³±äÁ¿Éú³ÉÈÕÖ¾ÎÄ¼ş
-		String logFileName = SysProp.pstr("song.logFileNameWithPath");
-		if (StringUtil.isEmpty(logFileName)) {
-			//DELAYED_TODO ÔÚwindowsÉÏÓĞBUG£¬Õâ¸öÎÄ¼ş»áÊÇ¿ÕµÄ£¬¿ÉÄÜºÍjava.io.tmpdirÊä³ö×îºó°üº¬\ÓĞ¹Ø£¬¿ÉÒÔÍ¨¹ıÉèÖÃsong.logFileNameWithPath±äÁ¿¹æ±Ü¡£
-			logFileName = SysProp.b_str("java.io.tmpdir", "./") + SysProp.getFS() + "devlog_" + appName + "_" + DateUtil.getNow("yyyyMMdd") + ".log";
-		}
+		DevLog.refreshFileLogWriter();
+	}
+
+	private static void refreshFileLogWriter() {
+		// ---------------------------
+		if (logWriter != null)
+			try {
+				logWriter.flush();
+				logWriter.close();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+		// ------------------------
+		if (StringUtil.isEmpty(logFileName))
+			logFileName = StringUtil.generateRandomString();
 		try {
-			DevLog.trace("[DevLog] IRE devlog written to " + logFileName);
-			logWriter = new FileWriter(logFileName, true);
+			System.out.println("[DevLog] refreshing file log writer");
+			// String fileNameWithPath = SysProp.b_str("java.io.tmpdir", ".") + SysProp.getFS() + logFileName + "_" + DateUtil.getNow("yyyyMMdd") + ".log";
+			String fileNameWithPath = "." + SysProp.getFS() + "devlog_" + logFileName + "_" + DateUtil.getNow("yyyyMMdd") + ".log";
+			File f = new File(fileNameWithPath);
+			System.out.println("[DevLog] IRE devlog written to " + f.getAbsolutePath());
+			logWriter = new FileWriter(f, true);
 		} catch (IOException e) {
-			DevLog.warn("[DevLog] Failed initiating DevLog. Logs will not be saved to disk.");
+			System.out.println("[DevLog] Failed initiating DevLog. Logs will not be saved to disk.");
 			e.printStackTrace();
 		}
 	}
@@ -70,16 +83,16 @@ public final class DevLog {
 	}
 
 	public static String buildPrefixedLog(String type, String msg) {
-		// ÎªLOGÔö¼ÓÊ±¼ä´Á
+		// ä¸ºLOGå¢åŠ æ—¶é—´æˆ³
 		StringBuffer sb = new StringBuffer(DateUtil.getNow("yyyy-MM-dd HH:mm:ss.SSS "));
-		// Ôö¼ÓÏß³ÌÃû³Æ
-		sb.append(Thread.currentThread().getName()).append(' ');
-		// Ôö¼ÓÏûÏ¢±àºÅ
+		// å¢åŠ çº¿ç¨‹id,ä¸å†ç”¨çº¿ç¨‹åç§°ï¼Œå› ä¸ºæœ‰äº›çº¿ç¨‹åç§°éå¸¸é•¿ã€‚è€Œä¸”wasé»˜è®¤æƒ…å†µä¸‹å°±åªæ‰“å°çº¿ç¨‹id
+		sb.append(Thread.currentThread().getId()).append(' ');
+		// å¢åŠ æ¶ˆæ¯ç¼–å·
 		// if (appName != null) {
 		// sb.append(appName.toUpperCase());
 		// }
 		sb.append(type).append(' ');
-		// Ôö¼ÓÈÕÖ¾ÄÚÈİ
+		// å¢åŠ æ—¥å¿—å†…å®¹
 		sb.append(msg);
 		sb.append('\n');
 		return sb.toString();
@@ -94,7 +107,7 @@ public final class DevLog {
 	}
 
 	/**
-	 * super trace£¬ÓÃÀ´TRACEÈÕÖ¾Á¿·Ç³£´óµÄÄÚÈİ
+	 * super traceï¼Œç”¨æ¥TRACEæ—¥å¿—é‡éå¸¸å¤§çš„å†…å®¹
 	 * 
 	 * @param logStr
 	 */
@@ -102,10 +115,17 @@ public final class DevLog {
 		DevLog.writeLog("S", logStr);
 	}
 
+	/**
+	 * å†™æ—¥å¿—ã€‚ä¸ºäº†é¿å…å¾ªç¯å¼•ç”¨ï¼Œè¿™ä¸ªæ–¹æ³•å’Œå®ƒå¼•ç”¨çš„æ–¹æ³•éƒ½ä¸èƒ½è°ƒç”¨DevLog
+	 * 
+	 * @param type
+	 * @param logStr
+	 */
 	private static void writeLog(String type, String logStr) {
 		final String prefixedLog = DevLog.buildPrefixedLog(type, logStr);
-		// ÔÚÎÄ¼şÖĞ¼ÇÂ¼ÈÕÖ¾£¬ÎŞÂÛÈÕÖ¾µÈ¼¶ÀàĞÍÈçºÎ£¬¶¼»áÔÚÎÄ¼şÖĞ¼ÇÂ¼£¬¶øÇÒÓÀÔ¶ÓÃTEXT·½Ê½¼ÇÂ¼
+		// åœ¨æ–‡ä»¶ä¸­è®°å½•æ—¥å¿—ï¼Œæ— è®ºæ—¥å¿—ç­‰çº§ç±»å‹å¦‚ä½•ï¼Œéƒ½ä¼šåœ¨æ–‡ä»¶ä¸­è®°å½•ï¼Œè€Œä¸”æ°¸è¿œç”¨TEXTæ–¹å¼è®°å½•
 		if (logWriter != null) {
+			DevLog.refreshFileLogOnceNeeded();
 			try {
 				logWriter.write(prefixedLog);
 				logWriter.flush();
@@ -113,17 +133,18 @@ public final class DevLog {
 				e.printStackTrace();
 			}
 		}
-		// ¸ù¾İÈÕÖ¾ÉèÖÃÀàĞÍ¾ö¶¨ÊÇ·ñÔÚSYSTEM OUT´òÓ¡ÈÕÖ¾ÄÚÈİ
+		// æ ¹æ®æ—¥å¿—è®¾ç½®ç±»å‹å†³å®šæ˜¯å¦åœ¨SYSTEM OUTæ‰“å°æ—¥å¿—å†…å®¹
 		String logLevel = SysProp.b_str("issac.logLevel", "-S-T-D-I-W-E-");
-		if (logLevel.indexOf(type) < 0) { // ²»´òÓ¡logLevel±äÁ¿ÖĞ²»°üº¬¼¶±ğµÄÈÕÖ¾
+		if (logLevel.indexOf(type) < 0) { // ä¸æ‰“å°logLevelå˜é‡ä¸­ä¸åŒ…å«çº§åˆ«çš„æ—¥å¿—
 			return;
 		}
-		if(SysProp.b_bool("song.devlog.printNothingInSystemOut", false)){
+		// ä¸ºäº†é¿å…å¹²æ‰°å…¶ä»–æ—¥å¿—ï¼Œè¿™ä¸ªå‚æ•°æä¾›äº†é¿å…æ‰“å°ä¸€åˆ‡ä¿¡æ¯çš„é€‰é¡¹ï¼Œå³ä»…å†™å…¥devlogæ–‡ä»¶æ—¥å¿—ï¼Œä¸è¾“å‡ºåˆ°javaæ ‡å‡†è¾“å‡º
+		if (SysProp.b_bool("song.devlog.printNothingInSystemOut", false)) {
 			return;
 		}
-		// ÔÚSYSTEM OUTÖĞÏÔÊ¾ÈÕÖ¾£¬¶ÔÓÚ½çÃæÏÔÊ¾£¬²»Ôö¼ÓÊ±¼ä¡¢Ïß³Ì£¬ÒÔÃâÔÚWAS,TOMCATµÈÓ¦ÓÃÖĞÏÔÊ¾Ê±ÏÔÊ¾³ö¶àÓàµÄÊ±¼ä¡£
-		// ½çÃæÏÔÊ¾²»ÏÔÊ¾PREFIXED LOG£¬Ö»ÏÔÊ¾¹Ø¼üÄÚÈİ
-		if(SysProp.b_bool("song.devlog.printDateTimeInSystemOut", true)){
+		// åœ¨SYSTEM OUTä¸­æ˜¾ç¤ºæ—¥å¿—ï¼Œå¯¹äºç•Œé¢æ˜¾ç¤ºï¼Œä¸å¢åŠ æ—¶é—´ã€çº¿ç¨‹ï¼Œä»¥å…åœ¨WAS,TOMCAT, LIBERTYç­‰åº”ç”¨ä¸­æ˜¾ç¤ºæ—¶æ˜¾ç¤ºå‡ºå¤šä½™çš„æ—¶é—´ã€‚
+		// ç•Œé¢æ˜¾ç¤ºä¸æ˜¾ç¤ºPREFIXED LOGï¼Œåªæ˜¾ç¤ºå…³é”®å†…å®¹
+		if (SysProp.b_bool("song.devlog.printDateTimeInSystemOut", true)) {
 			DevLog.display(prefixedLog);
 			return;
 		}
@@ -132,10 +153,24 @@ public final class DevLog {
 		DevLog.display(sb.toString());
 	}
 
+	private static void refreshFileLogOnceNeeded() {
+		Calendar cal = Calendar.getInstance();
+		int newDayOfMonth = cal.get(Calendar.DAY_OF_MONTH);
+		if (dayOfMonth == -1) {// åˆå§‹å€¼
+			dayOfMonth = newDayOfMonth;
+			return;
+		}
+		if (newDayOfMonth != dayOfMonth) {
+			DevLog.refreshFileLogWriter();
+			dayOfMonth = newDayOfMonth;
+			System.out.println("[DevLog] refreshing file log " + dayOfMonth);
+		}
+	}
+
 	/**
-	 * ÏÔÊ¾´¦Àí½ø¶ÈÈÕÖ¾
+	 * æ˜¾ç¤ºå¤„ç†è¿›åº¦æ—¥å¿—
 	 * 
-	 * @deprecated ¸ÄÓÃPLOG
+	 * @deprecated æ”¹ç”¨PLOG
 	 * @param logStr
 	 */
 	public static void progress(String logStr) {
@@ -160,7 +195,7 @@ public final class DevLog {
 	 * @param logStr
 	 */
 	public static void display(String logStr) {
-		// ÎªHTML¸ñÊ½½øĞĞÌØ±ğ´¦Àí
+		// ä¸ºHTMLæ ¼å¼è¿›è¡Œç‰¹åˆ«å¤„ç†
 		if (DevLog.os1 != null) {
 			StringBuffer sb = new StringBuffer("");
 			sb.append("<pre>").append(logStr).append("</pre>");
@@ -172,7 +207,7 @@ public final class DevLog {
 			}
 			return;
 		}
-		// ·ÇHTML£¬ÔòÖ±½Ó´òÓ¡ÈÕÖ¾
+		// éHTMLï¼Œåˆ™ç›´æ¥æ‰“å°æ—¥å¿—
 		System.out.print(logStr);
 	}
 
@@ -183,5 +218,11 @@ public final class DevLog {
 	 */
 	public static void displayln(String logStr) {
 		System.out.println(logStr);
+	}
+
+	public static void main(String[] args) {
+		DevLog.writeFileLog("test");
+		DevLog.super_trace("test super trace");
+		DevLog.debug("test debug");
 	}
 }

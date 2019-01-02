@@ -9,25 +9,25 @@ import com.ibm.issac.toolkit.DevLog;
 import com.ibm.issac.toolkit.util.StringUtil;
 
 /**
- * ½âÎömqs.ini
+ * è§£æžmqs.ini
  * 
  * @author issac
  *
  */
 public class INI_BLP implements ByLineProcesser {
-	private List sectionL = new ArrayList();// mqs.ini¹ýÂËµÃµ½µÄQMGRÊý¾Ý
-	private Map currentDataM = new HashMap(); // µ±Ç°Ò»½ÚµÄÊý¾Ý
+	private List sectionL = new ArrayList();// mqs.iniè¿‡æ»¤å¾—åˆ°çš„QMGRæ•°æ®
+	private Map currentDataM = new HashMap(); // å½“å‰ä¸€èŠ‚çš„æ•°æ®
 
 	public void process(String text) {
 		if (text == null)
 			return;
 		final String trimmedStr = text.trim();
-		// ÅÐ¶ÏÊÇ·ñÐÂµÄÒ»¸öQMGRÊý¾Ý¿ªÊ¼
+		// åˆ¤æ–­æ˜¯å¦æ–°çš„ä¸€ä¸ªQMGRæ•°æ®å¼€å§‹
 		if (this.isNewSectionBeginning(trimmedStr)) {
 			DevLog.debug("Discovered a new section :" + trimmedStr);
-			// °Ñµ±Ç°Êý¾Ý±£´æÆðÀ´
+			// æŠŠå½“å‰æ•°æ®ä¿å­˜èµ·æ¥
 			if (currentDataM != null) {
-				// ±£´æÊý¾Ý
+				// ä¿å­˜æ•°æ®
 				DevLog.trace("Saving previously-discovered section.");
 				if (!currentDataM.isEmpty()) {
 					final Map dataM = new HashMap();
@@ -37,11 +37,11 @@ public class INI_BLP implements ByLineProcesser {
 					DevLog.trace("Not adding an empty map.");
 				}
 			}
-			// ¿ªÊ¼´´½¨ÐÂÊý¾Ý
+			// å¼€å§‹åˆ›å»ºæ–°æ•°æ®
 			currentDataM = new HashMap();
 			currentDataM.put("$anaSetting.SECTION_KEYWORD", trimmedStr);
 		}
-		// ÊÕ¼¯Êý¾Ý
+		// æ”¶é›†æ•°æ®
 		if (trimmedStr.startsWith("#")) {
 			DevLog.trace("ignoring text due to starting with # in >" + trimmedStr + "<");
 			return;
@@ -58,7 +58,7 @@ public class INI_BLP implements ByLineProcesser {
 	}
 
 	/**
-	 * ÅÐ¶ÏINIÊÇ·ñÐÂ¿ªÊ¼ÁËÒ»¶Î
+	 * åˆ¤æ–­INIæ˜¯å¦æ–°å¼€å§‹äº†ä¸€æ®µ
 	 * 
 	 * @param trimmedStr
 	 * @return
@@ -74,7 +74,7 @@ public class INI_BLP implements ByLineProcesser {
 	}
 
 	public Object afterProcessing(Object msg) {
-		// ×îºóÒ»ÅúÊý¾ÝcurrentDataMÐèÒªÊ×ÏÈ±£´æºÃ
+		// æœ€åŽä¸€æ‰¹æ•°æ®currentDataMéœ€è¦é¦–å…ˆä¿å­˜å¥½
 		if (currentDataM != null) {
 			DevLog.trace("Saving lastly discovered data.");
 			final Map dataM = new HashMap();
