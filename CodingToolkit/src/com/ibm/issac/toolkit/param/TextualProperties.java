@@ -27,6 +27,13 @@ public class TextualProperties {
 		return p.getProperty(key);
 	}
 	
+	/**
+	 * 把一个STRING TOKEN，分隔字符串，解析为STRING ARRAY
+	 * 截至20190107， Java PROPERTIES仍然不支持LIST，必须解析分隔字符串
+	 * @param key
+	 * @param expr
+	 * @return
+	 */
 	public String[] pstra(String key, String expr){
 		String token = p.getProperty(key);
 		return token.split(expr);
@@ -62,6 +69,12 @@ public class TextualProperties {
 		p.list(System.out);
 	}
 
+	/**
+	 * 把一个分隔字符串属性解析为数字LIST
+	 * @param key
+	 * @param expr
+	 * @return
+	 */
 	public List pintl(String key, String expr) {
 		String token = p.getProperty(key);
 		String[] strA = token.split(expr);
