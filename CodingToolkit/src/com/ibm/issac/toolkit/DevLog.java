@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Map;
 
 import com.ibm.issac.toolkit.param.SysProp;
 import com.ibm.issac.toolkit.util.DateUtil;
@@ -65,8 +66,10 @@ public final class DevLog {
 			logFileName = StringUtil.generateRandomString();
 		try {
 			System.out.println("[DevLog] refreshing file log writer");
-			// String fileNameWithPath = SysProp.b_str("java.io.tmpdir", ".") + SysProp.getFS() + logFileName + "_" + DateUtil.getNow("yyyyMMdd") + ".log";
-			String fileNameWithPath = "." + SysProp.getFS() + "devlog_" + logFileName + "_" + DateUtil.getNow("yyyyMMdd") + ".log";
+			// String fileNameWithPath = SysProp.b_str("java.io.tmpdir", ".") +
+			// SysProp.getFS() + logFileName + "_" + DateUtil.getNow("yyyyMMdd") + ".log";
+			String fileNameWithPath = "." + SysProp.getFS() + "devlog_" + logFileName + "_"
+					+ DateUtil.getNow("yyyyMMdd") + ".log";
 			File f = new File(fileNameWithPath);
 			System.out.println("[DevLog] IRE devlog written to " + f.getAbsolutePath());
 			logWriter = new FileWriter(f, true);
@@ -224,5 +227,17 @@ public final class DevLog {
 		DevLog.writeFileLog("test");
 		DevLog.super_trace("test super trace");
 		DevLog.debug("test debug");
+	}
+
+	/**
+	 * 如果需要其他日志等级，用stringutil直接获得string后打印
+	 * @param objA
+	 */
+	public static void printArray(Object[] objA) {
+		DevLog.debug("array: " + StringUtil.flattenArray(objA));
+	}
+
+	public static void printMap(Map m) {
+		DevLog.debug("map: " + StringUtil.flattenMap(m));
 	}
 }

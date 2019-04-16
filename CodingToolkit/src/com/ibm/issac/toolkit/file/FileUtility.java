@@ -26,10 +26,11 @@ import com.ibm.issac.toolkit.util.StringUtil;
 /**
  * 辅助文件操作
  * 
+ * @deprecated 命令混乱，以后统一用fileutil
  * @author issac
  * 
  */
-public final class FileUtility {
+public class FileUtility {
 	/**
 	 * <p>
 	 * Creates an InputStream from a file, and fills it with the complete file. Thus, available() on the returned InputStream will return the full number of bytes the file contains

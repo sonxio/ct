@@ -132,15 +132,15 @@ public class Invoker {
 				Object valObj = Invoker.get(obj, f.getName(), f.getType());
 				sb.append(f.getName()).append(":>").append(valObj == null ? "$NULL" : valObj).append("<, ");
 			} catch (SecurityException e) {
-				e.printStackTrace();
+				DevLog.super_trace("[Invoker] "+e.getMessage());
 			} catch (IllegalArgumentException e) {
-				e.printStackTrace();
+				DevLog.super_trace("[Invoker] "+e.getMessage());
 			} catch (NoSuchMethodException e) {
-				e.printStackTrace();
+				DevLog.super_trace("[Invoker] "+e.getMessage());
 			} catch (IllegalAccessException e) {
-				e.printStackTrace();
+				DevLog.super_trace("[Invoker] "+e.getMessage());
 			} catch (InvocationTargetException e) {
-				e.printStackTrace();
+				DevLog.super_trace("[Invoker] "+e.getMessage());
 			}
 		}
 		sb.append('}');
