@@ -1,4 +1,4 @@
-package com.ibm.issac.toolkit.dto;
+package com.ibm.issac.toolkit.nativeRuntime;
 
 /**
  * 加载配置文件，保存各种运行时数据

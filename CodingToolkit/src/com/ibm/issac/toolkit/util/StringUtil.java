@@ -8,15 +8,13 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 import com.ibm.issac.toolkit.DevLog;
-import com.ibm.issac.toolkit.logging.ColorLog;
-import com.ibm.issac.toolkit.validation.StringValidation;
 
 public class StringUtil {
 
 	/**
 	 * 得到两个字符串之间的字符串
 	 * 
-	 * @param str1
+	 * @param str1Ø
 	 * @param str2
 	 * @return
 	 */
@@ -62,7 +60,7 @@ public class StringUtil {
 	 */
 	public static String generateRamdomString(String prefix) {
 		long uniqueNumber = System.currentTimeMillis() % 1000;
-		if (!StringValidation.isStringReadable(prefix))
+		if (!StringUtil.isReadable(prefix))
 			prefix = "RAMDOM_STRING_";
 		return prefix + uniqueNumber;
 	}

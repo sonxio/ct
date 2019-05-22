@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 
 import com.ibm.issac.toolkit.DevLog;
 import com.ibm.issac.toolkit.logging.Plog;
-import com.ibm.issac.toolkit.validation.StringValidation;
+import com.ibm.issac.toolkit.util.StringUtil;
 
 public class ConsoleInput {
 
@@ -22,7 +22,7 @@ public class ConsoleInput {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		Plog.p2(question);
 		String answer = br.readLine();
-		if (StringValidation.isStringReadable(answer))
+		if (StringUtil.isReadable(answer))
 			return answer;
 		return defaultVal;
 
