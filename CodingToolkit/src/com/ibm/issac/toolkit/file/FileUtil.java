@@ -8,7 +8,22 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import com.ibm.issac.toolkit.util.StringUtil;
+
+/**
+ * 统一工具类命名风格。
+ * @author song
+ *
+ */
 public class FileUtil extends FileUtility {
+	/**
+	 * 去掉文件名中的扩展名
+	 * @param fileName
+	 * @return
+	 */
+	public static String removeFileNameSurfix(String fileName) {
+		return StringUtil.removeSurfix(fileName);
+	}
 	/**
 	 * 获得指定文件的byte数组
 	 */

@@ -12,6 +12,18 @@ import com.ibm.issac.toolkit.DevLog;
 public class StringUtil {
 
 	/**
+	 * 去掉字符串中最后一个点到末尾的内容
+	 * 
+	 * @param str
+	 * @return
+	 */
+	public static String removeSurfix(String str) {
+		String result = str.replaceAll("\\..*$", "");
+		DevLog.super_trace("[StringUtil] removing surfix for >" + str + "< gives >" + result + "<");
+		return result;
+	}
+
+	/**
 	 * 得到两个字符串之间的字符串
 	 * 
 	 * @param str1Ø
@@ -44,7 +56,8 @@ public class StringUtil {
 	 */
 	public static String generateRandomString() {
 		Random random = new Random();
-		char[] word = new char[random.nextInt(8) + 3]; // words of length 3 through 10. (1 and 2 letter words are boring.)
+		char[] word = new char[random.nextInt(8) + 3]; // words of length 3 through 10. (1 and 2 letter words are
+														// boring.)
 		for (int j = 0; j < word.length; j++) {
 			word[j] = (char) ('a' + random.nextInt(26));
 		}
@@ -130,6 +143,7 @@ public class StringUtil {
 
 	/**
 	 * 把map转化为string，方便打印日志
+	 * 
 	 * @param m
 	 */
 	public static String flattenMap(Map m) {
@@ -143,6 +157,7 @@ public class StringUtil {
 		sb.append("}");
 		return sb.toString();
 	}
+
 	public static String flattenArray(int[] intA) {
 		final StringBuffer sb = new StringBuffer("[");
 		for (int i = 0; intA != null && i < intA.length; i++) {
@@ -182,7 +197,8 @@ public class StringUtil {
 	 * @param delimeterStr
 	 * @return
 	 */
-	public static String getSubStringEndingAtTheFirstDelimeter(String partStr, String delimeterStr) throws StringIndexOutOfBoundsException {
+	public static String getSubStringEndingAtTheFirstDelimeter(String partStr, String delimeterStr)
+			throws StringIndexOutOfBoundsException {
 		return partStr.substring(0, partStr.indexOf(delimeterStr));
 	}
 
@@ -193,7 +209,8 @@ public class StringUtil {
 	 * @param delimeterStr
 	 * @return
 	 */
-	public static String getSubStringBeginningFromTheFirstDelimeter(String partStr, String delimeterStr) throws StringIndexOutOfBoundsException {
+	public static String getSubStringBeginningFromTheFirstDelimeter(String partStr, String delimeterStr)
+			throws StringIndexOutOfBoundsException {
 		return partStr.substring(partStr.indexOf(delimeterStr) + delimeterStr.length(), partStr.length());
 	}
 
@@ -462,7 +479,8 @@ public class StringUtil {
 	 */
 	private static boolean isEqual(char c1, char c2) {
 		// 字母小写 字母大写
-		if (((97 <= c1 && c1 <= 122) || (65 <= c1 && c1 <= 90)) && ((97 <= c2 && c2 <= 122) || (65 <= c2 && c2 <= 90)) && ((c1 - c2 == 32) || (c2 - c1 == 32))) {
+		if (((97 <= c1 && c1 <= 122) || (65 <= c1 && c1 <= 90)) && ((97 <= c2 && c2 <= 122) || (65 <= c2 && c2 <= 90))
+				&& ((c1 - c2 == 32) || (c2 - c1 == 32))) {
 
 			return true;
 		} else if (c1 == c2) {
