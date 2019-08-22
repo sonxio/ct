@@ -10,13 +10,9 @@
 			<attribute name="optional" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6">
-		<attributes>
-			<attribute name="owner.project.facets" value="java"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="lib" path="/_JAR_LIB/COMMON_JAR/apache_httpclient/commons-httpclient-3.0.1/commons-httpclient-3.0.1.jar"/>
 	<classpathentry kind="lib" path="/_JAR_LIB/COMMON_JAR/jsoup/jsoup-1.11.3.jar"/>
 	<classpathentry kind="lib" path="/_JAR_LIB/COMMON_JAR/db-derby-10.14.2.0-bin/lib/derbyclient.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -12,6 +12,22 @@ import com.ibm.issac.toolkit.DevLog;
 public class StringUtil {
 
 	/**
+	 * 如果part是token中的一个，返回true； 否则为false。<br/>
+	 * 如果任何一个为空，返回false
+	 * 
+	 * @param token -分隔的字符串列表
+	 * @param part  左右不含-的关键词
+	 * @return
+	 */
+	public static boolean enlists(String token, String part) {
+		if (StringUtil.isEmpty(token) || StringUtil.isEmpty(part))
+			return false;
+		if (token.indexOf("-" + part + "-") < 0)
+			return false;
+		return true;
+	}
+
+	/**
 	 * 去掉字符串中最后一个点到末尾的内容
 	 * 
 	 * @param str
@@ -173,8 +189,7 @@ public class StringUtil {
 	 * Returns the supplied string, up to (and excluding) the first newline
 	 * character. If the supplied string is null, the output string is also null.
 	 * 
-	 * @param string
-	 *            String to parse.
+	 * @param string String to parse.
 	 * @return String the first line of the input string.
 	 */
 	public static String getFirstLine(String string) {
@@ -230,8 +245,7 @@ public class StringUtil {
 	 * 属性配置中可能包含中文时使用该选项。
 	 * 
 	 * @param propertyName
-	 * @param defaultValue
-	 *            如果中文解析失败，就是用默认值
+	 * @param defaultValue 如果中文解析失败，就是用默认值
 	 * @return
 	 */
 	public static String readChinese(String str, String defaultValue) {
@@ -260,10 +274,8 @@ public class StringUtil {
 	/**
 	 * 替换字符串中的回车、制表符等特殊符号。
 	 * 
-	 * @param inStr
-	 *            需要替换的字符串
-	 * @param replacement
-	 *            需要替换为该字符，例如设置为空字符串
+	 * @param inStr       需要替换的字符串
+	 * @param replacement 需要替换为该字符，例如设置为空字符串
 	 * @return
 	 */
 	public static String removeControlCharacters(String inStr, String replacement) {
@@ -276,8 +288,7 @@ public class StringUtil {
 	/**
 	 * 将字符串中的连续的多个换行缩减成一个换行
 	 * 
-	 * @param str
-	 *            要处理的内容
+	 * @param str 要处理的内容
 	 * @return 返回的结果
 	 */
 	public static String replaceLineBlanks(String str) {
@@ -305,10 +316,8 @@ public class StringUtil {
 	/**
 	 * 返回指定子字符串在此字符串中第一次出现处的索引，从指定的索引开始，不区分大小。
 	 * 
-	 * @param subject
-	 *            被查找字符串。
-	 * @param search
-	 *            要查找的子字符串。
+	 * @param subject 被查找字符串。
+	 * @param search  要查找的子字符串。
 	 * @return 指定子字符串在此字符串中第一次出现处的索引，从指定的索引开始。
 	 */
 	public static int ignoreCaseIndexOf(String subject, String search) {
@@ -318,13 +327,10 @@ public class StringUtil {
 	/**
 	 * 返回指定子字符串在此字符串中第一次出现处的索引，从指定的索引开始，不区分大小。
 	 * 
-	 * @param subject
-	 *            被查找字符串。
-	 * @param search
-	 *            要查找的子字符串。
-	 * @param fromIndex
-	 *            开始查找的索引位置。其值没有限制，如果它为负，则与它为 0 的效果同样：将查找整个字符串。
-	 *            如果它大于此字符串的长度，则与它等于此字符串长度的效果相同：返回 -1。
+	 * @param subject   被查找字符串。
+	 * @param search    要查找的子字符串。
+	 * @param fromIndex 开始查找的索引位置。其值没有限制，如果它为负，则与它为 0 的效果同样：将查找整个字符串。
+	 *                  如果它大于此字符串的长度，则与它等于此字符串长度的效果相同：返回 -1。
 	 * @return 指定子字符串在此字符串中第一次出现处的索引，从指定的索引开始。
 	 */
 	public static int ignoreCaseIndexOf(String subject, String search, int fromIndex) {
@@ -387,10 +393,8 @@ public class StringUtil {
 	/**
 	 * 返回指定子字符串在此字符串中最右边出现处的索引。
 	 * 
-	 * @param subject
-	 *            被查找字符串。
-	 * @param search
-	 *            要查找的子字符。
+	 * @param subject 被查找字符串。
+	 * @param search  要查找的子字符。
 	 * @return 在此对象表示的字符序列中最后一次出现该字符的索引；如果在该点之前未出现该字符，则返回 -1
 	 */
 	public static int ignoreCaseLastIndexOf(String subject, String search) {
@@ -404,13 +408,10 @@ public class StringUtil {
 	/**
 	 * 返回指定字符在此字符串中最后一次出现处的索引，从指定的索引处开始进行反向查找。
 	 * 
-	 * @param subject
-	 *            被查找字符串 。
-	 * @param search
-	 *            要查找的子字符串。
-	 * @param fromIndex
-	 *            开始查找的索引。fromIndex 的值没有限制。如果它大于等于此字符串的长度，则与它小于此字符串长度减 1
-	 *            的效果相同：将查找整个字符串。 如果它为负，则与它为 -1 的效果相同：返回 -1。
+	 * @param subject   被查找字符串 。
+	 * @param search    要查找的子字符串。
+	 * @param fromIndex 开始查找的索引。fromIndex 的值没有限制。如果它大于等于此字符串的长度，则与它小于此字符串长度减 1
+	 *                  的效果相同：将查找整个字符串。 如果它为负，则与它为 -1 的效果相同：返回 -1。
 	 * @return 在此对象表示的字符序列（小于等于 fromIndex）中最后一次出现该字符的索引； 如果在该点之前未出现该字符，则返回 -1
 	 */
 	public static int ignoreCaseLastIndexOf(String subject, String search, int fromIndex) {
@@ -471,10 +472,8 @@ public class StringUtil {
 	/**
 	 * 判断两个字符是否相等。
 	 * 
-	 * @param c1
-	 *            字符1
-	 * @param c2
-	 *            字符2
+	 * @param c1 字符1
+	 * @param c2 字符2
 	 * @return 若是英文字母，不区分大小写，相等true，不等返回false； 若不是则区分，相等返回true，不等返回false。
 	 */
 	private static boolean isEqual(char c1, char c2) {
